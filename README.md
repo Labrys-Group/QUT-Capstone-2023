@@ -6,8 +6,9 @@ This README.md should be updated constantly to reflect the state of the applicat
 
 # Repository Structure
 
-> ❗️ IMPORTANT 
-> Any merges into the main branch will require a PR first. So, create a new branch for your work, put it up for Code Review - before it's pushed here.
+> ❗️**IMPORTANT**
+> Any merges into the main branch will require a PR first.
+> So, create a new branch for your work, put it up for Code Review - before it's pushed here.
 
 ### app/
 
@@ -21,7 +22,7 @@ Once you've populated the `app/` folder with a NextJS application - come back he
 
 The design for the front end is [here](https://www.figma.com/proto/7UB73xYEJODrUIKVBBBa8q/MembersOnly?node-id=1-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2).
 
-** We will deploy this app to Vercel once it's set up here a bit more **
+**We will deploy this app to Vercel once it's set up here a bit more**
 
 ### contracts/
 
