@@ -15,6 +15,8 @@ The app folder will be where the code for the NextJS application will be.
 
 To get started with nextjs - read [here](https://nextjs.org/docs/getting-started).
 
+We'll be using rainbow kit to connect to our users wallet - you can read more about it [here](https://www.rainbowkit.com/).
+
 Once you've populated the `app/` folder with a NextJS application - come back here and update this description 😉
 
 The design for the front end is [here](https://www.figma.com/proto/7UB73xYEJODrUIKVBBBa8q/MembersOnly?node-id=1-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2).
