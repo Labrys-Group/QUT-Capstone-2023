@@ -17,7 +17,9 @@ To get started with nextjs - read [here](https://nextjs.org/docs/getting-started
 
 Once you've populated the `app/` folder with a NextJS application - come back here and update this description 😉
 
-The design for the front end is [here](https://www.figma.com/proto/7UB73xYEJODrUIKVBBBa8q/MembersOnly?node-id=1-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2):
+The design for the front end is [here](https://www.figma.com/proto/7UB73xYEJODrUIKVBBBa8q/MembersOnly?node-id=1-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2).
+
+** We will deploy this app to Vercel once it's set up here a bit more **
 
 ### contracts/
 
