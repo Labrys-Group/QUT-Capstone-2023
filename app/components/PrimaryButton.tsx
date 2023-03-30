@@ -1,17 +1,26 @@
-import { Button, ButtonProps } from '@chakra-ui/react'
+import { Button, ButtonProps } from "@chakra-ui/react"
 
-type InheritedProps = ButtonProps
+type InheritedProps = Pick<ButtonProps, 'leftIcon' | 'size'>
 
-export type PrimaryButtonProps= InheritedProps &{
+export type PrimaryButtonProps = InheritedProps & {
     text: string
-    onClick(): void
-    price?: number
+    onClick():void
 }
 
-const PrimaryButton = ({text, onClick, price = 0.01, children, ...props}:PrimaryButtonProps) =>{
+const style = {
+    display:"flex",
+    textAlign:"center",
+    backgroundColor:"#7190FF",
+    color:"whiteAlpha.900",
+    flexDirection:"row"
+}
 
-    return (
-        <Button onClick={onClick} {...props}>{text} {children}</Button> 
+const PrimaryButton = ({text, onClick, ...props} :PrimaryButtonProps) =>{
+    return(
+        <Button 
+        sx={style}
+        size='md'
+        {...props}>{text}</Button>
     )
 }
 

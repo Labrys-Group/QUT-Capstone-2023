@@ -8,15 +8,16 @@ import {
   Center,
   Box,
   Image,
-  CircularProgress
 } from '@chakra-ui/react'
 import { LinkIcon } from '@chakra-ui/icons'
 import PrimaryButton from '@/components/PrimaryButton'
+import TitleComponent from '@/components/TitleComponent'
 
 const App = () => (
   <ChakraProvider resetCSS>
     <Stack spacing={2} backgroundColor="#000000">
       <Box display="flex">
+
         <Box display="flex" width="30%" alignItems="stretch">
           <Image src="https://i.ibb.co/cYs5dR4/Members-Only-Clear.png" />
         </Box>
@@ -68,8 +69,6 @@ const App = () => (
       </Text>
       <Center border={0} borderRadius={0} opacity={1}>
         <Box width="45%" />
-        <PrimaryButton onClick={()=>{}} text={'You are pig'}/>
-        <PrimaryButton onClick={()=>{}} text={'You are pig'} leftIcon={<LinkIcon />}> <CircularProgress value={80} /></PrimaryButton>
         <Button
           variant="solid"
           size="md"
