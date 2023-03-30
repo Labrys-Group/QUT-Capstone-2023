@@ -7,9 +7,11 @@ import {
   Button,
   Center,
   Box,
-  Image
+  Image,
+  CircularProgress
 } from '@chakra-ui/react'
 import { LinkIcon } from '@chakra-ui/icons'
+import PrimaryButton from '@/components/PrimaryButton'
 
 const App = () => (
   <ChakraProvider resetCSS>
@@ -66,6 +68,8 @@ const App = () => (
       </Text>
       <Center border={0} borderRadius={0} opacity={1}>
         <Box width="45%" />
+        <PrimaryButton onClick={()=>{}} text={'You are pig'}/>
+        <PrimaryButton onClick={()=>{}} text={'You are pig'} leftIcon={<LinkIcon />}> <CircularProgress value={80} /></PrimaryButton>
         <Button
           variant="solid"
           size="md"
