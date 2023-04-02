@@ -1,11 +1,13 @@
-// here
+// Template here
 
 export type TestComponentProps= {
 
 }
 
-export default function TestComponent({}:TestComponentProps){
+const TestComponent = ({}:TestComponentProps) => {
     return(
         <></>
     )
 }
+
+export default TestComponent
