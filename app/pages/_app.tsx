@@ -30,6 +30,18 @@ const wagmiClient = createClient({
 })
 
 const theme = extendTheme({
+
+  //import font 
+  fonts: {
+    body: 'Poppins, sans-serif',
+    heading: 'Poppins, sans-serif',
+  },
+  fontWeights: {
+    extralight: 200,
+    regular: 400,
+    medium: 500,
+    bold: 700,
+  },
   styles: {
     global: {
       // styles for the `body`
@@ -43,6 +55,14 @@ const theme = extendTheme({
         _hover: {
           textDecoration: 'underline',
         },
+      // styles for H1 -- we can use this for the club name at the club page
+      h1:{
+
+        fontFamily: "Poppins",
+        fontWeight:"Bold 700",
+      
+      }
+      
       },
     },
   },
