@@ -7,7 +7,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 
-contract AccessTicket is ERC721Enumerable, Ownable {
+import "hardhat/console.sol";
+
+contract AccessTicket is ERC721Enumerable {
     mapping(uint256 => address) private _ticketOwnersByTokenId;
     mapping(address => bool) private _ticketOwnersByAddress;
     address payable private _owner;
