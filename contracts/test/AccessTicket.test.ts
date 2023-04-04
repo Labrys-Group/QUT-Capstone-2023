@@ -3,6 +3,8 @@ import { expect } from "chai";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 import { Contract } from "ethers";
 
+// test command: npx hardhat test test/MembersOnly.test.ts
+
 describe("AccessTicket", function () {
   let owner: SignerWithAddress;
   let user1: SignerWithAddress;
@@ -51,18 +53,45 @@ describe("AccessTicket", function () {
     ).to.be.revertedWith("AccessTicket: User already owns a token");
   });
 
+  it("should get tokenURI", async function () {
+    await accessTicket
+      .connect(user1)
+      .mint({ value: ethers.utils.parseEther("0.01") });
+
+    let result = await accessTicket.connect(user1).tokenURI(1);
+    expect(result).to.equal("http://localhost.com:3000/1");
+  });
+
+  it("should verify ownership", async function () {
+    await accessTicket
+      .connect(user1)
+      .mint({ value: ethers.utils.parseEther("0.01") });
+
+    await accessTicket
+      .connect(user2)
+      .mint({ value: ethers.utils.parseEther("0.01") });
+
+    let result = await accessTicket
+      .connect(user1)
+      .verifyAccess(user1.address, 1);
+    expect(result).to.equal(true);
+
+    let result_error = await accessTicket
+      .connect(user1)
+      .verifyAccess(user1.address, 2);
+    expect(result_error).to.equal(false);
+  });
+
   it("should remove a token and verify ownership", async function () {
     await accessTicket
       .connect(user1)
       .mint({ value: ethers.utils.parseEther("0.01") });
 
+    await accessTicket.connect(user1).removeTicket(1);
+
     await expect(
       accessTicket.connect(user1).removeTicket(1)
-    ).to.be.revertedWith("ERC721: invalid token ID");
-
-    await expect(accessTicket.ownerOf(1)).to.be.revertedWith(
-      "ERC721: owner query for nonexistent token"
-    );
+    ).to.be.revertedWith("ERC721: token does not exist");
   });
 
   it("should revert if caller is not the ticket owner", async function () {
