@@ -1,29 +1,19 @@
 // Template here
-import { Box, Flex, Grid, GridItem, Spacer } from "@chakra-ui/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { Box, Image, Flex, GridItem, Spacer } from "@chakra-ui/react";
 
-export type NavBarProps = {};
-
-const TestComponent = ({}: NavBarProps) => {
+//export type NavBarProps = {};
+export const NavBarProps = () => {
   return (
-    //          <MyBox display="flex">
-    //     <MyBox display="flex" width="30%" alignItems="stretch">
-    //       <Image src="https://i.ibb.co/cYs5dR4/Members-Only-Clear.png" />
-    //     </MyBox>
-    //     <Box mr="auto" />
-    //     <ConnectButton />
-    //   </MyBox>
-    <Grid
-      h="200px"
-      templateRows="repeat(2, 1fr)"
-      templateColumns="repeat(5, 1fr)"
-      gap={4}
-    >
-      <GridItem rowSpan={2} colSpan={1} bg="tomato" />
-      <GridItem colSpan={2} bg="papayawhip" />
-      <GridItem colSpan={2} bg="papayawhip" />
-      <GridItem colSpan={4} bg="tomato" />
-    </Grid>
+    <Flex>
+      <Box p="4" width="13%" alignItems="stretch" ml="40px">
+        <Image src="https://i.ibb.co/cYs5dR4/Members-Only-Clear.png" />
+      </Box>
+      <Spacer />
+      <Box p="4" mr="40px" mt="10px">
+        <ConnectButton />
+      </Box>
+    </Flex>
   );
 };
-
-export default TestComponent;
+export default NavBarProps;
