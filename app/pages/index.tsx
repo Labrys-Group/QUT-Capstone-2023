@@ -7,30 +7,12 @@ import { RainbowButton } from '@/components/RainbowButton'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 import ethers from 'ethers'
+import { useSession, signIn, signOut } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function App() {
   const { address } = useAccount()
-
-  async function getTokensFromMetaMask() {
-    const provider = new ethers.providers.JsonRpcProvider(
-      'http://localhost:8545'
-    )
-    const walletAddress: string = '0xe5CA461cF9FF63143dE899d1Af8AE112eF6850CA'
-
-    const logs = await provider.getLogs({
-      fromBlock: 0,
-      toBlock: 'latest',
-      address: walletAddress,
-    })
-
-    const tokenAddresses: string[] = logs
-      .map((log: ethers.providers.Log) => ethers.utils.getAddress(log.address))
-      .filter((address: string) => address !== walletAddress)
-
-    console.log(tokenAddresses)
-  }
-
-  getTokensFromMetaMask()
+  const { data: session } = useSession()
 
   return (
     <Stack spacing={22}>
