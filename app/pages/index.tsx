@@ -42,10 +42,12 @@ export const MyBox: React.FC<MyBoxProps> = (props) => {
 //     );
 //   else return <Text className="txt">You have connected to your wallet</Text>;
 // }
+import { useSession, signIn, signOut } from 'next-auth/react'
+import Link from 'next/link'
 
 export default function App() {
-  const { address } = useAccount();
-
+  const { address } = useAccount()
+  const { data: session } = useSession()
   const isConnected = address !== undefined;
 
   return (
