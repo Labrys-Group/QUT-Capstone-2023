@@ -12,6 +12,8 @@ import { mainnet, polygon, optimism, arbitrum, goerli } from 'wagmi/chains'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 import { publicProvider } from 'wagmi/providers/public'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { SessionProvider } from 'next-auth/react'
+import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth'
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum, goerli],
@@ -48,18 +50,25 @@ const theme = extendTheme({
   },
 })
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
-      <RainbowKitProvider
-        chains={chains}
-        theme={midnightTheme()}
-        coolMode
-        showRecentTransactions={true}>
-        <ChakraProvider theme={theme} resetCSS={true}>
-          <Component {...pageProps} />
-        </ChakraProvider>
-      </RainbowKitProvider>
+      <ChakraProvider theme={theme} resetCSS={true}>
+        <SessionProvider refetchInterval={0} session={session}>
+          <RainbowKitSiweNextAuthProvider>
+            <RainbowKitProvider
+              chains={chains}
+              theme={midnightTheme()}
+              coolMode
+              showRecentTransactions={true}>
+              <Component {...pageProps} />
+            </RainbowKitProvider>
+          </RainbowKitSiweNextAuthProvider>
+        </SessionProvider>
+      </ChakraProvider>
     </WagmiConfig>
   )
 }
