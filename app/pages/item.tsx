@@ -5,8 +5,11 @@ import { useRouter } from 'next/router'
 import { Text, Box, BoxProps } from '@chakra-ui/react'
 import { NavBarProps } from '@/components/NavBar'
 import ItemTitle from '@/components/ItemTitle'
+import AddressBar from '@/components/AddressBar'
+import { useAccount } from 'wagmi'
 
 function Item() {
+  const { address } = useAccount()
   const [loading, setLoading] = useState(true)
   const { data: session } = useSession()
   const router = useRouter()
@@ -30,6 +33,8 @@ function Item() {
   return (
     <Box h="100vh" className="gameImg">
       <NavBarProps />
+      <AddressBar status={address !== undefined} text={address} />
+
       <ItemTitle text="GAMERS UNITED" />
     </Box>
   )
