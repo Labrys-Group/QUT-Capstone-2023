@@ -1,54 +1,35 @@
-import React from "react";
-import {
-  Heading,
-  Stack,
-  Text,
-  Center,
-  Box,
-  Image,
-  BoxProps,
-  HeadingProps,
-} from "@chakra-ui/react";
-import { LinkIcon } from "@chakra-ui/icons";
-import PrimaryButton from "@/components/PrimaryButton";
-import TitleComponent from "@/components/TitleComponent";
-import { RainbowButton } from "@/components/RainbowButton";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount, useConnect, useDisconnect } from "wagmi";
-import { NavBarProps } from "@/components/NavBar";
-import ethers from "ethers";
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { Text, Box, BoxProps } from '@chakra-ui/react'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { useAccount, useConnect, useDisconnect } from 'wagmi'
+import { NavBarProps } from '@/components/NavBar'
+import { getSession, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 interface MyBoxProps extends BoxProps {
   // add any additional props specific to your component
 }
 
 export const MyBox: React.FC<MyBoxProps> = (props) => {
-  return <Box {...props} />;
-};
-
-// export type ConnectInformationComponentProps = {
-//   connected: boolean;
-// };
-
-// function ConnectInformationComponent({
-//   connected,
-// }: ConnectInformationComponentProps) {
-//   if (!connected)
-//     return (
-//       <>
-//         <Text className="txt">To get started, first connect your wallet</Text>
-//         <ConnectButton />
-//       </>
-//     );
-//   else return <Text className="txt">You have connected to your wallet</Text>;
-// }
-import { useSession, signIn, signOut } from 'next-auth/react'
-import Link from 'next/link'
+  return <Box {...props} />
+}
 
 export default function App() {
   const { address } = useAccount()
   const { data: session } = useSession()
-  const isConnected = address !== undefined;
+  const router = useRouter()
+
+  useEffect(() => {
+    const securePage = async () => {
+      const session1 = await getSession()
+      if (!session1) {
+      } else {
+        router.push('/item')
+      }
+    }
+    securePage()
+  }, [session])
 
   return (
     //
@@ -71,5 +52,5 @@ export default function App() {
         {/* <ConnectInformationComponent connected={isConnected} /> */}
       </MyBox>
     </MyBox>
-  );
+  )
 }
