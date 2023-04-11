@@ -6,6 +6,8 @@ import { Text, Box, BoxProps } from '@chakra-ui/react'
 import { NavBarProps } from '@/components/NavBar'
 import ItemTitle from '@/components/ItemTitle'
 import AddressBar from '@/components/AddressBar'
+import DescriptionBox from '@/components/DescriptionBox'
+import KeyGranted from '@/components/KeyGranted'
 import { useAccount } from 'wagmi'
 
 function Item() {
@@ -31,11 +33,13 @@ function Item() {
   }
 
   return (
-    <Box h="100vh" className="gameImg">
+    <Box h="100vh" className="exyImg">
       <NavBarProps />
       <AddressBar status={address !== undefined} text={address} />
-
-      <ItemTitle text="GAMERS UNITED" />
+      <br/><br/><br/><br/><br/>
+      <ItemTitle text="EXY UNITED" />
+      <DescriptionBox/>
+      <KeyGranted/>
     </Box>
   )
 }
