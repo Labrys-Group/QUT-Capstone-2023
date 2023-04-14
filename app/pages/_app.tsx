@@ -58,6 +58,17 @@ const theme = extendTheme({
         backgroundSize: 'cover',
       },
 
+      '.exyGranted': {
+        backgroundImage: "url('/exyGranted.png')",
+        backgroundSize: 'cover',
+      },
+
+      //set exy1.png as background image of a sample item page
+      '.exyImg': {
+        backgroundImage: "url('/exy1.jpg')",
+        backgroundSize: 'cover',
+      },
+
       //Big bold title used in homepage
       '.title': {
         fontFamily: 'Inter, sans-serif',
