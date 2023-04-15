@@ -2,7 +2,7 @@ import { getSession, useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useRouter } from 'next/router'
-import { Text, Box, BoxProps, AspectRatio, Container, Flex, Grid, Spacer } from '@chakra-ui/react'
+import { Text, Box, BoxProps, AspectRatio, Container, Flex, Grid, Spacer, Divider, Image } from '@chakra-ui/react'
 import { NavBarProps } from '../components/NavBar'
 import ItemTitle from '../components/ItemTitle'
 import AddressBar from '../components/AddressBar'
@@ -62,6 +62,15 @@ function Item() {
             allowFullScreen
         />
         </AspectRatio>
+
+        <Spacer />
+
+        <Box maxWidth='300px' ratio={12 / 15} flex='4'>
+          <Image src='exyLift.jpg' alt='Exy Lift Selfie' />
+        </Box>
+
+        <Spacer />
+
     </Flex>
     <br/>
       <Flex>
@@ -83,6 +92,14 @@ function Item() {
         </AspectRatio>
 
         <AspectRatio maxW='400px' flex='3'>
+        <iframe
+            title='Gloomy Letter'
+            src='https://www.youtube.com/embed/ZBPQCKpoe6c'
+            allowFullScreen
+        />
+        </AspectRatio>
+
+        <AspectRatio maxW='400px' flex='4'>
         <iframe
             title='Wave'
             src='https://www.youtube.com/embed/aWX8_QER_qQ'
