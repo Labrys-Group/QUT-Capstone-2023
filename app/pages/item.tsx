@@ -1,47 +1,48 @@
-import { getSession, useSession } from 'next-auth/react'
-import { useState, useEffect } from 'react'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { useRouter } from 'next/router'
-import { Text, Box, BoxProps } from '@chakra-ui/react'
-import { NavBarProps } from '@/components/NavBar'
-import ItemTitle from '@/components/ItemTitle'
-import AddressBar from '@/components/AddressBar'
-import DescriptionBox from '@/components/DescriptionBox'
-import KeyGranted from '@/components/KeyGranted'
-import { useAccount } from 'wagmi'
+import { getSession, useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useRouter } from "next/router";
+import { Text, Box, BoxProps } from "@chakra-ui/react";
+import NavBar from "@/components/NavBar";
+import AddressBar from "@/components/AddressBar";
+import { useAccount } from "wagmi";
+import TitleAndDescription from "@/components/TitleAndDescription";
 
 function Item() {
-  const { address } = useAccount()
-  const [loading, setLoading] = useState(true)
-  const { data: session } = useSession()
-  const router = useRouter()
+  const { address } = useAccount();
+  const [loading, setLoading] = useState(true);
+  const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     const securePage = async () => {
-      const session1 = await getSession()
+      const session1 = await getSession();
       if (!session1) {
-        router.push('/')
+        router.push("/");
       } else {
-        setLoading(false)
+        setLoading(false);
       }
-    }
-    securePage()
-  }, [session])
+    };
+    securePage();
+  }, [session]);
 
   if (loading) {
-    return <h2>Loading。。。</h2>
+    return <h2>Loading。。。</h2>;
   }
 
   return (
     <Box h="100vh" className="exyImg">
-      <NavBarProps />
+      <NavBar />
       <AddressBar status={address !== undefined} text={address} />
-      <br/><br/><br/><br/><br/>
-      <ItemTitle text="EXY UNITED" />
-      <DescriptionBox/>
-      <KeyGranted/>
+      <Box flexDirection="row">
+        <TitleAndDescription
+          title="EXY UNITED"
+          description="An exclusive online community dedicated to fans of EXY, leader of the K-pop girl group COSMIC GIRLS (also known as WJSN). This community is a gathering place for fans who admire EXY's talents, personality, and unique style. As a member of the EXY Community, you will have access to exclusive content, such as behind-the-scenes footage, photos, and interviews. You will also be able to connect with other fans from all over the world who share your love for EXY and COSMIC GIRLS."
+        />
+        {/* // KeyGranted component goes here */}
+      </Box>
     </Box>
-  )
+  );
 }
 
-export default Item
+export default Item;

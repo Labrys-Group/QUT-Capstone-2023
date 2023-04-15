@@ -3,7 +3,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { Box, Image, Flex, GridItem, Spacer } from "@chakra-ui/react";
 
 //export type NavBarProps = {};
-export const NavBarProps = () => {
+export const NavBar = () => {
   return (
     <Flex>
       <Box p="4" width="13%" alignItems="stretch" ml="40px">
@@ -16,4 +16,4 @@ export const NavBarProps = () => {
     </Flex>
   );
 };
-export default NavBarProps;
+export default NavBar;
