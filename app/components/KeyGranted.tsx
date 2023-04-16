@@ -16,7 +16,7 @@ type KeyGrantedProps = {
 
 const boxStyle = {
   flexDirection: "column",
-  backgroundColor: "#303030",
+  backgroundColor: "#1E1E22",
   padding: "12px",
   borderRadius: "10px",
   textAlign: "left",
