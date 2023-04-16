@@ -84,6 +84,12 @@ const theme = extendTheme({
         fontWeight: "600",
         fontSize: "20px",
       },
+      ".headingMd": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "900",
+        fontSize: "14px",
+        lineHeight: "17px",
+      },
       //Small light blue text used across the app
       ".blueTxt": {
         fontFamily: "Inter, sans-serif",

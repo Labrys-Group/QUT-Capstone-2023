@@ -1,7 +1,10 @@
-import { Button, ButtonProps } from "@chakra-ui/react";
+import { Button, ButtonProps, SystemStyleObject } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
 
-type InheritedProps = Pick<ButtonProps, "leftIcon" | "size" | "rightIcon">;
+type InheritedProps = Pick<
+  ButtonProps,
+  "leftIcon" | "rightIcon" | "margin" | "variant" | "size"
+>;
 
 export type PrimaryButtonProps = InheritedProps & {
   //text: string

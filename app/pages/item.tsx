@@ -39,10 +39,16 @@ function Item() {
     image: "/exyGranted.png",
   };
 
+  const [username, setUsername] = useState(address);
+
   return (
     <Box h="100vh" className="exyImg">
       <NavBar />
-      <AddressBar status={address !== undefined} text={address} />
+      <AddressBar
+        status={address !== undefined}
+        username={username}
+        onSubmit={setUsername}
+      />
       {/* //TODO: remove top margin */}
       <Flex
         className="pagePadding"
