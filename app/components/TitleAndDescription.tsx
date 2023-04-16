@@ -1,4 +1,4 @@
-import { Text, Box } from "@chakra-ui/react";
+import { Text, Box, Flex } from "@chakra-ui/react";
 
 export type TitleAndDescriptionProps = {
   title: string;
@@ -6,18 +6,21 @@ export type TitleAndDescriptionProps = {
 };
 
 const boxStyle = {
-  display: "flex",
-  flexWrap: "wrap",
-  //width: '30vh',
+  flexDirection: "column",
+  maxWidth: "55vw",
 };
 
-const TitleStyle = {
-  fontFamily: "Inter",
-  fontStyle: "normal",
-  fontWeight: "900",
-  fontSize: "110px",
-  lineHeight: "133px",
-  alignItems: "center",
+const descriptionStyle = {
+  // add bg
+  backgroundColor: "#1E1E22",
+  borderRadius: "10px",
+  padding: "12px 16px",
+  lineHeight: "16px",
+  border: "0.42735px solid #303030",
+};
+
+const titleStyle = {
+  // add shadow
   textShadow: "0px 0px 20px #000000,0px 0px 50px #000000",
   textStroke: "2px #000000",
 };
@@ -27,10 +30,14 @@ const TitleAndDescription = ({
   description,
 }: TitleAndDescriptionProps) => {
   return (
-    <Box sx={boxStyle}>
-      <Text sx={TitleStyle}>{title}</Text>
-      <Text>{description}</Text>
-    </Box>
+    <Flex sx={boxStyle}>
+      <Text className="title" sx={titleStyle}>
+        {title.toUpperCase()}
+      </Text>
+      <Text className="txt" sx={descriptionStyle}>
+        {description}
+      </Text>
+    </Flex>
   );
 };
 

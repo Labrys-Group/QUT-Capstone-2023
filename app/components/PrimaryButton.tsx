@@ -1,27 +1,34 @@
-import { Button, ButtonProps } from "@chakra-ui/react"
+import { Button, ButtonProps } from "@chakra-ui/react";
+import { PropsWithChildren } from "react";
 
-type InheritedProps = Pick<ButtonProps, 'leftIcon' | 'size'>
+type InheritedProps = Pick<
+  ButtonProps,
+  "leftIcon" | "rightIcon" | "margin" | "variant" | "size"
+>;
 
 export type PrimaryButtonProps = InheritedProps & {
-    text: string
-    onClick():void
-}
+  //text: string
+  onClick(): void;
+};
 
-const style = {
-    display:"flex",
-    textAlign:"center",
-    backgroundColor:"#7190FF",
-    color:"whiteAlpha.900",
-    flexDirection:"row"
-}
+const btnStyle = {
+  display: "flex",
+  textAlign: "center",
+  backgroundColor: "#7190FF",
+  color: "whiteAlpha.900",
+  flexDirection: "row",
+};
 
-const PrimaryButton = ({text, onClick, ...props} :PrimaryButtonProps) =>{
-    return(
-        <Button 
-        sx={style}
-        size='md'
-        {...props}>{text}</Button>
-    )
-}
+const PrimaryButton = ({
+  onClick,
+  children,
+  ...props
+}: PropsWithChildren<PrimaryButtonProps>) => {
+  return (
+    <Button sx={btnStyle} size="md" {...props} _hover={{ bg: "#435dba" }}>
+      {children}
+    </Button>
+  );
+};
 
-export default PrimaryButton
+export default PrimaryButton;

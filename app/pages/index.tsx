@@ -1,19 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Text, Box, BoxProps } from "@chakra-ui/react";
+import { Text, Box, BoxProps, Flex } from "@chakra-ui/react";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useAccount } from "wagmi";
 import NavBar from "@/components/NavBar";
 import { getSession, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-
-interface MyBoxProps extends BoxProps {
-  // add any additional props specific to your component
-}
-
-export const MyBox: React.FC<MyBoxProps> = (props) => {
-  return <Box {...props} />;
-};
 
 export default function App() {
   const { address } = useAccount();
@@ -32,11 +24,10 @@ export default function App() {
   }, [session]);
 
   return (
-    //
-    <MyBox h="100vh" className="bgImg">
+    <Box h="100vh" className="bgImg">
       <NavBar />
 
-      <MyBox h="30vh" mt="10vh">
+      <Flex h="30vh" mt="10vh" flexDirection="column" alignItems="center">
         <Text className="blueTxt">WELCOME TO</Text>
         <Text className="title">MEMBERS ONLY</Text>
         <Text className="txt">
@@ -46,11 +37,11 @@ export default function App() {
         <Text className="txt">
           All memberships secured as NFTs on the Ethereum blockchain.
         </Text>
-      </MyBox>
-      <MyBox className="flexAlgnCenter">
+      </Flex>
+      <Box className="flexAlgnCenter">
         <ConnectButton />
         {/* <ConnectInformationComponent connected={isConnected} /> */}
-      </MyBox>
-    </MyBox>
+      </Box>
+    </Box>
   );
 }
