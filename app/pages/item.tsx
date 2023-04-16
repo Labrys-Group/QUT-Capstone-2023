@@ -34,7 +34,7 @@ function Item() {
     <Box h="100vh" className="exyImg">
       <NavBar />
       <AddressBar status={address !== undefined} text={address} />
-      <Box flexDirection="row">
+      <Box>
         <TitleAndDescription
           title="EXY UNITED"
           description="An exclusive online community dedicated to fans of EXY, leader of the K-pop girl group COSMIC GIRLS (also known as WJSN). This community is a gathering place for fans who admire EXY's talents, personality, and unique style. As a member of the EXY Community, you will have access to exclusive content, such as behind-the-scenes footage, photos, and interviews. You will also be able to connect with other fans from all over the world who share your love for EXY and COSMIC GIRLS."

@@ -5,19 +5,16 @@ export type TitleAndDescriptionProps = {
   description?: string;
 };
 
-const boxStyle = {
-  display: "flex",
-  flexWrap: "wrap",
-  //width: '30vh',
+const descriptionStyle = {
+  // add bg
+  backgroundColor: "#303030",
+  borderRadius: "10px",
+  padding: "12px 16px",
+  lineHeight: "16px",
 };
 
-const TitleStyle = {
-  fontFamily: "Inter",
-  fontStyle: "normal",
-  fontWeight: "900",
-  fontSize: "110px",
-  lineHeight: "133px",
-  alignItems: "center",
+const titleStyle = {
+  // add shadow
   textShadow: "0px 0px 20px #000000,0px 0px 50px #000000",
   textStroke: "2px #000000",
 };
@@ -27,9 +24,13 @@ const TitleAndDescription = ({
   description,
 }: TitleAndDescriptionProps) => {
   return (
-    <Box sx={boxStyle}>
-      <Text sx={TitleStyle}>{title}</Text>
-      <Text>{description}</Text>
+    <Box>
+      <Text className="title" sx={titleStyle}>
+        {title}
+      </Text>
+      <Text className="txt" sx={descriptionStyle}>
+        {description}
+      </Text>
     </Box>
   );
 };
