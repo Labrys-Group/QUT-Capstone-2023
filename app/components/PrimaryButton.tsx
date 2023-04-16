@@ -1,4 +1,4 @@
-import { Button, ButtonProps, SystemStyleObject } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 import { PropsWithChildren } from "react";
 
 type InheritedProps = Pick<
