@@ -16,6 +16,7 @@ const descriptionStyle = {
   borderRadius: "10px",
   padding: "12px 16px",
   lineHeight: "16px",
+  border: "0.42735px solid #303030",
 };
 
 const titleStyle = {

@@ -22,6 +22,7 @@ const boxStyle = {
   textAlign: "left",
   width: "274px",
   boxShadow: "0px 3.4188px 8.54701px 1.7094px rgba(0, 0, 0, 0.2)",
+  border: "0.42735px solid #303030",
 };
 
 const KeyGranted = ({
