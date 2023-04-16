@@ -38,10 +38,7 @@ const textStyle = {
 const AddressBar = ({ status, text, ...props }: AddressBarProps) => {
   return (
     <Box sx={boxStyle}>
-      <Text sx={textStyle} color={"blue.500"} fontSize={"10px"}>
-        {status ? "CONNECTED" : "Not Connected"}
-      </Text>
-
+      <Text className="blueTxt">{status ? "CONNECTED" : "Not Connected"}</Text>
       <Text sx={textStyle} color={"#FFFFFF"} fontSize={"14px"}>
         {text}
       </Text>

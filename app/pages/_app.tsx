@@ -68,7 +68,10 @@ const theme = extendTheme({
         backgroundImage: "url('/exy1.jpg')",
         backgroundSize: "cover",
       },
-
+      //page padding
+      ".pagePadding": {
+        padding: "0 4vw",
+      },
       //Big bold title used in homepage
       ".title": {
         fontFamily: "Inter, sans-serif",
@@ -76,20 +79,30 @@ const theme = extendTheme({
         fontSize: "6rem",
         lineHeight: "130px",
       },
+      ".headingSm": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "600",
+        fontSize: "20px",
+      },
       //Small light blue text used across the app
       ".blueTxt": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "400",
-        textAlign: "center",
-        fontSize: "0.9vw",
+        fontSize: "12px",
+        color: "#7190FF",
+      },
+      ".blueTxtBold": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "600",
+        fontSize: "14px",
         color: "#7190FF",
       },
       //grey paragraph text used across the app
       ".txt": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "400",
-        lineHeight: "24px",
-        fontSize: "15px",
+        lineHeight: "25px",
+        fontSize: "14px",
         color: "rgba(255, 255, 255, 0.7)",
       },
       //This class used for display flex, column, align items center

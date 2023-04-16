@@ -1,8 +1,13 @@
-import { Text, Box } from "@chakra-ui/react";
+import { Text, Box, Flex } from "@chakra-ui/react";
 
 export type TitleAndDescriptionProps = {
   title: string;
   description?: string;
+};
+
+const boxStyle = {
+  flexDirection: "column",
+  maxWidth: "55vw",
 };
 
 const descriptionStyle = {
@@ -24,14 +29,14 @@ const TitleAndDescription = ({
   description,
 }: TitleAndDescriptionProps) => {
   return (
-    <Box>
+    <Flex sx={boxStyle}>
       <Text className="title" sx={titleStyle}>
-        {title}
+        {title.toUpperCase()}
       </Text>
       <Text className="txt" sx={descriptionStyle}>
         {description}
       </Text>
-    </Box>
+    </Flex>
   );
 };
 
