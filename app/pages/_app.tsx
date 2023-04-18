@@ -17,6 +17,7 @@ import { publicProvider } from "wagmi/providers/public";
 const apiKey = process.env.ALCHEMY_ID;
 import { SessionProvider } from "next-auth/react";
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { WalletContextProvider } from "@/context/walletContext";
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum, goerli],
@@ -128,6 +129,7 @@ export default function App({
   return (
     <WagmiConfig client={wagmiClient}>
       <ChakraProvider theme={theme} resetCSS={true}>
+        <WalletContextProvider>
         <SessionProvider refetchInterval={0} session={session}>
           <RainbowKitSiweNextAuthProvider>
             <RainbowKitProvider
@@ -140,6 +142,7 @@ export default function App({
             </RainbowKitProvider>
           </RainbowKitSiweNextAuthProvider>
         </SessionProvider>
+        </WalletContextProvider>
       </ChakraProvider>
     </WagmiConfig>
   );

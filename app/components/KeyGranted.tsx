@@ -12,6 +12,7 @@ type KeyGrantedProps = {
   remainingToken?: number;
   totalToken?: number;
   price?: number;
+  onClick():void;
 };
 
 const boxStyle = {
@@ -33,6 +34,7 @@ const KeyGranted = ({
   remainingToken,
   totalToken,
   price,
+  onClick,
 }: KeyGrantedProps) => {
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
@@ -70,11 +72,11 @@ const KeyGranted = ({
         {accessGranted ? "Access granted" : displayRemaining + " Remaining"}
       </Text>
       {accessGranted ? (
-        <PrimaryButton rightIcon={<ArrowForwardIcon />} onClick={() => {}}>
+        <PrimaryButton rightIcon={<ArrowForwardIcon />} onClick={onClick}>
           Enter Site
         </PrimaryButton>
       ) : (
-        <PrimaryButton onClick={() => {}}>Purchase for Ξ{price}</PrimaryButton>
+        <PrimaryButton onClick={onClick}>Purchase for Ξ{price}</PrimaryButton>
       )}
     </Flex>
   );
