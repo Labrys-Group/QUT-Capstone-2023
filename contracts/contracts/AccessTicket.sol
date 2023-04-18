@@ -35,7 +35,7 @@ contract AccessTicket is ERC721Enumerable {
 
     // Charge every user 0.01 eth per mint and send the money to the contract owner
     function mint() public payable {
-        require(msg.value == 0.01 ether, "AccessTicket: Insufficient payment");
+        require(msg.value == 0.0000000001 ether, "AccessTicket: Insufficient payment");
         require(
             _ticketOwnersByAddress[msg.sender] == false,
             "AccessTicket: User already owns a token"
@@ -89,4 +89,6 @@ contract AccessTicket is ERC721Enumerable {
 
         emit FundsWithdrawn(msg.sender, amount);
     }
+
+    // readTicketPrice
 }
