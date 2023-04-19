@@ -1,27 +1,30 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import { Text, Box, BoxProps, Flex } from "@chakra-ui/react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
-import NavBar from "@/components/NavBar";
-import { getSession, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import React from 'react'
+import { useState, useEffect } from 'react'
+import { Text, Box, BoxProps, Flex } from '@chakra-ui/react'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { useAccount } from 'wagmi'
+import NavBar from '@/components/NavBar'
+import { getSession, signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function App() {
-  const { address } = useAccount();
-  const { data: session } = useSession();
-  const router = useRouter();
+  const account = useAccount()
+  const { data: session } = useSession()
+  const router = useRouter()
+
+  const status = account.status
 
   useEffect(() => {
     const securePage = async () => {
-      const session1 = await getSession();
-      if (!session1) {
+      //check if authenticated and if is connected to wallet
+      console.log(status)
+      if (session && status === 'connected') {
+        router.push('/item')
       } else {
-        router.push("/item");
       }
-    };
-    securePage();
-  }, [session]);
+    }
+    securePage()
+  }, [session, status])
 
   return (
     <Box h="100vh" className="bgImg">
@@ -43,5 +46,5 @@ export default function App() {
         {/* <ConnectInformationComponent connected={isConnected} /> */}
       </Box>
     </Box>
-  );
+  )
 }
