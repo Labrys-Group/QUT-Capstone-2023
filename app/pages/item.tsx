@@ -9,6 +9,7 @@ import { useAccount } from "wagmi";
 import TitleAndDescription from "@/components/TitleAndDescription";
 import KeyGranted from "@/components/KeyGranted";
 import { WalletContext } from "@/context/walletContext";
+import { showToast } from "@/components/showToast";
 
 function Item() {
   const { address } = useAccount();
@@ -16,12 +17,26 @@ function Item() {
   const { data: session } = useSession();
   const router = useRouter();
 
+  const { erc721 } = useContext(WalletContext);
+
+  const handleMint = async () => {
+    if (erc721 === undefined) {
+      console.log("ERC721 undefined", "Please try again", "error");
+    } else {
+      try {
+        const transaction = await erc721.mint();
+        console.log("Minting...", transaction.hash, "loading");
+      } catch (e: any) {
+        console.log("Failed", e.message, "error");
+      }
+    }
+  };
 
   useEffect(() => {
     const securePage = async () => {
       const session1 = await getSession();
-    
-      if (!session1) { 
+
+      if (!session1) {
         router.push("/");
       } else {
         setLoading(false);
@@ -59,7 +74,9 @@ function Item() {
           accessGranted={false}
           clubName={"Exy United"}
           image={exy.image}
-          onClick ={()=>{}}
+          price={0.01}
+          mintFunction={() => handleMint()}
+          enterSiteFunction={() => {}}
         />
       </Flex>
     </Box>

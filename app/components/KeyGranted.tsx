@@ -1,7 +1,9 @@
+import { WalletContext } from "../context/walletContext";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { Button, ButtonProps } from "@chakra-ui/react";
+import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
 
 type KeyGrantedProps = {
@@ -12,7 +14,8 @@ type KeyGrantedProps = {
   remainingToken?: number;
   totalToken?: number;
   price?: number;
-  onClick():void;
+  mintFunction(): void;
+  enterSiteFunction(): void;
 };
 
 const boxStyle = {
@@ -34,7 +37,8 @@ const KeyGranted = ({
   remainingToken,
   totalToken,
   price,
-  onClick,
+  mintFunction,
+  enterSiteFunction,
 }: KeyGrantedProps) => {
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
@@ -72,11 +76,16 @@ const KeyGranted = ({
         {accessGranted ? "Access granted" : displayRemaining + " Remaining"}
       </Text>
       {accessGranted ? (
-        <PrimaryButton rightIcon={<ArrowForwardIcon />} onClick={onClick}>
+        <PrimaryButton
+          rightIcon={<ArrowForwardIcon />}
+          onClick={enterSiteFunction}
+        >
           Enter Site
         </PrimaryButton>
       ) : (
-        <PrimaryButton onClick={onClick}>Purchase for Ξ{price}</PrimaryButton>
+        <PrimaryButton onClick={mintFunction}>
+          Purchase for Ξ{price}
+        </PrimaryButton>
       )}
     </Flex>
   );
