@@ -6,7 +6,7 @@ export const showToast = (
   status: "info" | "success" | "error" | "loading"
 ) => {
   const toast = useToast();
-  toast({
+  return toast({
     title,
     description,
     status,

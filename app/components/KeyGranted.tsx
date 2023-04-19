@@ -5,6 +5,8 @@ import { Image } from "@chakra-ui/react";
 import { Button, ButtonProps } from "@chakra-ui/react";
 import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
+import { showToast } from "./showToast";
+import getTotalSupply from "@/helpers/getTotalSupply";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -14,8 +16,6 @@ type KeyGrantedProps = {
   remainingToken?: number;
   totalToken?: number;
   price?: number;
-  mintFunction(): void;
-  enterSiteFunction(): void;
 };
 
 const boxStyle = {
@@ -37,11 +37,28 @@ const KeyGranted = ({
   remainingToken,
   totalToken,
   price,
-  mintFunction,
-  enterSiteFunction,
 }: KeyGrantedProps) => {
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
+
+  const { erc721, signer } = useContext(WalletContext);
+
+  const tokenBalance = erc721 ? getTotalSupply(erc721) : 0;
+
+  const handleMint = async () => {
+    console.log(tokenBalance);
+    // console.log("click on mint function");
+    if (erc721 === undefined) {
+      console.log("ERC721 undefined", "Please try again", "error");
+    } else {
+      try {
+        const transaction = await erc721.mint();
+        console.log("Minting...", transaction.hash, "loading");
+      } catch (e: any) {
+        console.log("Failed:", e.message, "error");
+      }
+    }
+  };
 
   return (
     <Flex sx={boxStyle}>
@@ -76,14 +93,11 @@ const KeyGranted = ({
         {accessGranted ? "Access granted" : displayRemaining + " Remaining"}
       </Text>
       {accessGranted ? (
-        <PrimaryButton
-          rightIcon={<ArrowForwardIcon />}
-          onClick={enterSiteFunction}
-        >
+        <PrimaryButton rightIcon={<ArrowForwardIcon />} onClick={() => {}}>
           Enter Site
         </PrimaryButton>
       ) : (
-        <PrimaryButton onClick={mintFunction}>
+        <PrimaryButton onClick={handleMint}>
           Purchase for Ξ{price}
         </PrimaryButton>
       )}

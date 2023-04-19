@@ -17,21 +17,6 @@ function Item() {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const { erc721 } = useContext(WalletContext);
-
-  const handleMint = async () => {
-    if (erc721 === undefined) {
-      console.log("ERC721 undefined", "Please try again", "error");
-    } else {
-      try {
-        const transaction = await erc721.mint();
-        console.log("Minting...", transaction.hash, "loading");
-      } catch (e: any) {
-        console.log("Failed", e.message, "error");
-      }
-    }
-  };
-
   useEffect(() => {
     const securePage = async () => {
       const session1 = await getSession();
@@ -75,8 +60,6 @@ function Item() {
           clubName={"Exy United"}
           image={exy.image}
           price={0.01}
-          mintFunction={() => handleMint()}
-          enterSiteFunction={() => {}}
         />
       </Flex>
     </Box>
