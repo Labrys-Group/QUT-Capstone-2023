@@ -8,6 +8,7 @@ import AddressBar from "@/components/AddressBar";
 import { useAccount } from "wagmi";
 import TitleAndDescription from "@/components/TitleAndDescription";
 import KeyGranted from "@/components/KeyGranted";
+import LoadingModal from "@/components/LoadingModal";
 
 function Item() {
   const { address } = useAccount();
@@ -58,6 +59,7 @@ function Item() {
           //hard code for now
           price={0.01}
         />
+        <LoadingModal/>
       </Flex>
     </Box>
   );
