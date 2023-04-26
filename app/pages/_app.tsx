@@ -72,6 +72,9 @@ const theme = extendTheme({
       ".pagePadding": {
         padding: "0 4vw",
       },
+      ".contentPagePadding": {
+        padding: "0 3.5vw",
+      },
       //Big bold title used in homepage
       ".title": {
         fontFamily: "Inter, sans-serif",
@@ -116,6 +119,17 @@ const theme = extendTheme({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+      },
+      ".slick-slider": {
+        top: "50px",
+        display: "flex",
+        alignItems: "center",
+      },
+      ".slick-prev": {
+        left: "20px",
+      },
+      ".slick-next": {
+        right: "0px",
       },
     },
   },
