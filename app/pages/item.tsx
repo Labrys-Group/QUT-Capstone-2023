@@ -1,4 +1,5 @@
 import { getSession, signOut, useSession } from 'next-auth/react'
+import React from 'react'
 import { useState, useEffect } from 'react'
 import { ConnectButton } from '@rainbow-me/rainbowkit'
 import { useRouter } from 'next/router'
@@ -6,15 +7,15 @@ import { Text, Box, BoxProps, Flex } from '@chakra-ui/react'
 import NavBar from '@/components/NavBar'
 import AddressBar from '@/components/AddressBar'
 import { useAccount } from 'wagmi'
+
 import TitleAndDescription from '@/components/TitleAndDescription'
 import KeyGranted from '@/components/KeyGranted'
 
 function Item() {
-  const { address } = useAccount()
+  const { address, isConnected } = useAccount()
   const [loading, setLoading] = useState(true)
   const { data: session } = useSession()
   const router = useRouter()
-  const { isConnected } = useAccount()
 
   useEffect(() => {
     const securePage = async () => {
@@ -51,12 +52,15 @@ function Item() {
         justifyContent="space-between"
         alignItems="center">
         <TitleAndDescription title={exy.title} description={exy.description} />
-        <KeyGranted
-          accessGranted={false}
-          clubName={'Exy United'}
-          image={exy.image}
-        />
+        {isConnected && (
+          <KeyGranted
+            accessGranted={false}
+            clubName={'Exy United'}
+            image={exy.image}
+          />
+        )}
       </Flex>
+      <button onClick={() => mint?.()}>dsdssd</button>
     </Box>
   )
 }
