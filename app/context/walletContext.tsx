@@ -2,14 +2,10 @@ import { ethers, providers, Contract } from "ethers";
 import React, {
   createContext,
   ReactNode,
-  useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
-
-import getTokenBalance from "../helpers/getTokenBalance";
-import getTotalSupply from "../helpers/getTotalSupply";
 
 import { abi, address } from "../constants/AccessTicket";
 import { AccessTicket } from "@/constants/typechain-types";
@@ -43,13 +39,14 @@ export const WalletContextProvider = ({
 
   const [erc721, setErc721] = useState<AccessTicket | undefined>();
   const [accountAddress, setAccountAddress] = useState<string | undefined>();
+
+  //@TODO: implement
   const [balance, setBalance] = useState<number | undefined>();
   const [totalSupply, setTotalSupply] = useState<number | undefined>();
 
   // set the wallet provider in state on load
   useEffect(() => {
     if (!window.ethereum) return;
-
     const connectProvider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(connectProvider);
   }, []);
@@ -79,6 +76,25 @@ export const WalletContextProvider = ({
       console.log(e);
     }
   }, [address, abi, signer, provider]);
+
+  //verify nft
+  useEffect(() => {
+    if (!provider) return;
+    (async () => {
+      try {
+        if (accountAddress === undefined) {
+          setBalance(undefined);
+        } else {
+          if (erc721 !== undefined) {
+            const balance = await erc721.balanceOf(accountAddress);
+            setBalance(balance?.toNumber());
+          }
+        }
+      } catch (e: any) {
+        console.log(e);
+      }
+    })();
+  }, [accountAddress, erc721]);
 
   const values = useMemo(
     () => ({

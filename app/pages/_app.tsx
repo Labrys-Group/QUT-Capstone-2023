@@ -20,9 +20,10 @@ import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next
 import { WalletContextProvider } from "@/context/walletContext";
 
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, goerli],
+  [mainnet, goerli],
+  // [mainnet, polygon, optimism, arbitrum, goerli],
   [
-    alchemyProvider(apiKey !== undefined ? { apiKey } : { apiKey: "" }),
+    alchemyProvider({ apiKey: "o13ZJRrEu85G8Zi9lb9KxaZhkv6537H7" }),
     publicProvider(),
   ]
 );
@@ -130,18 +131,18 @@ export default function App({
     <WagmiConfig client={wagmiClient}>
       <ChakraProvider theme={theme} resetCSS={true}>
         <WalletContextProvider>
-        <SessionProvider refetchInterval={0} session={session}>
-          <RainbowKitSiweNextAuthProvider>
-            <RainbowKitProvider
-              chains={chains}
-              theme={midnightTheme()}
-              coolMode
-              showRecentTransactions={true}
-            >
-              <Component {...pageProps} />
-            </RainbowKitProvider>
-          </RainbowKitSiweNextAuthProvider>
-        </SessionProvider>
+          <SessionProvider refetchInterval={0} session={session}>
+            <RainbowKitSiweNextAuthProvider>
+              <RainbowKitProvider
+                chains={chains}
+                theme={midnightTheme()}
+                coolMode
+                showRecentTransactions={true}
+              >
+                <Component {...pageProps} />
+              </RainbowKitProvider>
+            </RainbowKitSiweNextAuthProvider>
+          </SessionProvider>
         </WalletContextProvider>
       </ChakraProvider>
     </WagmiConfig>

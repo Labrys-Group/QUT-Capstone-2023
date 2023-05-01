@@ -2,11 +2,9 @@ import { WalletContext } from "../context/walletContext";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
-import { Button, ButtonProps } from "@chakra-ui/react";
 import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
-import { showToast } from "./showToast";
-import getTotalSupply from "@/helpers/getTotalSupply";
+import { utils } from "ethers";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -41,19 +39,23 @@ const KeyGranted = ({
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
 
-  const { erc721, signer } = useContext(WalletContext);
-
-  const tokenBalance = erc721 ? getTotalSupply(erc721) : 0;
+  const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
 
   const handleMint = async () => {
-    console.log(tokenBalance);
-    // console.log("click on mint function");
+    console.log("click on mint function");
+    console.log("signer", signer);
+    console.log("account address", accountAddress);
+    console.log("balance", balance);
+
     if (erc721 === undefined) {
-      console.log("ERC721 undefined", "Please try again", "error");
     } else {
       try {
-        const transaction = await erc721.mint();
+        const transaction = await erc721.mint({
+          value: utils.parseEther("0.000000000000001"),
+        });
+
         console.log("Minting...", transaction.hash, "loading");
+        console.log("Success");
       } catch (e: any) {
         console.log("Failed:", e.message, "error");
       }

@@ -1,15 +1,14 @@
 import { getSession, useSession } from "next-auth/react";
 import { useState, useEffect, useContext } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useRouter } from "next/router";
-import { Text, Box, BoxProps, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import NavBar from "@/components/NavBar";
 import AddressBar from "@/components/AddressBar";
 import { useAccount } from "wagmi";
 import TitleAndDescription from "@/components/TitleAndDescription";
 import KeyGranted from "@/components/KeyGranted";
 import { WalletContext } from "@/context/walletContext";
-import { showToast } from "@/components/showToast";
+import getTotalSupply from "@/helpers/getTotalSupply";
 
 function Item() {
   const { address } = useAccount();
@@ -29,6 +28,33 @@ function Item() {
     };
     securePage();
   }, [session]);
+
+  //verify access
+  const { erc721, accountAddress, balance } = useContext(WalletContext);
+
+  const [access, setAccess] = useState(false);
+  useEffect(() => {
+    // if user do not have any nfts, break
+    if (balance === 0 || balance === undefined) return;
+    // else
+    (async () => {
+      if (erc721 !== undefined) {
+        // get number of minted nft
+        const totalSupply = await getTotalSupply(erc721);
+        console.log("totalSupply", totalSupply);
+        if (totalSupply > 0) {
+          for (let i = 1; i <= totalSupply; i++) {
+            console.log("tokenId", i);
+            let access = await erc721.verifyAccess(accountAddress, i);
+            if (access) {
+              setAccess(true);
+              break;
+            }
+          }
+        }
+      }
+    })();
+  }, [erc721]);
 
   if (loading) {
     return <h2>Loading。。。</h2>;
@@ -56,7 +82,7 @@ function Item() {
         <TitleAndDescription title={exy.title} description={exy.description} />
 
         <KeyGranted
-          accessGranted={false}
+          accessGranted={access}
           clubName={"Exy United"}
           image={exy.image}
           price={0.01}

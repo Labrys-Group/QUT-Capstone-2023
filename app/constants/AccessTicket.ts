@@ -1,4 +1,4 @@
-const address = "0x0bBFC31805EB8643Bc4F726DDEc8BF3F348Fe8C9";
+const address = "0x137725783730B71DFDBD54eAaC637d3148f40F12";
 const abi = [
   {
     inputs: [
@@ -262,6 +262,19 @@ const abi = [
         internalType: "address",
         name: "",
         type: "address",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "readTicketPrice",
+    outputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256",
       },
     ],
     stateMutability: "view",
