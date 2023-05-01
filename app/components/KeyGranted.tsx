@@ -3,6 +3,7 @@ import { Text, Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { Button, ButtonProps } from "@chakra-ui/react";
 import PrimaryButton from "./PrimaryButton";
+import { useRouter } from "next/router";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -36,7 +37,12 @@ const KeyGranted = ({
 }: KeyGrantedProps) => {
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
+  const router = useRouter();
 
+  const handleClick = () => {
+    //hardcoded for exy page
+    router.push("/exy");
+  };
   return (
     <Flex sx={boxStyle}>
       <Text className="blueTxtBold">{clubName}</Text>
@@ -70,7 +76,13 @@ const KeyGranted = ({
         {accessGranted ? "Access granted" : displayRemaining + " Remaining"}
       </Text>
       {accessGranted ? (
-        <PrimaryButton rightIcon={<ArrowForwardIcon />} onClick={() => {}}>
+        <PrimaryButton
+          rightIcon={<ArrowForwardIcon />}
+          onClick={() => {
+            handleClick();
+            console.log(router);
+          }}
+        >
           Enter Site
         </PrimaryButton>
       ) : (
