@@ -1,15 +1,14 @@
-import { getSession, signOut, useSession } from 'next-auth/react'
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { useRouter } from 'next/router'
-import { Text, Box, BoxProps, Flex } from '@chakra-ui/react'
-import NavBar from '@/components/NavBar'
 import AddressBar from '@/components/AddressBar'
-import { useAccount } from 'wagmi'
-
-import TitleAndDescription from '@/components/TitleAndDescription'
 import KeyGranted from '@/components/KeyGranted'
+import LoadingModal from '@/components/LoadingModal'
+import NavBar from '@/components/NavBar'
+import TitleAndDescription from '@/components/TitleAndDescription'
+import { Flex } from '@chakra-ui/react'
+import { Box } from 'framer-motion'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import { useAccount } from 'wagmi'
 
 function Item() {
   const { address, isConnected } = useAccount()
@@ -52,15 +51,15 @@ function Item() {
         justifyContent="space-between"
         alignItems="center">
         <TitleAndDescription title={exy.title} description={exy.description} />
-        {isConnected && (
-          <KeyGranted
-            accessGranted={false}
-            clubName={'Exy United'}
-            image={exy.image}
-          />
-        )}
+        <KeyGranted
+          accessGranted={true}
+          clubName={'Exy United'}
+          image={exy.image}
+          //hard code for now
+          price={0.01}
+        />
+        <LoadingModal />
       </Flex>
-      <button onClick={() => mint?.()}>dsdssd</button>
     </Box>
   )
 }
