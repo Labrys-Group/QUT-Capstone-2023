@@ -3,8 +3,7 @@ import KeyGranted from '@/components/KeyGranted'
 import LoadingModal from '@/components/LoadingModal'
 import NavBar from '@/components/NavBar'
 import TitleAndDescription from '@/components/TitleAndDescription'
-import { Flex } from '@chakra-ui/react'
-import { Box } from 'framer-motion'
+import { Flex, Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from 'react'
@@ -58,7 +57,7 @@ function Item() {
           //hard code for now
           price={0.01}
         />
-        <LoadingModal />
+        {/* <LoadingModal /> */}
       </Flex>
     </Box>
   )
