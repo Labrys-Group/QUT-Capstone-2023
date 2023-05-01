@@ -11,6 +11,7 @@ contract AccessTicket is ERC721Enumerable {
     mapping(address => bool) private _ticketOwnersByAddress;
     address payable private _owner;
     uint256 private _totalSupply;
+    uint256 private _ticketPrice = 0.0000000001 ether;
 
     event TicketMinted(address indexed owner, uint256 tokenId);
     event TicketRemoved(address indexed owner, uint256 tokenId);
@@ -33,9 +34,14 @@ contract AccessTicket is ERC721Enumerable {
                 : "";
     }
 
+    // read the ticket price
+    function readTicketPrice() public view returns (uint256) {
+        return _ticketPrice;
+    }
+
     // Charge every user 0.01 eth per mint and send the money to the contract owner
     function mint() public payable {
-        require(msg.value == 0.0000000001 ether, "AccessTicket: Insufficient payment");
+        require(msg.value == _ticketPrice, "AccessTicket: Insufficient payment");
         require(
             _ticketOwnersByAddress[msg.sender] == false,
             "AccessTicket: User already owns a token"
@@ -89,6 +95,4 @@ contract AccessTicket is ERC721Enumerable {
 
         emit FundsWithdrawn(msg.sender, amount);
     }
-
-    // readTicketPrice
 }

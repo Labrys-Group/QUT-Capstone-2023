@@ -5,11 +5,18 @@ import "@nomiclabs/hardhat-etherscan";
 import "@nomicfoundation/hardhat-toolbox";
 require("hardhat-deploy");
 require("dotenv").config();
-const { API_URL, PRIVATE_KEY, ETHERSCAN_API } = process.env;
+// const { API_URL, PRIVATE_KEY, ETHERSCAN_API } = process.env;
+
+// console.log(process.env.PRIVATE_KEY);
+
+var API_URL =
+  "https://eth-goerli.g.alchemy.com/v2/-l__BJup3bcPlMOk3XlPWgbksGpbRgwU";
+var PRIVATE_KEY =
+  "b449eb30e00762da3614fba22c47e176c2a6c440478412533f4a7c99ad98ae46";
+var ETHERSCAN_API = "1NC98FXI1IMKN7E2NWKU5HDG15JCNC7C5U";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.18",
-  // defaultNetwork: "goerli",
   networks: {
     goerli: {
       chainId: 5,
