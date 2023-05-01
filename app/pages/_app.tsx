@@ -1,16 +1,13 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import { extendTheme, ChakraProvider, CSSReset } from '@chakra-ui/react'
-import { signOut } from 'next-auth/react'
-import '@rainbow-me/rainbowkit/styles.css'
-import { useState, useEffect } from 'react'
-import { useAccount } from 'wagmi'
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { extendTheme, ChakraProvider, CSSReset } from "@chakra-ui/react";
+import "@rainbow-me/rainbowkit/styles.css";
 import {
   getDefaultWallets,
   RainbowKitProvider,
   midnightTheme,
-} from '@rainbow-me/rainbowkit'
-import { configureChains, createClient, WagmiConfig } from 'wagmi'
+} from "@rainbow-me/rainbowkit";
+import { configureChains, createClient, WagmiConfig } from "wagmi";
 import {
   mainnet,
   polygon,
@@ -18,125 +15,120 @@ import {
   arbitrum,
   goerli,
   Chain,
-} from 'wagmi/chains'
-import { alchemyProvider } from 'wagmi/providers/alchemy'
-import { publicProvider } from 'wagmi/providers/public'
-// import { ConnectButton } from "@rainbow-me/rainbowkit";
+} from "wagmi/chains";
+import { alchemyProvider } from "wagmi/providers/alchemy";
+import { publicProvider } from "wagmi/providers/public";
 
-const apiKey = process.env.ALCHEMY_ID
-import { SessionProvider } from 'next-auth/react'
-import { RainbowKitSiweNextAuthProvider } from '@rainbow-me/rainbowkit-siwe-next-auth'
+import { SessionProvider } from "next-auth/react";
+import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
+import { WalletContextProvider } from "@/context/walletContext";
 
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, goerli],
+  [mainnet, goerli],
+  // [mainnet, polygon, optimism, arbitrum, goerli],
   [
-    //alchemyProvider(apiKey !== undefined ? { apiKey } : { apiKey: '' }),
+    alchemyProvider({ apiKey: "o13ZJRrEu85G8Zi9lb9KxaZhkv6537H7" }),
     publicProvider(),
   ]
-)
+);
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
+  appName: "My RainbowKit App",
   chains,
-})
+});
 
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
   provider,
-})
+});
 
 const theme = extendTheme({
   styles: {
     global: {
       // styles for the `body`
       body: {
-        bg: 'black',
-        color: 'white',
+        bg: "black",
+        color: "white",
       },
       //set homeBG.png as background image of the app
-      '.bgImg': {
+      ".bgImg": {
         backgroundImage: "url('/homeBg.png')",
-        //backgroundImage: 'url("../public/homeBg.png")',
-        backgroundSize: 'cover',
+        backgroundSize: "cover",
       },
       //set gameBG.png as background image of the app
-      '.gameImg': {
+      ".gameImg": {
         backgroundImage: "url('/game.png')",
-        //backgroundImage: 'url("../public/homeBg.png")',
-        backgroundSize: 'cover',
+        backgroundSize: "cover",
       },
 
-      '.exyGranted': {
+      ".exyGranted": {
         backgroundImage: "url('/exyGranted.png')",
-        backgroundSize: 'cover',
+        backgroundSize: "cover",
       },
 
       //set exy1.png as background image of a sample item page
-      '.exyImg': {
+      ".exyImg": {
         backgroundImage: "url('/exy1.jpg')",
-        backgroundSize: 'cover',
+        backgroundSize: "cover",
       },
       //page padding
-      '.pagePadding': {
-        padding: '0 4vw',
+      ".pagePadding": {
+        padding: "0 4vw",
       },
       ".contentPagePadding": {
         padding: "0 3.5vw",
       },
       //Big bold title used in homepage
-      '.title': {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '900',
-        fontSize: '6rem',
-        lineHeight: '130px',
+      ".title": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "900",
+        fontSize: "6rem",
+        lineHeight: "130px",
       },
-      '.headingSm': {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '600',
-        fontSize: '20px',
+      ".headingSm": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "600",
+        fontSize: "20px",
       },
-      '.headingMd': {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '900',
-        fontSize: '14px',
-        lineHeight: '17px',
+      ".headingMd": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "900",
+        fontSize: "14px",
+        lineHeight: "17px",
       },
       //Small light blue text used across the app
-      '.blueTxt': {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '400',
-        fontSize: '12px',
-        color: '#7190FF',
+      ".blueTxt": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "400",
+        fontSize: "12px",
+        color: "#7190FF",
       },
-      '.blueTxtBold': {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '600',
-        fontSize: '14px',
-        color: '#7190FF',
+      ".blueTxtBold": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "600",
+        fontSize: "14px",
+        color: "#7190FF",
       },
       //grey paragraph text used across the app
-      '.txt': {
-        fontFamily: 'Inter, sans-serif',
-        fontWeight: '400',
-        lineHeight: '25px',
-        fontSize: '14px',
-        color: 'rgba(255, 255, 255, 0.7)',
+      ".txt": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "400",
+        lineHeight: "25px",
+        fontSize: "14px",
+        color: "rgba(255, 255, 255, 0.7)",
       },
       //This class used for display flex, column, align items center
-      '.flexAlgnCenter': {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+      ".flexAlgnCenter": {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
       },
       ".slick-slider": {
         top: "50px",
         display: "flex",
         alignItems: "center",
       },
-      // ".slick-prev": {
-      //   left: "5px",
-      // },
       ".slick-next": {
         right: "0px",
       },
@@ -145,7 +137,7 @@ const theme = extendTheme({
       },
     },
   },
-})
+});
 
 export default function App({
   Component,
@@ -155,18 +147,21 @@ export default function App({
   return (
     <WagmiConfig client={wagmiClient}>
       <ChakraProvider theme={theme} resetCSS={true}>
-        <SessionProvider refetchInterval={0} session={session}>
-          <RainbowKitSiweNextAuthProvider>
-            <RainbowKitProvider
-              chains={chains}
-              theme={midnightTheme()}
-              coolMode
-              showRecentTransactions={true}>
-              <Component {...pageProps} />
-            </RainbowKitProvider>
-          </RainbowKitSiweNextAuthProvider>
-        </SessionProvider>
+        <WalletContextProvider>
+          <SessionProvider refetchInterval={0} session={session}>
+            <RainbowKitSiweNextAuthProvider>
+              <RainbowKitProvider
+                chains={chains}
+                theme={midnightTheme()}
+                coolMode
+                showRecentTransactions={true}
+              >
+                <Component {...pageProps} />
+              </RainbowKitProvider>
+            </RainbowKitSiweNextAuthProvider>
+          </SessionProvider>
+        </WalletContextProvider>
       </ChakraProvider>
     </WagmiConfig>
-  )
+  );
 }

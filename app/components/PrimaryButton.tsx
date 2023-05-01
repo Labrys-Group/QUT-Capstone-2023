@@ -3,12 +3,11 @@ import { PropsWithChildren } from "react";
 
 type InheritedProps = Pick<
   ButtonProps,
-  "leftIcon" | "rightIcon" | "margin" | "variant" | "size"
+  "leftIcon" | "rightIcon" | "margin" | "variant" | "size" | "onClick"
 >;
 
 export type PrimaryButtonProps = InheritedProps & {
   //text: string
-  onClick(): void;
 };
 
 const btnStyle = {
@@ -20,18 +19,11 @@ const btnStyle = {
 };
 
 const PrimaryButton = ({
-  onClick,
   children,
   ...props
 }: PropsWithChildren<PrimaryButtonProps>) => {
   return (
-    <Button
-      sx={btnStyle}
-      size="md"
-      {...props}
-      onClick={onClick}
-      _hover={{ bg: "#435dba" }}
-    >
+    <Button sx={btnStyle} size="md" _hover={{ bg: "#435dba" }} {...props}>
       {children}
     </Button>
   );

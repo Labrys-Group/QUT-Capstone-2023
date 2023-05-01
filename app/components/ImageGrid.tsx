@@ -31,24 +31,3 @@ const ImageGrid = ({ image_list }: ImageGridProps) => {
   );
 };
 export default ImageGrid;
-
-//import { SimpleGrid, Box, Image } from "@chakra-ui/react";
-
-// const images = [
-//   { src: "https://example.com/image1.jpg", alt: "Image 1" },
-//   { src: "https://example.com/image2.jpg", alt: "Image 2" },
-//   { src: "https://example.com/image3.jpg", alt: "Image 3" },
-//   // Add more images as needed
-// ];
-
-// export default function ImageGrid() {
-//   return (
-//     <SimpleGrid columns={[1, 2, 3]} spacing={4}>
-
-//     </SimpleGrid>
-//   );
-// }
-
-// <Box>
-//   <Image height="100%" objectFit="cover" src={src_} alt={alt_} />
-// </Box>

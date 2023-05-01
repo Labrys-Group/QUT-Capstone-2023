@@ -1,9 +1,11 @@
+import { WalletContext } from "../context/walletContext";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Text, Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
-import { Button, ButtonProps } from "@chakra-ui/react";
+import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useRouter } from "next/router";
+import { utils } from "ethers";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -38,6 +40,29 @@ const KeyGranted = ({
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
   const router = useRouter();
+
+  const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
+
+  const handleMint = async () => {
+    console.log("click on mint function");
+    console.log("signer", signer);
+    console.log("account address", accountAddress);
+    console.log("balance", balance);
+
+    if (erc721 === undefined) {
+    } else {
+      try {
+        const transaction = await erc721.mint({
+          value: utils.parseEther("0.000000000000001"),
+        });
+
+        console.log("Minting...", transaction.hash, "loading");
+        console.log("Success");
+      } catch (e: any) {
+        console.log("Failed:", e.message, "error");
+      }
+    }
+  };
 
   const handleClick = () => {
     //hardcoded for exy page
@@ -86,7 +111,9 @@ const KeyGranted = ({
           Enter Site
         </PrimaryButton>
       ) : (
-        <PrimaryButton onClick={() => {}}>Purchase for Ξ{price}</PrimaryButton>
+        <PrimaryButton onClick={handleMint}>
+          Purchase for Ξ{price}
+        </PrimaryButton>
       )}
     </Flex>
   );

@@ -5,11 +5,11 @@ import "@nomiclabs/hardhat-etherscan";
 import "@nomicfoundation/hardhat-toolbox";
 require("hardhat-deploy");
 require("dotenv").config();
+
 const { API_URL, PRIVATE_KEY, ETHERSCAN_API } = process.env;
 
 const config: HardhatUserConfig = {
   solidity: "0.8.18",
-  // defaultNetwork: "goerli",
   networks: {
     goerli: {
       chainId: 5,

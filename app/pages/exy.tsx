@@ -1,18 +1,9 @@
 import { getSession, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import {
-  Box,
-  AspectRatio,
-  Flex,
-  Spacer,
-  Image,
-  SimpleGrid,
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import AddressBar from "../components/AddressBar";
 import { useAccount } from "wagmi";
-import ImageGrid from "@/components/ImageGrid";
-import VideoCarousel from "@/components/VideoCarousel";
 import ContentTitle from "@/components/ContentTitle";
 import NavBar from "@/components/NavBar";
 

@@ -21,8 +21,6 @@ export type ArrowButtonProps = InheritedProps & {
   direction: "left" | "right";
 };
 
-//can you please finish this component? I am looking to make this into a component where user can decide the direction of the arrow so different direction will use different icon and aria-label
-
 const ArrowButton = ({
   onClick,
   direction,

@@ -12,18 +12,19 @@
     "@typechain/hardhat": "^6.1.5",
     "@types/chai": "^4.3.4",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.15.10",
+    "@types/node": "^18.15.11",
     "chai": "^4.3.7",
     "ethers": "^5.7.2",
-    "hardhat": "^2.13.0",
+    "hardhat": "^2.14.0",
     "hardhat-gas-reporter": "^1.0.9",
     "solidity-coverage": "^0.8.2",
     "ts-node": "^10.9.1",
     "typechain": "^8.1.1",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.8.2",
+    "@openzeppelin/contracts": "^4.8.3",
+    "dotenv": "^16.0.3",
     "hardhat-deploy": "^0.11.25"
   }
 }

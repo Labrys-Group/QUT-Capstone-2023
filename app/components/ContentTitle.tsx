@@ -47,8 +47,7 @@ const ContentTitle = ({
 }: ContentTitleProps) => {
   const router = useRouter();
   const handleClick = () => {
-    //hardcoded for exy page
-    router.push("/exy");
+    router.back();
   };
   return (
     <Flex w="100vw">
