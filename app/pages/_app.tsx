@@ -134,11 +134,14 @@ const theme = extendTheme({
         display: "flex",
         alignItems: "center",
       },
-      ".slick-prev": {
-        left: "20px",
-      },
+      // ".slick-prev": {
+      //   left: "5px",
+      // },
       ".slick-next": {
         right: "0px",
+      },
+      ".slick-prev:before, .slick-next:before": {
+        display: "none",
       },
     },
   },

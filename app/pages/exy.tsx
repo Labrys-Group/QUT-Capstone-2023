@@ -56,50 +56,14 @@ function Exy() {
       <NavBar />
       <AddressBar status={address !== undefined} username={address} />
 
-      <Box marginTop="15vh" className="pagePadding">
+      <Box marginTop="20vh" className="pagePadding">
         <ContentTitle
           title="EXY UNITED: SECRET ZONE"
           description="Members only content"
           images={images}
           videos={videos}
         />
-        <ImageGrid image_list={images} />
       </Box>
-
-      <VideoCarousel video_list={videos} />
-      {/* <Flex>
-        <AspectRatio maxW="400px" flex="1">
-          <iframe
-            title="Burinakae"
-            src="https://www.youtube.com/embed/g-Bhp_ea6os"
-            allowFullScreen
-          />
-        </AspectRatio>
-
-        <AspectRatio maxW="400px" flex="2">
-          <iframe
-            title="Diamonds"
-            src="https://www.youtube.com/embed/eDff2WORFow"
-            allowFullScreen
-          />
-        </AspectRatio>
-
-        <AspectRatio maxW="400px" flex="3">
-          <iframe
-            title="Gloomy Letter"
-            src="https://www.youtube.com/embed/ZBPQCKpoe6c"
-            allowFullScreen
-          />
-        </AspectRatio>
-
-        <AspectRatio maxW="400px" flex="4">
-          <iframe
-            title="Wave"
-            src="https://www.youtube.com/embed/aWX8_QER_qQ"
-            allowFullScreen
-          />
-        </AspectRatio>
-      </Flex> */}
     </Box>
   );
 }
