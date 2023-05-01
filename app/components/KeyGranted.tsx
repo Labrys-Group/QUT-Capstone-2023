@@ -4,6 +4,7 @@ import { Text, Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
+import { useRouter } from "next/router";
 import { utils } from "ethers";
 
 type KeyGrantedProps = {
@@ -38,6 +39,7 @@ const KeyGranted = ({
 }: KeyGrantedProps) => {
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
+  const router = useRouter();
 
   const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
 
@@ -62,6 +64,10 @@ const KeyGranted = ({
     }
   };
 
+  const handleClick = () => {
+    //hardcoded for exy page
+    router.push("/exy");
+  };
   return (
     <Flex sx={boxStyle}>
       <Text className="blueTxtBold">{clubName}</Text>
@@ -95,7 +101,13 @@ const KeyGranted = ({
         {accessGranted ? "Access granted" : displayRemaining + " Remaining"}
       </Text>
       {accessGranted ? (
-        <PrimaryButton rightIcon={<ArrowForwardIcon />} onClick={() => {}}>
+        <PrimaryButton
+          rightIcon={<ArrowForwardIcon />}
+          onClick={() => {
+            handleClick();
+            console.log(router);
+          }}
+        >
           Enter Site
         </PrimaryButton>
       ) : (

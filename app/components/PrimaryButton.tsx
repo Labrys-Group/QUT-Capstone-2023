@@ -23,7 +23,7 @@ const PrimaryButton = ({
   ...props
 }: PropsWithChildren<PrimaryButtonProps>) => {
   return (
-    <Button sx={btnStyle} size="md" {...props} _hover={{ bg: "#435dba" }}>
+    <Button sx={btnStyle} size="md" _hover={{ bg: "#435dba" }} {...props}>
       {children}
     </Button>
   );

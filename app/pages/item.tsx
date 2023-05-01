@@ -1,39 +1,27 @@
-import { getSession, useSession } from "next-auth/react";
-import { useState, useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import { Box, Flex } from "@chakra-ui/react";
-import NavBar from "@/components/NavBar";
 import AddressBar from "@/components/AddressBar";
-import { useAccount } from "wagmi";
-import TitleAndDescription from "@/components/TitleAndDescription";
 import KeyGranted from "@/components/KeyGranted";
+import NavBar from "@/components/NavBar";
+import TitleAndDescription from "@/components/TitleAndDescription";
 import { WalletContext } from "@/context/walletContext";
 import getTotalSupply from "@/helpers/getTotalSupply";
+import { Flex, Box } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useState, useEffect, useContext } from "react";
+import { useAccount } from "wagmi";
 
 function Item() {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
   const router = useRouter();
-
-  useEffect(() => {
-    const securePage = async () => {
-      const session1 = await getSession();
-
-      if (!session1) {
-        router.push("/");
-      } else {
-        setLoading(false);
-      }
-    };
-    securePage();
-  }, [session]);
 
   //verify access
   const { erc721, accountAddress, balance } = useContext(WalletContext);
 
   const [access, setAccess] = useState(false);
   useEffect(() => {
+    console.log("run verify useEffect");
     // if user do not have any nfts, break
     if (balance === 0 || balance === undefined) return;
     // else
@@ -54,7 +42,19 @@ function Item() {
         }
       }
     })();
-  }, [erc721]);
+  }, [balance, erc721]);
+
+  useEffect(() => {
+    const securePage = async () => {
+      if (!session) {
+        router.push("/");
+      } else {
+        console.log(session);
+        setLoading(false);
+      }
+    };
+    securePage();
+  }, [session]);
 
   if (loading) {
     return <h2>Loading。。。</h2>;
@@ -87,6 +87,7 @@ function Item() {
           image={exy.image}
           price={0.01}
         />
+        {/* <LoadingModal /> */}
       </Flex>
     </Box>
   );

@@ -2,19 +2,23 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { extendTheme, ChakraProvider, CSSReset } from "@chakra-ui/react";
 import "@rainbow-me/rainbowkit/styles.css";
-
 import {
   getDefaultWallets,
   RainbowKitProvider,
   midnightTheme,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import { mainnet, polygon, optimism, arbitrum, goerli } from "wagmi/chains";
+import {
+  mainnet,
+  polygon,
+  optimism,
+  arbitrum,
+  goerli,
+  Chain,
+} from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-// import { ConnectButton } from "@rainbow-me/rainbowkit";
 
-const apiKey = process.env.ALCHEMY_ID;
 import { SessionProvider } from "next-auth/react";
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
 import { WalletContextProvider } from "@/context/walletContext";
@@ -50,13 +54,11 @@ const theme = extendTheme({
       //set homeBG.png as background image of the app
       ".bgImg": {
         backgroundImage: "url('/homeBg.png')",
-        //backgroundImage: 'url("../public/homeBg.png")',
         backgroundSize: "cover",
       },
       //set gameBG.png as background image of the app
       ".gameImg": {
         backgroundImage: "url('/game.png')",
-        //backgroundImage: 'url("../public/homeBg.png")',
         backgroundSize: "cover",
       },
 
@@ -73,6 +75,9 @@ const theme = extendTheme({
       //page padding
       ".pagePadding": {
         padding: "0 4vw",
+      },
+      ".contentPagePadding": {
+        padding: "0 3.5vw",
       },
       //Big bold title used in homepage
       ".title": {
@@ -119,6 +124,17 @@ const theme = extendTheme({
         flexDirection: "column",
         alignItems: "center",
       },
+      ".slick-slider": {
+        top: "50px",
+        display: "flex",
+        alignItems: "center",
+      },
+      ".slick-next": {
+        right: "0px",
+      },
+      ".slick-prev:before, .slick-next:before": {
+        display: "none",
+      },
     },
   },
 });
@@ -127,6 +143,7 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }: AppProps) {
+  //console.log('session on app', session)
   return (
     <WagmiConfig client={wagmiClient}>
       <ChakraProvider theme={theme} resetCSS={true}>
