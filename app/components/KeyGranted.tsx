@@ -1,6 +1,6 @@
 import { WalletContext } from "../context/walletContext";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Text, Box, Flex } from "@chakra-ui/react";
+import { Text, Box, Flex, Alert, useToast } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
@@ -39,8 +39,10 @@ const KeyGranted = ({
 }: KeyGrantedProps) => {
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
-  const router = useRouter();
 
+  // use hook
+  const router = useRouter();
+  const toast = useToast();
   const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
 
   const handleMint = async () => {
@@ -52,14 +54,25 @@ const KeyGranted = ({
     if (erc721 === undefined) {
     } else {
       try {
+        toast({
+          title: "Loading",
+          description: "Trying to mint access token",
+          status: "loading",
+        });
         const transaction = await erc721.mint({
           value: utils.parseEther("0.000000000000001"),
         });
-
-        console.log("Minting...", transaction.hash, "loading");
-        console.log("Success");
+        toast({
+          title: "Success",
+          description: `View transaction at ${transaction.hash}`,
+          status: "success",
+        });
       } catch (e: any) {
-        console.log("Failed:", e.message, "error");
+        toast({
+          title: "Error",
+          description: `${e.error.code} ${e.error.message}`,
+          status: "error",
+        });
       }
     }
   };
