@@ -34,13 +34,15 @@ function Item() {
   useEffect(() => {
     console.log('run verify useEffect')
     // if user do not have any nfts, break
+    console.log(erc721)
+    getToken()
     if (balance === 0 || balance === undefined) return // else
     ;(async () => {
       if (erc721 !== undefined) {
         // get number of minted nft
         const totalSupply = await getTotalSupply(erc721)
         console.log('totalSupply', totalSupply)
-        if (totalSupply > 0) {
+        if (totalSupply >= 0) {
           for (let i = 1; i <= totalSupply; i++) {
             console.log('tokenId', i)
             let access = await erc721.verifyAccess(accountAddress, i)
@@ -53,7 +55,6 @@ function Item() {
         }
       }
     })()
-    getToken()
   }, [balance, erc721])
 
   useEffect(() => {
@@ -101,6 +102,9 @@ function Item() {
           clubName={'Exy United'}
           image={exy.image}
           price={0.01}
+          remainingToken={200 - remainingToken}
+          totalToken={200}
+          tokenNumber={tokenId}
         />
         {/* <LoadingModal /> */}
         <NavigationButton direction="right" goto="item-climbing-gym" />
