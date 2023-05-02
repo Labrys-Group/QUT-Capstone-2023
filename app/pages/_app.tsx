@@ -138,7 +138,6 @@ const theme = extendTheme({
         alignItems: "center",
       },
       ".slick-slider": {
-        top: "50px",
         display: "flex",
         alignItems: "center",
       },

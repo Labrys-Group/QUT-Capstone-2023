@@ -48,7 +48,7 @@ function Exy() {
   }
 
   return (
-    <Box className="exyImg">
+    <Box className="exyImg" paddingBottom={"10vh"}>
       <NavBar />
       <AddressBar status={address !== undefined} username={address} />
 

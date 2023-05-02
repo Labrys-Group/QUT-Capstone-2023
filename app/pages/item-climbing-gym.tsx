@@ -45,7 +45,7 @@ function ItemClimbingGym() {
   const climbing = {
     title: "Steve Climbing Gym",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
+      "Our state-of-the-art facility offers some of the most intense and exciting climbing experiences you'll find anywhere. And as a member of our club, you'll get exclusive access to training programs, gear reviews, and interviews with some of the top climbers in the world.",
     image: "/exyGranted.png",
   };
 

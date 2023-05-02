@@ -45,7 +45,7 @@ function ItemTableTennis() {
   const tableTennis = {
     title: "Table Tennis",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
+      "Welcome to the Table Tennis Club, where we are passionate about the sport of ping pong! As a member of our exclusive club, you'll have access to a wealth of exclusive content, including training videos, match highlights, and interviews with some of the top players in the game.",
     image: "/exyGranted.png",
   };
 
