@@ -5,6 +5,7 @@ import ArrowButton from "./ArrowButton";
 import ImageGrid from "./ImageGrid";
 import VideoCarousel from "./VideoCarousel";
 import { useRouter } from "next/router";
+
 type ImageProps = {
   alt: string;
   src: string;

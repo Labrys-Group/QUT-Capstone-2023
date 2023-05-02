@@ -1,35 +1,34 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
-import { Text, Box, BoxProps, Flex } from '@chakra-ui/react'
-import { ConnectButton } from '@rainbow-me/rainbowkit'
-import { useAccount } from 'wagmi'
-import NavBar from '@/components/NavBar'
-import { getSession, signOut, useSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
+import React from "react";
+import { useEffect } from "react";
+import { Text, Box, Flex } from "@chakra-ui/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import { useAccount } from "wagmi";
+import NavBar from "@/components/NavBar";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 export default function App() {
-  const account = useAccount()
-  const { data: session } = useSession()
-  const router = useRouter()
+  const account = useAccount();
+  const { data: session } = useSession();
+  const router = useRouter();
 
-  const status = account.status
+  const status = account.status;
 
   useEffect(() => {
     const securePage = async () => {
-      //check if authenticated and if is connected to wallet
-      console.log(status)
-      if (session && status === 'connected') {
-        router.push('/item')
+      // check if authenticated and if is connected to wallet
+      console.log(status);
+      if (session && status === "connected") {
+        router.push("/item");
       } else {
       }
-    }
-    securePage()
-  }, [session, status])
+    };
+    securePage();
+  }, [session, status]);
 
   return (
     <Box h="100vh" className="bgImg">
       <NavBar />
-
       <Flex h="30vh" mt="10vh" flexDirection="column" alignItems="center">
         <Text className="blueTxt">WELCOME TO</Text>
         <Text className="title">MEMBERS ONLY</Text>
@@ -43,8 +42,7 @@ export default function App() {
       </Flex>
       <Box className="flexAlgnCenter">
         <ConnectButton />
-        {/* <ConnectInformationComponent connected={isConnected} /> */}
       </Box>
     </Box>
-  )
+  );
 }

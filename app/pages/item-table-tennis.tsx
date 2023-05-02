@@ -3,8 +3,7 @@ import KeyGranted from "@/components/KeyGranted";
 import NavBar from "@/components/NavBar";
 import TitleAndDescription from "@/components/TitleAndDescription";
 import { WalletContext } from "@/context/walletContext";
-import getTotalSupply from "@/helpers/getTotalSupply";
-import { Flex, Box, Button } from "@chakra-ui/react";
+import { Flex, Box } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
@@ -73,7 +72,6 @@ function ItemTableTennis() {
           image={tableTennis.image}
           price={0.01}
         />
-        {/* <LoadingModal /> */}
         <NavigationButton direction="right" goto="item" />
       </Flex>
     </Box>

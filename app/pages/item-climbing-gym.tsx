@@ -73,7 +73,6 @@ function ItemClimbingGym() {
           image={climbing.image}
           price={0.01}
         />
-        {/* <LoadingModal /> */}
         <NavigationButton direction="right" goto="item-table-tennis" />
       </Flex>
     </Box>

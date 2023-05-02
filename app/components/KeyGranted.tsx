@@ -1,6 +1,6 @@
 import { WalletContext } from "../context/walletContext";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Text, Box, Flex, Alert, useToast } from "@chakra-ui/react";
+import { Text, Box, Flex, useToast } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
@@ -37,7 +37,6 @@ const KeyGranted = ({
   totalToken,
   price,
 }: KeyGrantedProps) => {
-  // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
 
   // use hook

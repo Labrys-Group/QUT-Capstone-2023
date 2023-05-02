@@ -1,8 +1,12 @@
-import { Contract } from "ethers";
+import { Contract } from 'ethers'
 
 const getTotalSupply = async (erc721: Contract) => {
-  const totalBalance = await erc721.totalSupply();
-  return totalBalance.toNumber();
-};
+  try {
+    const totalBalance = await erc721.totalSupply()
+    return totalBalance.toNumber()
+  } catch {
+    return -221210
+  }
+}
 
-export default getTotalSupply;
+export default getTotalSupply

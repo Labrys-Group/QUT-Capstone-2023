@@ -14,29 +14,42 @@ import NavigationButton from "@/components/NavigationButton";
 
 function Item() {
   const { address, isConnected } = useAccount();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [remainingToken, setRemainingToken] = useState<number | undefined>();
+  const [tokenId, setTokenID] = useState<number | undefined>();
+  const [access, setAccess] = useState<boolean>(false);
+
   const { data: session } = useSession();
   const router = useRouter();
 
-  //verify access
+  // wallet context
   const { erc721, accountAddress, balance } = useContext(WalletContext);
 
-  const [access, setAccess] = useState(false);
+  // get total supply
+  async function getToken() {
+    if (erc721 != undefined) {
+      setRemainingToken(await getTotalSupply(erc721));
+    }
+  }
+
+  // verify token
+  // @TODO: move this to backend and verify by erc721.balanceOf >0
   useEffect(() => {
     console.log("run verify useEffect");
+    getToken();
     // if user do not have any nfts, break
-    if (balance === 0 || balance === undefined) return;
-    // else
+    if (balance === 0 || balance === undefined) return; // else
     (async () => {
       if (erc721 !== undefined) {
         // get number of minted nft
         const totalSupply = await getTotalSupply(erc721);
         console.log("totalSupply", totalSupply);
-        if (totalSupply > 0) {
+        if (totalSupply >= 0) {
           for (let i = 1; i <= totalSupply; i++) {
             console.log("tokenId", i);
             let access = await erc721.verifyAccess(accountAddress, i);
             if (access) {
+              setTokenID(i);
               setAccess(true);
               break;
             }
@@ -46,6 +59,7 @@ function Item() {
     })();
   }, [balance, erc721]);
 
+  // verify session
   useEffect(() => {
     const securePage = async () => {
       if (!session) {
@@ -74,6 +88,9 @@ function Item() {
     image: "/exyGranted.png",
   };
 
+  let displayRemainingToken =
+    remainingToken !== undefined ? 200 - remainingToken : 9999;
+
   return (
     <Box h="100vh" className="exyImg">
       <NavBar />
@@ -90,11 +107,13 @@ function Item() {
 
         <KeyGranted
           accessGranted={access}
-          clubName={exy.title}
+          clubName={"Exy United"}
           image={exy.image}
-          price={0.000000000000001}
+          price={0.01}
+          remainingToken={displayRemainingToken}
+          totalToken={200}
+          tokenNumber={tokenId}
         />
-        {/* <LoadingModal /> */}
         <NavigationButton direction="right" goto="item-climbing-gym" />
       </Flex>
     </Box>

@@ -77,7 +77,7 @@ export const WalletContextProvider = ({
     }
   }, [address, abi, signer, provider]);
 
-  //verify nft
+  // set balance
   useEffect(() => {
     if (!provider) return;
     (async () => {
@@ -87,6 +87,7 @@ export const WalletContextProvider = ({
         } else {
           if (erc721 !== undefined) {
             const balance = await erc721.balanceOf(accountAddress);
+            console.log(balance.toNumber());
             setBalance(balance?.toNumber());
           }
         }
