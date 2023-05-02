@@ -70,7 +70,7 @@ const KeyGranted = ({
       } catch (e: any) {
         toast({
           title: "Error",
-          description: `${e.error.code} ${e.error.message}`,
+          description: `${e.error.message}`,
           status: "error",
         });
       }

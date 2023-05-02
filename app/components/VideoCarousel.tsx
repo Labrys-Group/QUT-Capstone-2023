@@ -15,7 +15,7 @@ export type VideoGridProps = {
 
 const VideoCarousel = ({ video_list }: VideoGridProps) => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -37,7 +37,12 @@ const VideoCarousel = ({ video_list }: VideoGridProps) => {
     <Box>
       <Slider {...settings}>
         {video_list.map((video) => (
-          <Box key={video.src} p={2} display="flex" justifyContent="center">
+          <Box
+            key={video.src}
+            display="flex"
+            justifyContent="center"
+            marginTop={"50px"}
+          >
             <iframe
               width="100%"
               height="500"

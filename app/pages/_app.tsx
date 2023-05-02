@@ -77,6 +77,14 @@ const theme = extendTheme({
         backgroundImage: "url('/exy1.jpg')",
         backgroundSize: "cover",
       },
+      ".climbingImg": {
+        backgroundImage: "url('/bouldering.jpg')",
+        backgroundSize: "cover",
+      },
+      ".tableTennisImg": {
+        backgroundImage: "url('/tableTennis.jpg')",
+        backgroundSize: "cover",
+      },
       //page padding
       ".pagePadding": {
         padding: "0 4vw",
@@ -130,7 +138,6 @@ const theme = extendTheme({
         alignItems: "center",
       },
       ".slick-slider": {
-        top: "50px",
         display: "flex",
         alignItems: "center",
       },
