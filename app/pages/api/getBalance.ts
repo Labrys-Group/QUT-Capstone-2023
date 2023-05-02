@@ -26,9 +26,12 @@ export default async function handler(
 
   const balance = await contract.balanceOf(address)
   const totalSupply = await contract.totalSupply()
-  const tokenId = await contract.tokenOfOwnerByIndex(address, 0)
-
-  console.log(`Account ${address} owns token ${tokenId}`)
+  if (balance == 1) {
+    var tokenId = await contract.tokenOfOwnerByIndex(address, 0)
+    console.log(`Account ${address} owns token ${tokenId}`)
+  } else {
+    tokenId = 'null'
+  }
 
   console.log(`Address ${address} has ${balance} ERC721 tokens.`)
   console.log(
