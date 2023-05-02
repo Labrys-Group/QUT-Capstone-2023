@@ -22,6 +22,7 @@ function Item() {
   const router = useRouter()
   // wallet context
   const { erc721, accountAddress, balance } = useContext(WalletContext)
+
   // fetch user balance and totalsupply from backend
   const fetchAccess = async () => {
     const response = await fetch('/api/getBalance', {
@@ -36,6 +37,7 @@ function Item() {
     if (data.userBalance == '0') {
       setAccess(false)
     } else {
+      setTokenID(data.tokenId)
       setAccess(true)
     }
   }
@@ -52,7 +54,6 @@ function Item() {
       if (!session) {
         router.push('/')
       } else {
-        console.log(session)
         setLoading(false)
       }
     }
