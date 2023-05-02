@@ -6,6 +6,7 @@ import AddressBar from "../components/AddressBar";
 import { useAccount } from "wagmi";
 import ContentTitle from "@/components/ContentTitle";
 import NavBar from "@/components/NavBar";
+import LoadingPage from "@/components/LoadingPage";
 
 const images = [
   { src: "exy_1.jpg", alt: "Exy Lift Selfie" },
@@ -39,7 +40,11 @@ function Exy() {
   }, [session]);
 
   if (loading) {
-    return <h2>Loading。。。</h2>;
+    return (
+      <Box>
+        <LoadingPage />
+      </Box>
+    );
   }
 
   return (
@@ -47,7 +52,7 @@ function Exy() {
       <NavBar />
       <AddressBar status={address !== undefined} username={address} />
 
-      <Box marginTop="20vh" className="pagePadding">
+      <Box marginTop="20vh" className="pagePadding" overflow={"auto"}>
         <ContentTitle
           title="EXY UNITED: SECRET ZONE"
           description="Members only content"

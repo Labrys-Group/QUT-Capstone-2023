@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { useAccount } from "wagmi";
+import LoadingPage from "@/components/LoadingPage";
 
 function Item() {
   const { address, isConnected } = useAccount();
@@ -57,7 +58,11 @@ function Item() {
   }, [session]);
 
   if (loading) {
-    return <h2>Loading。。。</h2>;
+    return (
+      <Box>
+        <LoadingPage />
+      </Box>
+    );
   }
 
   // @TODO: move this to constant folder
