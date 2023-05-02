@@ -51,6 +51,11 @@ const theme = extendTheme({
         bg: "black",
         color: "white",
       },
+      ".logoImg": {
+        width: "100%",
+        height: "auto",
+        maxWidth: "200px",
+      },
       //set homeBG.png as background image of the app
       ".bgImg": {
         backgroundImage: "url('/homeBg.png')",
