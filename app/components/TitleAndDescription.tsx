@@ -12,11 +12,10 @@ const boxStyle = {
 
 const descriptionStyle = {
   // add bg
-  backgroundColor: "rgba(30, 30, 34, 0.6)",
+  backgroundColor: "rgba(30,30,34,0.6)",
   borderRadius: "10px",
   padding: "12px 16px",
   lineHeight: "16px",
-  border: "0.42735px solid #303030",
 };
 
 const titleStyle = {

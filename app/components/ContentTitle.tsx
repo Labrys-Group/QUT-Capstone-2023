@@ -1,8 +1,10 @@
-//This component is used in content page to display title and description
-import { Text, Flex } from "@chakra-ui/react";
-import { ChevronLeftIcon } from "@chakra-ui/icons";
+//This component is used in content page to display title and description and any other inclusize content
+//This design is suitable for any
+import { Text, Flex, Box } from "@chakra-ui/react";
+import ArrowButton from "./ArrowButton";
 import ImageGrid from "./ImageGrid";
 import VideoCarousel from "./VideoCarousel";
+import { useRouter } from "next/router";
 type ImageProps = {
   alt: string;
   src: string;
@@ -43,17 +45,26 @@ const ContentTitle = ({
   images,
   videos,
 }: ContentTitleProps) => {
+  const router = useRouter();
+  const handleClick = () => {
+    router.back();
+  };
   return (
-    <Flex alignItems={"center"}>
-      <ChevronLeftIcon
-        className="icon"
-        boxSize={10}
-        color="rgba(255, 255, 255, 0.5)"
-      />
-      <Flex sx={boxStyle}>
-        <Text sx={titleStyle}>{title.toUpperCase()}</Text>
-        <Text sx={descriptionStyle}>{description}</Text>
+    <Flex w="100vw">
+      <Flex alignItems={"start"} w="2%">
+        <ArrowButton direction="left" onClick={handleClick} />
       </Flex>
+      <Box w="88%">
+        <Flex sx={boxStyle}>
+          <Text sx={titleStyle}>{title.toUpperCase()}</Text>
+          <Text sx={descriptionStyle}>{description}</Text>
+        </Flex>
+        <Box mt="20px">
+          <ImageGrid image_list={images || []} />
+        </Box>
+
+        <VideoCarousel video_list={videos || []} />
+      </Box>
     </Flex>
   );
 };

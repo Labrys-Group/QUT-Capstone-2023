@@ -1,8 +1,11 @@
+import { WalletContext } from "../context/walletContext";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Text, Box, Flex } from "@chakra-ui/react";
+import { Text, Box, Flex, Alert, useToast } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
-import { Button, ButtonProps } from "@chakra-ui/react";
+import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
+import { useRouter } from "next/router";
+import { utils } from "ethers";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -37,6 +40,47 @@ const KeyGranted = ({
   // @TODO: Work out remainingToken properly, currently hardcoded
   const displayRemaining = remainingToken + `/${totalToken}`;
 
+  // use hook
+  const router = useRouter();
+  const toast = useToast();
+  const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
+
+  const handleMint = async () => {
+    console.log("click on mint function");
+    console.log("signer", signer);
+    console.log("account address", accountAddress);
+    console.log("balance", balance);
+
+    if (erc721 === undefined) {
+    } else {
+      try {
+        toast({
+          title: "Loading",
+          description: "Trying to mint access token",
+          status: "loading",
+        });
+        const transaction = await erc721.mint({
+          value: utils.parseEther("0.000000000000001"),
+        });
+        toast({
+          title: "Success",
+          description: `View transaction at ${transaction.hash}`,
+          status: "success",
+        });
+      } catch (e: any) {
+        toast({
+          title: "Error",
+          description: `${e.error.code} ${e.error.message}`,
+          status: "error",
+        });
+      }
+    }
+  };
+
+  const handleClick = () => {
+    //hardcoded for exy page
+    router.push("/exy");
+  };
   return (
     <Flex sx={boxStyle}>
       <Text className="blueTxtBold">{clubName}</Text>
@@ -70,11 +114,19 @@ const KeyGranted = ({
         {accessGranted ? "Access granted" : displayRemaining + " Remaining"}
       </Text>
       {accessGranted ? (
-        <PrimaryButton rightIcon={<ArrowForwardIcon />} onClick={() => {}}>
+        <PrimaryButton
+          rightIcon={<ArrowForwardIcon />}
+          onClick={() => {
+            handleClick();
+            console.log(router);
+          }}
+        >
           Enter Site
         </PrimaryButton>
       ) : (
-        <PrimaryButton onClick={() => {}}>Purchase for Ξ{price}</PrimaryButton>
+        <PrimaryButton onClick={handleMint}>
+          Purchase for Ξ{price}
+        </PrimaryButton>
       )}
     </Flex>
   );

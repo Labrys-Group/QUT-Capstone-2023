@@ -1,27 +1,56 @@
-import { getSession, useSession } from "next-auth/react";
-import { useState, useEffect } from "react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useRouter } from "next/router";
-import { Text, Box, BoxProps, Flex } from "@chakra-ui/react";
-import NavBar from "@/components/NavBar";
 import AddressBar from "@/components/AddressBar";
-import { useAccount } from "wagmi";
-import TitleAndDescription from "@/components/TitleAndDescription";
 import KeyGranted from "@/components/KeyGranted";
-import LoadingModal from "@/components/LoadingModal";
+import NavBar from "@/components/NavBar";
+import TitleAndDescription from "@/components/TitleAndDescription";
+import { WalletContext } from "@/context/walletContext";
+import getTotalSupply from "@/helpers/getTotalSupply";
+import { Flex, Box } from "@chakra-ui/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { useState, useEffect, useContext } from "react";
+import { useAccount } from "wagmi";
+import LoadingPage from "@/components/LoadingPage";
 
 function Item() {
-  const { address } = useAccount();
+  const { address, isConnected } = useAccount();
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
   const router = useRouter();
 
+  //verify access
+  const { erc721, accountAddress, balance } = useContext(WalletContext);
+
+  const [access, setAccess] = useState(false);
+  useEffect(() => {
+    console.log("run verify useEffect");
+    // if user do not have any nfts, break
+    if (balance === 0 || balance === undefined) return;
+    // else
+    (async () => {
+      if (erc721 !== undefined) {
+        // get number of minted nft
+        const totalSupply = await getTotalSupply(erc721);
+        console.log("totalSupply", totalSupply);
+        if (totalSupply > 0) {
+          for (let i = 1; i <= totalSupply; i++) {
+            console.log("tokenId", i);
+            let access = await erc721.verifyAccess(accountAddress, i);
+            if (access) {
+              setAccess(true);
+              break;
+            }
+          }
+        }
+      }
+    })();
+  }, [balance, erc721]);
+
   useEffect(() => {
     const securePage = async () => {
-      const session1 = await getSession();
-      if (!session1) {
+      if (!session) {
         router.push("/");
       } else {
+        console.log(session);
         setLoading(false);
       }
     };
@@ -29,7 +58,11 @@ function Item() {
   }, [session]);
 
   if (loading) {
-    return <h2>Loading。。。</h2>;
+    return (
+      <Box>
+        <LoadingPage />
+      </Box>
+    );
   }
 
   // @TODO: move this to constant folder
@@ -52,14 +85,14 @@ function Item() {
         alignItems="center"
       >
         <TitleAndDescription title={exy.title} description={exy.description} />
+
         <KeyGranted
-          accessGranted={true}
+          accessGranted={access}
           clubName={"Exy United"}
           image={exy.image}
-          //hard code for now
           price={0.01}
         />
-        <LoadingModal/>
+        {/* <LoadingModal /> */}
       </Flex>
     </Box>
   );
