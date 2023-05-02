@@ -48,11 +48,11 @@ function Exy() {
   }
 
   return (
-    <Box className="exyImg">
+    <Box className="exyImg" paddingBottom={"10vh"}>
       <NavBar />
       <AddressBar status={address !== undefined} username={address} />
 
-      <Box marginTop="20vh" className="pagePadding" overflow={"auto"}>
+      <Box marginTop="20vh" className="pagePadding">
         <ContentTitle
           title="EXY UNITED: SECRET ZONE"
           description="Members only content"

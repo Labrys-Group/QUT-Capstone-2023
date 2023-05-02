@@ -4,12 +4,13 @@ import NavBar from "@/components/NavBar";
 import TitleAndDescription from "@/components/TitleAndDescription";
 import { WalletContext } from "@/context/walletContext";
 import getTotalSupply from "@/helpers/getTotalSupply";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Button } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { useAccount } from "wagmi";
 import LoadingPage from "@/components/LoadingPage";
+import NavigationButton from "@/components/NavigationButton";
 
 function Item() {
   const { address, isConnected } = useAccount();
@@ -84,15 +85,17 @@ function Item() {
         justifyContent="space-between"
         alignItems="center"
       >
+        <NavigationButton direction="left" goto="item-table-tennis" />
         <TitleAndDescription title={exy.title} description={exy.description} />
 
         <KeyGranted
           accessGranted={access}
-          clubName={"Exy United"}
+          clubName={exy.title}
           image={exy.image}
-          price={0.01}
+          price={0.000000000000001}
         />
         {/* <LoadingModal /> */}
+        <NavigationButton direction="right" goto="item-climbing-gym" />
       </Flex>
     </Box>
   );
