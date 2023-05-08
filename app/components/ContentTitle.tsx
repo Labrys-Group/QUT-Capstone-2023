@@ -30,7 +30,7 @@ const boxStyle = {
 const descriptionStyle = {
   fontFamily: "Inter, sans-serif",
   fontWeight: "400",
-  fontSize: "18px",
+  fontSize: "1.2em",
   color: "#7190FF",
 };
 
@@ -58,6 +58,7 @@ const ContentTitle = ({
       <Box w="88%">
         <Flex sx={boxStyle}>
           <Text sx={titleStyle}>{title.toUpperCase()}</Text>
+
           <Text sx={descriptionStyle}>{description}</Text>
         </Flex>
         <Box mt="20px">

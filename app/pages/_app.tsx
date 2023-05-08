@@ -1,12 +1,13 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { extendTheme, ChakraProvider, CSSReset } from "@chakra-ui/react";
+import { extendTheme, ChakraProvider, CSSReset, Box } from "@chakra-ui/react";
 import "@rainbow-me/rainbowkit/styles.css";
 import {
   getDefaultWallets,
   RainbowKitProvider,
   midnightTheme,
 } from "@rainbow-me/rainbowkit";
+import NavBar from "@/components/NavBar";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import {
   mainnet,
@@ -50,11 +51,29 @@ const theme = extendTheme({
       body: {
         bg: "black",
         color: "white",
+        fontSize: { base: "10px", md: "13px", lg: "16px" },
       },
+      // style for item page content
+      ".itemDesc": {
+        flexDirection: { base: "column", md: "row" },
+        alignItems: "center",
+      },
+      //style for nav bar
+      ".navBarLeft": {
+        // alignItems: "stretch",
+        marginLeft: { base: "1.5em", md: "3em" },
+        paddingTop: "4",
+      },
+      ".navBarRight": {
+        paddingTop: "4",
+        marginRight: { base: "1.5em", md: "3em" },
+        marginTop: "10px",
+      },
+      //logo setting
       ".logoImg": {
         width: "100%",
         height: "auto",
-        maxWidth: "200px",
+        maxWidth: { base: "22em", md: "16em" },
       },
       //set homeBG.png as background image of the app
       ".bgImg": {
@@ -76,6 +95,7 @@ const theme = extendTheme({
       ".exyImg": {
         backgroundImage: "url('/exy1.jpg')",
         backgroundSize: "cover",
+        backgroundPosition: "center",
       },
       ".climbingImg": {
         backgroundImage: "url('/bouldering.jpg')",
@@ -85,10 +105,18 @@ const theme = extendTheme({
         backgroundImage: "url('/tableTennis.jpg')",
         backgroundSize: "cover",
       },
-      //page padding
+      //page padding used in item page
       ".pagePadding": {
-        padding: "0 4vw",
+        padding: { base: "0", md: "0 4vw" },
       },
+      //item page box style
+      ".itemBox": {
+        paddingTop: { base: "25vh", lg: "20vh" },
+        justifyContent: "space-between",
+        alignItems: "center",
+        paddingBottom: { base: "10vh" },
+      },
+      //
       ".contentPagePadding": {
         padding: "0 3.5vw",
       },
@@ -96,39 +124,42 @@ const theme = extendTheme({
       ".title": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "900",
-        fontSize: "6rem",
-        lineHeight: "130px",
+        fontSize: "6em",
+        lineHeight: "1.2em",
       },
       ".headingSm": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "600",
-        fontSize: "20px",
+        fontSize: "1.1em",
       },
+      ".txtCenter": { textAlign: "center" },
+
       ".headingMd": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "900",
-        fontSize: "14px",
+        fontSize: "1em",
         lineHeight: "17px",
       },
       //Small light blue text used across the app
       ".blueTxt": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "400",
-        fontSize: "12px",
+        fontSize: "0.9em",
         color: "#7190FF",
       },
       ".blueTxtBold": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "600",
-        fontSize: "14px",
+        fontSize: "1em",
         color: "#7190FF",
       },
       //grey paragraph text used across the app
       ".txt": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "400",
-        lineHeight: "25px",
-        fontSize: "14px",
+        lineHeight: "1.5em",
+
+        fontSize: "1em",
         color: "rgba(255, 255, 255, 0.7)",
       },
       //This class used for display flex, column, align items center
@@ -147,15 +178,18 @@ const theme = extendTheme({
       ".slick-prev:before, .slick-next:before": {
         display: "none",
       },
+      ".paddingTxt": {
+        padding: "0 3em",
+      },
     },
   },
 });
 
+// src/pages/_app.tsx
 export default function App({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { session, backgroundImage, ...pageProps },
 }: AppProps) {
-  //console.log('session on app', session)
   return (
     <WagmiConfig client={wagmiClient}>
       <ChakraProvider theme={theme} resetCSS={true}>

@@ -17,8 +17,6 @@ import {
   useDisclosure,
   Input,
 } from "@chakra-ui/react";
-import { Form, Formik, FormikHelpers, FormikValues } from "formik";
-import { useState } from "react";
 
 export type AddressBarProps = {
   status: boolean;
@@ -27,8 +25,8 @@ export type AddressBarProps = {
 
 const accordianStyle = {
   position: "absolute",
-  width: "50vw",
-  top: "74px",
+  width: { base: "80vw", md: "50vw" },
+  top: "80px",
   left: "0",
   right: "0",
   marginLeft: "auto",
