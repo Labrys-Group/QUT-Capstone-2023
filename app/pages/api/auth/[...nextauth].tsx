@@ -64,6 +64,7 @@ export default async function auth(req: any, res: any) {
     callbacks: {
       async session({ session, token }: { session: any; token: any }) {
         session.address = token.sub
+        // add a session.owns array, this can be an array of contract addresses where balanceOf(token.sub) > 0
         session.user.name = token.sub
         session.user.image = 'https://www.fillmurray.com/128/128'
         return session
