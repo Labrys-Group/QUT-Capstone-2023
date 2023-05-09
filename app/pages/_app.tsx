@@ -7,7 +7,6 @@ import {
   RainbowKitProvider,
   midnightTheme,
 } from "@rainbow-me/rainbowkit";
-import NavBar from "@/components/NavBar";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
 import {
   mainnet,
@@ -51,11 +50,13 @@ const theme = extendTheme({
       body: {
         bg: "black",
         color: "white",
-        fontSize: { base: "10px", md: "13px", lg: "16px" },
+        fontSize: { base: "11px", md: "13px", lg: "15px" },
       },
       // style for item page content
       ".itemDesc": {
         flexDirection: { base: "column", md: "row" },
+        justifyContent: "space-around",
+        width: "100%",
         alignItems: "center",
       },
       //style for nav bar
@@ -104,6 +105,7 @@ const theme = extendTheme({
       ".tableTennisImg": {
         backgroundImage: "url('/tableTennis.jpg')",
         backgroundSize: "cover",
+        backgroundPosition: "center",
       },
       //page padding used in item page
       ".pagePadding": {

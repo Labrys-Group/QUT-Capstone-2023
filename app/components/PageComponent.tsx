@@ -36,7 +36,7 @@ const PageComponent = ({
   displayRemainingToken,
 }: PageComponentProps) => {
   return (
-    <Box h="auto" className={backgroundClassName}>
+    <Box h={{ base: "auto", sm: "100vh" }} className={backgroundClassName}>
       <NavBar />
       <AddressBar status={address !== undefined} username={address} />
       {/* //TODO: remove top margin */}
