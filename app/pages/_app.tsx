@@ -50,6 +50,7 @@ const theme = extendTheme({
       body: {
         bg: "black",
         color: "white",
+
         fontSize: { base: "11px", md: "13px" },
       },
       // style for item page content
