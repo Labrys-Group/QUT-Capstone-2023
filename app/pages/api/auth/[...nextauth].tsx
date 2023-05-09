@@ -6,6 +6,16 @@ import { SiweMessage } from 'siwe'
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export default async function auth(req: any, res: any) {
+  const apiKey = 'o13ZJRrEu85G8Zi9lb9KxaZhkv6537H7'
+  const baseURL = `https://eth-goerli.alchemyapi.io/v2/${apiKey}`
+  const address = '0xe5CA461cF9FF63143dE899d1Af8AE112eF6850CA'
+  const url = `${baseURL}/getNFTs/?owner=${address}`
+
+  var requestOptions = {
+    method: 'get',
+    redirect: 'follow',
+  }
+
   const providers = [
     CredentialsProvider({
       name: 'Ethereum',
@@ -66,7 +76,6 @@ export default async function auth(req: any, res: any) {
         session.address = token.sub
         // add a session.owns array, this can be an array of contract addresses where balanceOf(token.sub) > 0
         session.user.name = token.sub
-        session.user.image = 'https://www.fillmurray.com/128/128'
         return session
       },
     },
