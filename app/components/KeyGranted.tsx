@@ -23,9 +23,11 @@ const boxStyle = {
   padding: "1em",
   borderRadius: "10px",
   textAlign: "left",
-  minWidth: { base: "55vw", md: "274px" },
+  maxWidth: { base: "65vw", md: "274px" },
   boxShadow: "0px 3.4188px 8.54701px 1.7094px rgba(0, 0, 0, 0.2)",
   border: "0.42735px solid #303030",
+  minHeight: { base: "0", md: "250px" },
+  margin: { base: "0", md: "12px 0px" },
 };
 
 const KeyGranted = ({
@@ -96,13 +98,13 @@ const KeyGranted = ({
         />
       ) : (
         <Box
-          minHeight={{ base: "0", md: "250px" }}
-          margin={{ base: "0", md: "12px 0px" }}
+        // minHeight={{ base: "0", md: "250px" }}
+        // margin={{ base: "0", md: "12px 0px" }}
         >
           <Image
             src="/lockCrop.png"
             alt="locked-image"
-            boxSize="200px"
+            boxSize="250px"
             objectFit="cover"
             margin="auto"
           />
