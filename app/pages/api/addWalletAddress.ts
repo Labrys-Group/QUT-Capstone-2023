@@ -15,8 +15,11 @@ const getUserWallets = async (
     req: NextApiRequest,
     res: NextApiResponse<any>
 ) => {
-    const users = await UserModel.find({}).lean();
-    res.status(200).json({ users })
+
+    const test = await UserModel.findOne();
+    console.log(test);
+    // const users = await UserModel.find({}).lean();
+    res.status(200).json({ test })
 }
 
 const addUserWallet = async (

@@ -5,7 +5,7 @@ import { TimeStamps } from '@typegoose/typegoose/lib/defaultClasses';
 @modelOptions({ schemaOptions: { timestamps: true, collection: "Users" } })
 class User {
     @prop()
-    walletAddress?: string;
+    walletAddress?: string | undefined;
 
     @prop()
     userName?: string;
