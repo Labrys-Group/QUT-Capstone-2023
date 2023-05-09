@@ -17,8 +17,8 @@ export default function App() {
   useEffect(() => {
     const securePage = async () => {
       // check if authenticated and if is connected to wallet
-      console.log(status);
       if (session && status === "connected") {
+        console.log("session", session);
         router.push("/item");
       } else {
       }
