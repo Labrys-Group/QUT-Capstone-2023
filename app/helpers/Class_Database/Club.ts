@@ -1,12 +1,10 @@
 import mongoose from "mongoose";
 
-// interface Club extends Document {
-//   name: string;
-//   abi: { [key: string]: any };
-//   address: string;
-// }
-
 const clubSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -19,14 +17,18 @@ const clubSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    required: true,
+  },
 });
 
-let Club;
+let Club: any;
 
 try {
-  Club = mongoose.model("Club");
+  Club = mongoose.model("Clubs");
 } catch (e) {
-  Club = mongoose.model("Club", clubSchema);
+  Club = mongoose.model("Clubs", clubSchema);
 }
 
 export default Club;
