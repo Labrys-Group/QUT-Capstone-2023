@@ -27,22 +27,32 @@ export default function App() {
   }, [session, status]);
 
   return (
-    <Box h="100vh" className="bgImg">
-      <NavBar />
-      <Flex h="30vh" mt="10vh" flexDirection="column" alignItems="center">
+    <Flex h="100vh" flexDirection="column" className="bgImg">
+      <Box h={{ base: "30%", lg: "20%" }}>
+        <NavBar />
+      </Box>
+      <Flex
+        h={{ base: "70%", lg: "80%" }}
+        pt="2em"
+        flexDirection="column"
+        alignItems="center"
+      >
         <Text className="blueTxt">WELCOME TO</Text>
-        <Text className="title">MEMBERS ONLY</Text>
-        <Text className="txt">
+        <Text className="title paddingTxt txtCenter">MEMBERS ONLY</Text>
+        <Text className="txt paddingTxt txtCenter">
           Your gateway to exclusive content from your favourite brands &
           services.
         </Text>
-        <Text className="txt">
+        <Text className="txt paddingTxt txtCenter">
           All memberships secured as NFTs on the Ethereum blockchain.
         </Text>
+        <Box className="flexAlgnCenter" mt="3em">
+          <Text className="txt paddingTxt txtCenter" mb="1em">
+            To get start first connect your wallet
+          </Text>
+          <ConnectButton />
+        </Box>
       </Flex>
-      <Box className="flexAlgnCenter">
-        <ConnectButton />
-      </Box>
-    </Box>
+    </Flex>
   );
 }

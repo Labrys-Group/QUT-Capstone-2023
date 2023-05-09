@@ -1,4 +1,4 @@
-import { Text, Box, Flex } from "@chakra-ui/react";
+import { Text, Flex } from "@chakra-ui/react";
 
 export type TitleAndDescriptionProps = {
   title: string;
@@ -7,7 +7,7 @@ export type TitleAndDescriptionProps = {
 
 const boxStyle = {
   flexDirection: "column",
-  maxWidth: "55vw",
+  maxWidth: { base: "80vw", lg: "55vw" },
 };
 
 const descriptionStyle = {
@@ -22,6 +22,7 @@ const titleStyle = {
   // add shadow
   textShadow: "0px 0px 20px #000000,0px 0px 50px #000000",
   textStroke: "2px #000000",
+  wordWrap: "initial",
 };
 
 const TitleAndDescription = ({
