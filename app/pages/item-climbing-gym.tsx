@@ -1,16 +1,11 @@
-import AddressBar from "@/components/AddressBar";
-import KeyGranted from "@/components/KeyGranted";
-import NavBar from "@/components/NavBar";
-import TitleAndDescription from "@/components/TitleAndDescription";
 import { WalletContext } from "@/context/walletContext";
-import getTotalSupply from "@/helpers/getTotalSupply";
-import { Flex, Box, Button } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import { useAccount } from "wagmi";
 import LoadingPage from "@/components/LoadingPage";
-import NavigationButton from "@/components/NavigationButton";
+import PageComponent from "@/components/PageComponent";
 
 function ItemClimbingGym() {
   const { address, isConnected } = useAccount();
@@ -46,36 +41,36 @@ function ItemClimbingGym() {
     title: "Steve Climbing Gym",
     description:
       "Our state-of-the-art facility offers some of the most intense and exciting climbing experiences you'll find anywhere. And as a member of our club, you'll get exclusive access to training programs, gear reviews, and interviews with some of the top climbers in the world.",
-    image: "/exyGranted.png",
+    image: "/climbingGranted.png",
+    backgroundClassName: "climbingImg",
+    gotoLeft: "item",
+    gotoRight: "item-table-tennis",
+    price: 0.01,
+    clubName: "Climbing Gym",
+    //access set to false by default
+    access: false,
+    //set tokenId to undefined by default
+    tokenId: undefined,
+    //set displayRemainingToken to 0 by default
+    displayRemainingToken: 0,
   };
 
   // @TODO: access is always false
   return (
-    <Box h="100vh" className="climbingImg">
-      <NavBar />
-      <AddressBar status={address !== undefined} username={address} />
-      {/* //TODO: remove top margin */}
-      <Flex
-        className="pagePadding"
-        marginTop="20vh"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <NavigationButton direction="left" goto="item" />
-        <TitleAndDescription
-          title={climbing.title}
-          description={climbing.description}
-        />
-
-        <KeyGranted
-          accessGranted={false}
-          clubName={climbing.title}
-          image={climbing.image}
-          price={0.01}
-        />
-        <NavigationButton direction="right" goto="item-table-tennis" />
-      </Flex>
-    </Box>
+    <PageComponent
+      title={climbing.title}
+      description={climbing.description}
+      address={address}
+      image={climbing.image}
+      backgroundClassName={climbing.backgroundClassName}
+      gotoLeft={climbing.gotoLeft}
+      gotoRight={climbing.gotoRight}
+      access={climbing.access}
+      clubName={climbing.clubName}
+      price={climbing.price}
+      tokenId={climbing.tokenId}
+      displayRemainingToken={climbing.displayRemainingToken}
+    />
   );
 }
 

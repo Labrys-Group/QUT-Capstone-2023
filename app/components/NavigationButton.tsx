@@ -5,11 +5,11 @@ import { PropsWithChildren } from "react";
 
 type InheritedProps = ButtonProps;
 
-type Page = "item" | "item-climbing-gym" | "item-table-tennis";
+// type Page = "item" | "item-climbing-gym" | "item-table-tennis";
 
 export type NavigationButtonProps = {
   direction: "left" | "right";
-  goto: Page;
+  goto: string;
 };
 
 const NavigationButton = ({
