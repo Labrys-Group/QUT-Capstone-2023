@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import nc, { NextConnect } from "next-connect";
 import Club from "./Class_Database/Club";
 import Member from "./Class_Database/Member";
+import { error } from "console";
 
 /**
  * Factory to generate request handlers with default 404 and 500 handlers
@@ -50,13 +51,11 @@ export const dbHandlerFactory = (
 const writeDocument = async (type: string, data: Array<object>) => {
   try {
     var obj: any = Club;
-    if (type == "member") {
-      obj = Member;
-    }
+    type == "member" ? (obj = Member) : null;
     const result = await (obj as any).insertMany(data);
     return `${Object.keys(result).length} objects inserted`;
-  } catch (e) {
-    return e;
+  } catch (err) {
+    throw err;
   }
 };
 
@@ -67,15 +66,11 @@ const writeDocument = async (type: string, data: Array<object>) => {
 const readDocument = async (type: string) => {
   try {
     var obj: any = Club;
-    if (type == "member") {
-      obj = Member;
-    }
+    type == "member" ? (obj = Member) : null;
     const data = await (obj as any).find().exec();
-    console.log(Object.keys(data).length);
-    console.log(JSON.stringify(data));
     return data;
-  } catch (e) {
-    return e;
+  } catch (err) {
+    throw err;
   }
 };
 
@@ -87,9 +82,7 @@ const deleteDocument = async (type: String, data: Array<string>) => {
   try {
     var message: Array<string> = [];
     var obj: any = Club;
-    if (type == "member") {
-      obj = Member;
-    }
+    type == "member" ? (obj = Member) : null;
     await Promise.all(
       data.map(async (str: String) => {
         let result = await obj.deleteMany({ id: str });
@@ -107,7 +100,7 @@ const deleteDocument = async (type: String, data: Array<string>) => {
     console.log(message);
     return message;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 
@@ -119,9 +112,7 @@ const updateDocument = async (type: string, data: Array<object>) => {
   try {
     var message: Array<string> = [];
     var obj: any = Club;
-    if (type == "member") {
-      obj = Member;
-    }
+    type == "member" ? (obj = Member) : null;
     await Promise.all(
       data.map(async (cla: any) => {
         const result = await obj.updateMany({ id: cla.id }, cla);
@@ -134,7 +125,7 @@ const updateDocument = async (type: string, data: Array<object>) => {
     );
     return message;
   } catch (err) {
-    return err;
+    throw err;
   }
 };
 
