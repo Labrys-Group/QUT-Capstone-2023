@@ -32,6 +32,42 @@ npx hardhat test
 Smart Contract Deployment
 
 ```sh
-npx hardhat deploy --network goerli deploy/001.ts
-npx hardhat verify --network goerli <address> 
+npx hardhat deploy --network goerli    // deploy/001.ts
+npx hardhat verify --network goerli <address>   // "Access Ticket" "TICKET"
+```
+
+Git operations
+
+- update branch
+
+```sh
+git pull origin main
+git add .
+git commit -m "merge from main"
+git push
+```
+
+- create branch
+
+```sh
+git checkout -b stone
+```
+
+or
+
+```sh
+git branch stone
+git checkout stone
+```
+
+- check git log
+
+```sh
+git log
+```
+
+- stash
+
+```sh
+git stash
 ```

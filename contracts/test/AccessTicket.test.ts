@@ -25,7 +25,7 @@ describe("AccessTicket", function () {
   it("should mint a new token and verify ownership", async function () {
     await accessTicket
       .connect(user1)
-      .mint({ value: utils.parseEther("0.0000000001") });
+      .mint({ value: utils.parseEther("0.000000000000001") });
 
     const ownerOfToken = await accessTicket.ownerOf(1);
     expect(ownerOfToken).to.equal(user1.address);
