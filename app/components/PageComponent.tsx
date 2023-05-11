@@ -36,7 +36,11 @@ const PageComponent = ({
   displayRemainingToken,
 }: PageComponentProps) => {
   return (
-    <Box h="auto" className={backgroundClassName}>
+    <Box
+      height={{ base: "fit-content", md: "100vh" }}
+      min-height={{ base: "100vh", md: "auto" }}
+      className={backgroundClassName}
+    >
       <NavBar />
       <AddressBar status={address !== undefined} username={address} />
       {/* //TODO: remove top margin */}
