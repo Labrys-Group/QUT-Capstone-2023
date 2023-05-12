@@ -7,16 +7,16 @@ import NavigationButton from '@/components/NavigationButton'
 import SlideTransitionWrapper from './SlideTransitionWrapper'
 
 export type PageComponentProps = {
-  title: string
-  description: string
+  title: string | undefined
+  description: string | undefined
   address: string | undefined
   image: string
-  backgroundClassName: string
+  backgroundClassName: string | undefined
   gotoLeft: string
   gotoRight: string
   access: boolean
-  clubName: string
-  price: number
+  clubName: string | undefined
+  price: string | undefined
   tokenId: number | undefined
   displayRemainingToken: number
 }

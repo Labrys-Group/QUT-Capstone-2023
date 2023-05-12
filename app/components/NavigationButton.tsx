@@ -9,7 +9,7 @@ type InheritedProps = ButtonProps
 
 export type NavigationButtonProps = {
   direction: 'left' | 'right'
-  goto: string
+  goto: string | undefined
 }
 
 const NavigationButton = ({

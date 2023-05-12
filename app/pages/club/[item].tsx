@@ -11,12 +11,12 @@ import NavigationButton from '@/components/NavigationButton'
 
 function Item() {
   const { address, isConnected } = useAccount()
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(true)
   const [remainingToken, setRemainingToken] = useState<number | undefined>()
   const [tokenId, setTokenID] = useState<number | undefined>()
   const [access, setAccess] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
-  const [item, setItem] = useState<string>('')
+  const [item, setItem] = useState<string | undefined>('')
   const [clubNu, setClubNu] = useState<number | undefined>()
   const [right, setRight] = useState<string | undefined>()
   const [left, setLeft] = useState<string | undefined>()
@@ -24,21 +24,47 @@ function Item() {
   const [price, setPrice] = useState<string | undefined>()
   const { data: session } = useSession()
   const [description, setDescription] = useState<string | undefined>()
-
+  const [contractAddress, setContractAddress] = useState<string | undefined>()
   const router = useRouter()
   // wallet context
   const itemName = router.query.item
   const { club } = useContext(ClubContext)
 
+  interface ISession {
+    owns: any
+  }
+
   useEffect(() => {
-    console.log(club)
+    console.log(session)
+    if (
+      session !== undefined &&
+      session !== null &&
+      contractAddress !== undefined
+    ) {
+      session.owns.ownedNfts.forEach((item: string) => {
+        if (
+          contractAddress.toLowerCase() == item.contract.address.toLowerCase()
+        ) {
+          setAccess(true)
+          return
+        } else {
+          setAccess(false)
+        }
+      })
+    }
+  }, [session, contractAddress])
+
+  useEffect(() => {
     if (itemName !== undefined && club !== undefined) {
-      const index = club.findIndex((obj) => obj.name === itemName)
+      console.log(club)
+      const index: number = club.findIndex((obj) => obj.name === itemName)
       setClubNu(index)
-      setDescription(club[index].description)
-      setItem(club[index].title)
-      setClubName(club[index].name)
-      setPrice(club[index].price)
+      setDescription(club[index]?.description)
+      setItem(club[index]?.title)
+      setClubName(club[index]?.name)
+      setPrice(club[index]?.price)
+      setContractAddress(club[index]?.address)
+      setLoading(false)
     }
   }, [itemName, club])
 
@@ -79,20 +105,6 @@ function Item() {
     )
   }
 
-  // @TODO: move this to constant folder
-  let exy = {
-    title: { item },
-    description:
-      "An exclusive online community dedicated to fans of EXY, leader of the K-pop girl group COSMIC GIRLS (also known as WJSN). This community is a gathering place for fans who admire EXY's talents, personality, and unique style. As a member of the EXY Community, you will have access to exclusive content, such as behind-the-scenes footage, photos, and interviews. You will also be able to connect with other fans from all over the world who share your love for EXY and COSMIC GIRLS.",
-    image: '/exyGranted.png',
-    backgroundClassName: 'exyImg',
-    gotoLeft: '1',
-    gotoRight: '2',
-    price: 0.01,
-    //for testing
-    test: true,
-  }
-
   let displayRemainingToken =
     remainingToken !== undefined ? 200 - remainingToken : 9999
 
@@ -105,7 +117,7 @@ function Item() {
       backgroundClassName={clubName + 'Img'}
       gotoLeft={left}
       gotoRight={right}
-      access={false}
+      access={access}
       clubName={item}
       price={price}
       tokenId={1111}

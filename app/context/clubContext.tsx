@@ -1,9 +1,23 @@
-import React, { createContext, useState, useEffect } from 'react'
+import React, { createContext, useState, useEffect, ReactNode } from 'react'
 
-export const ClubContext = createContext()
+export type DataObject = {
+  id: string | undefined
+  name: string | undefined
+  title: string | undefined
+  abi: string | undefined
+  address: string | undefined
+  price: string | undefined
+  description: string | undefined
+}
 
-export const ClubProvider = ({ children }) => {
-  const [club, setClub] = useState()
+interface IClubContext {
+  club: DataObject[] | undefined
+}
+
+export const ClubContext = createContext<IClubContext>({} as IClubContext)
+
+export const ClubProvider = ({ children }: { children: ReactNode }) => {
+  const [club, setClub] = useState<DataObject[]>([])
 
   const fetchClub = async () => {
     const response = await fetch('/api/useDatabase?type=club')
@@ -16,8 +30,6 @@ export const ClubProvider = ({ children }) => {
   }, [])
 
   return (
-    <ClubContext.Provider value={{ club, setClub }}>
-      {children}
-    </ClubContext.Provider>
+    <ClubContext.Provider value={{ club }}>{children}</ClubContext.Provider>
   )
 }
