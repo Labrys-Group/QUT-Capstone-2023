@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const clubSchema = new mongoose.Schema({
   id: {
@@ -6,6 +6,10 @@ const clubSchema = new mongoose.Schema({
     required: true,
   },
   name: {
+    type: String,
+    required: true,
+  },
+  title: {
     type: String,
     required: true,
   },
@@ -21,14 +25,18 @@ const clubSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-});
+  price: {
+    type: String,
+    required: true,
+  },
+})
 
-let Club: any;
+let Club: any
 
 try {
-  Club = mongoose.model("Clubs");
+  Club = mongoose.model('Clubs')
 } catch (e) {
-  Club = mongoose.model("Clubs", clubSchema);
+  Club = mongoose.model('Clubs', clubSchema)
 }
 
-export default Club;
+export default Club

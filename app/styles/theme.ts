@@ -13,6 +13,8 @@ const theme = extendTheme({
       '.itemDesc': {
         flexDirection: { base: 'column', md: 'row' },
         alignItems: 'center',
+        justifyContent: 'space-around',
+        width: '100%',
       },
       //style for nav bar
       '.navBarLeft': {
