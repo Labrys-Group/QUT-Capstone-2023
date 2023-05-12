@@ -19,6 +19,7 @@ export type PageComponentProps = {
   price: number;
   tokenId: number | undefined;
   displayRemainingToken: number;
+  contentPage: string;
 };
 
 const PageComponent = ({
@@ -34,13 +35,10 @@ const PageComponent = ({
   price,
   tokenId,
   displayRemainingToken,
+  contentPage,
 }: PageComponentProps) => {
   return (
-    <Box
-      height={{ base: "fit-content", md: "100vh" }}
-      min-height={{ base: "100vh", md: "auto" }}
-      className={backgroundClassName}
-    >
+    <Box height={{ base: "auto", md: "100vh" }} className={backgroundClassName}>
       <NavBar />
       <AddressBar status={address !== undefined} username={address} />
       {/* //TODO: remove top margin */}
@@ -63,6 +61,7 @@ const PageComponent = ({
               remainingToken={displayRemainingToken}
               totalToken={200}
               tokenNumber={tokenId}
+              contentPage={contentPage}
             />
           </Flex>
           <NavigationButton direction="right" goto={gotoRight} />

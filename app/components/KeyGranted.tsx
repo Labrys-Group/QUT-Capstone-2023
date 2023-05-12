@@ -6,6 +6,7 @@ import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useRouter } from "next/router";
 import { utils } from "ethers";
+import { Url } from "url";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -15,6 +16,7 @@ type KeyGrantedProps = {
   remainingToken?: number;
   totalToken?: number;
   price?: number;
+  contentPage: string;
 };
 
 const boxStyle = {
@@ -38,6 +40,7 @@ const KeyGranted = ({
   remainingToken,
   totalToken,
   price,
+  contentPage,
 }: KeyGrantedProps) => {
   const displayRemaining = remainingToken + `/${totalToken}`;
 
@@ -80,7 +83,7 @@ const KeyGranted = ({
 
   const handleClick = () => {
     //hardcoded for exy page
-    router.push("/exy");
+    router.push(`/${contentPage}`);
   };
   return (
     <Flex sx={boxStyle}>

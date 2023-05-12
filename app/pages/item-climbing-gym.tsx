@@ -48,11 +48,12 @@ function ItemClimbingGym() {
     price: 0.01,
     clubName: "Climbing Gym",
     //access set to false by default
-    access: false,
+    access: true,
     //set tokenId to undefined by default
     tokenId: undefined,
     //set displayRemainingToken to 0 by default
     displayRemainingToken: 0,
+    contentPage: "climbing",
   };
 
   // @TODO: access is always false
@@ -70,6 +71,7 @@ function ItemClimbingGym() {
       price={climbing.price}
       tokenId={climbing.tokenId}
       displayRemainingToken={climbing.displayRemainingToken}
+      contentPage={climbing.contentPage}
     />
   );
 }

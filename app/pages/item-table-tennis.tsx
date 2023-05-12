@@ -53,6 +53,7 @@ function ItemTableTennis() {
     tokenId: undefined,
     //set displayRemainingToken to 0 by default
     displayRemainingToken: 0,
+    contentPage: "table-tennis",
   };
 
   // @TODO: access is always false
@@ -70,6 +71,7 @@ function ItemTableTennis() {
       price={tableTennis.price}
       tokenId={tableTennis.tokenId}
       displayRemainingToken={tableTennis.displayRemainingToken}
+      contentPage={tableTennis.contentPage}
     />
   );
 }

@@ -75,6 +75,7 @@ function Item() {
     price: 0.01,
     //for testing
     test: true,
+    contentPage: "exy",
   };
 
   let displayRemainingToken =
@@ -94,6 +95,7 @@ function Item() {
       price={exy.price}
       tokenId={tokenId}
       displayRemainingToken={displayRemainingToken}
+      contentPage={exy.contentPage}
     />
   );
 }
