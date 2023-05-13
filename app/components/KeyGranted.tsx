@@ -10,6 +10,7 @@ import { utils } from "ethers";
 type KeyGrantedProps = {
   accessGranted: boolean;
   clubName: string;
+  image_lock: string;
   image: string;
   tokenNumber?: number;
   remainingToken?: number;
@@ -32,12 +33,15 @@ const KeyGranted = ({
   accessGranted,
   clubName,
   image,
+  image_lock,
   tokenNumber,
   remainingToken,
   totalToken,
   price,
 }: KeyGrantedProps) => {
   const displayRemaining = remainingToken + `/${totalToken}`;
+
+  const clubName_noSpace = clubName.replace(/ /g, "_");
 
   // use hook
   const router = useRouter();
@@ -81,7 +85,7 @@ const KeyGranted = ({
     router.push("/exy");
   };
   return (
-    <Flex sx={boxStyle}>
+    <Flex id={clubName_noSpace + "_Box"} sx={boxStyle}>
       <Text className="blueTxtBold">{clubName}</Text>
       <Text className="headingSm">
         Member Key {accessGranted ? `#${tokenNumber}` : null}
@@ -100,11 +104,12 @@ const KeyGranted = ({
           margin={{ base: "0", md: "12px 0px" }}
         >
           <Image
-            src="/lockCrop.png"
+            src={image_lock}
             alt="locked-image"
             boxSize="200px"
             objectFit="cover"
             margin="auto"
+            id={clubName_noSpace + "_LockImage"}
           />
           <Text className="txt" align="center">
             Key required for access
