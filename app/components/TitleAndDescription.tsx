@@ -7,7 +7,7 @@ export type TitleAndDescriptionProps = {
 
 const boxStyle = {
   flexDirection: "column",
-  maxWidth: { base: "80vw", lg: "55vw" },
+  maxWidth: { base: "60vw", md: "40vw", lg: "35vw" },
 };
 
 const descriptionStyle = {
