@@ -96,6 +96,7 @@ const theme = extendTheme({
         backgroundImage: "url('/exy1.jpg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
+        height: "100vh",
       },
       ".climbingImg": {
         backgroundImage: "url('/bouldering.jpg')",

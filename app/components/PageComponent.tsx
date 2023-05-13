@@ -10,6 +10,7 @@ export type PageComponentProps = {
   title: string;
   description: string;
   address: string | undefined;
+  image_lock: string;
   image: string;
   backgroundClassName: string;
   gotoLeft: string;
@@ -25,6 +26,7 @@ const PageComponent = ({
   title,
   description,
   address,
+  image_lock,
   image,
   backgroundClassName,
   gotoLeft,
@@ -54,6 +56,7 @@ const PageComponent = ({
             <KeyGranted
               accessGranted={access}
               clubName={clubName}
+              image_lock={image_lock}
               image={image}
               price={price}
               remainingToken={displayRemainingToken}

@@ -41,6 +41,7 @@ function ItemClimbingGym() {
     title: "Steve Climbing Gym",
     description:
       "Our state-of-the-art facility offers some of the most intense and exciting climbing experiences you'll find anywhere. And as a member of our club, you'll get exclusive access to training programs, gear reviews, and interviews with some of the top climbers in the world.",
+    image_lock: "/lockShoes.png",
     image: "/climbingGranted.png",
     backgroundClassName: "climbingImg",
     gotoLeft: "item",
@@ -61,6 +62,7 @@ function ItemClimbingGym() {
       title={climbing.title}
       description={climbing.description}
       address={address}
+      image_lock={climbing.image_lock}
       image={climbing.image}
       backgroundClassName={climbing.backgroundClassName}
       gotoLeft={climbing.gotoLeft}
