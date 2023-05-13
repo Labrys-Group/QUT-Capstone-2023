@@ -151,4 +151,85 @@ const theme = extendTheme({
         fontSize: "0.9em",
         color: "#7190FF",
       },
-      ".blueTxtBold":
+      ".blueTxtBold": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "600",
+        fontSize: "1em",
+        color: "#7190FF",
+      },
+      //grey paragraph text used across the app
+      ".txt": {
+        fontFamily: "Inter, sans-serif",
+        fontWeight: "400",
+        lineHeight: "1.5em",
+
+        fontSize: "1em",
+        color: "rgba(255, 255, 255, 0.7)",
+      },
+      //This class used for display flex, column, align items center
+      ".flexAlgnCenter": {
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      },
+      ".slick-slider": {
+        display: "flex",
+        alignItems: "center",
+      },
+      ".slick-next": {
+        right: "0px",
+      },
+      ".slick-prev:before, .slick-next:before": {
+        display: "none",
+      },
+      ".paddingTxt": {
+        padding: "0 3em",
+      },
+      "@keyframes float_pingpang": {
+        "0%": { transform: "translateY(0px)" },
+        "50%": { transform: "translateY(-20px)" },
+        "100%": { transform: "translateY(0px)" },
+      },
+      "@keyframes rotate_climbingshoes": {
+        "0%": { transform: "rotate(-45deg)" },
+        "50%": { transform: "rotate(15deg)" },
+        "100%": { transform: " rotate(-45deg)" },
+      },
+      "#Climbing_Gym_Box": { background: "rgba(0,0,0,0.5)" },
+      "#Table_Tennis_United_Box": { background: "none" },
+      "#Climbing_Gym_LockImage": {
+        animation: "rotate_climbingshoes 4s ease-in-out infinite",
+      },
+      "#Table_Tennis_United_LockImage": {
+        animation: "float_pingpang 2s ease-in-out infinite",
+      },
+    },
+  },
+});
+
+// src/pages/_app.tsx
+export default function App({
+  Component,
+  pageProps: { session, backgroundImage, ...pageProps },
+}: AppProps) {
+  return (
+    <WagmiConfig client={wagmiClient}>
+      <ChakraProvider theme={theme} resetCSS={true}>
+        <WalletContextProvider>
+          <SessionProvider refetchInterval={0} session={session}>
+            <RainbowKitSiweNextAuthProvider>
+              <RainbowKitProvider
+                chains={chains}
+                theme={midnightTheme()}
+                coolMode
+                showRecentTransactions={true}
+              >
+                <Component {...pageProps} />
+              </RainbowKitProvider>
+            </RainbowKitSiweNextAuthProvider>
+          </SessionProvider>
+        </WalletContextProvider>
+      </ChakraProvider>
+    </WagmiConfig>
+  );
+}
