@@ -30,9 +30,17 @@ function Item() {
   const itemName = router.query.item
   const { club } = useContext(ClubContext)
 
-  interface ISession {
-    owns: any
-  }
+  // verify session
+  useEffect(() => {
+    const securePage = async () => {
+      if (!session) {
+        router.push('/')
+      } else {
+        setLoading(false)
+      }
+    }
+    securePage()
+  }, [session])
 
   useEffect(() => {
     console.log(session)
@@ -45,18 +53,20 @@ function Item() {
         if (
           contractAddress.toLowerCase() == item.contract.address.toLowerCase()
         ) {
+          const newStr = item.id.tokenId.replace(/[0x]+/g, '')
+          setTokenID(newStr)
           setAccess(true)
           return
         } else {
           setAccess(false)
+          getTokenRemaining()
         }
       })
     }
   }, [session, contractAddress])
 
   useEffect(() => {
-    if (itemName !== undefined && club !== undefined) {
-      console.log(club)
+    if (itemName !== undefined && club !== undefined && club.length !== 0) {
       const index: number = club.findIndex((obj) => obj.name === itemName)
       setClubNu(index)
       setDescription(club[index]?.description)
@@ -69,7 +79,10 @@ function Item() {
   }, [itemName, club])
 
   useEffect(() => {
-    judge()
+    if (clubNu !== undefined && club !== undefined && club.length !== 0) {
+      console.log(club)
+      judge()
+    }
   }, [clubNu, club])
 
   function judge() {
@@ -87,6 +100,12 @@ function Item() {
       setRight(club[clubNu + 1].name)
       setLeft(club[clubNu - 1].name)
     }
+  }
+
+  async function getTokenRemaining() {
+    const res = await fetch('../api/getBalance')
+    const data = await res.json()
+    setRemainingToken(200 - data.totalSupply)
   }
 
   if (loading) {
@@ -120,8 +139,8 @@ function Item() {
       access={access}
       clubName={item}
       price={price}
-      tokenId={1111}
-      displayRemainingToken={999}
+      tokenId={tokenId}
+      displayRemainingToken={remainingToken}
     />
   )
 }

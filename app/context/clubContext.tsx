@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, ReactNode } from 'react'
 
 export type DataObject = {
   id: string | undefined
-  name: string | undefined
+  name: string
   title: string | undefined
   abi: string | undefined
   address: string | undefined
