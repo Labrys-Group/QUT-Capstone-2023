@@ -1,20 +1,18 @@
 import { getSession, useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Box, Divider, Flex, Spacer } from "@chakra-ui/react";
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Box } from "@chakra-ui/react";
 import AddressBar from "../components/AddressBar";
 import { useAccount } from "wagmi";
 import ContentTitle from "@/components/ContentTitle";
 import NavBar from "@/components/NavBar";
 import LoadingPage from "@/components/LoadingPage";
-import { Spotify } from "react-spotify-embed";
 
 const images = [
-  { src: "exy_1.jpg", alt: "Exy Peace Pose" },
+  { src: "exy_1.jpg", alt: "Exy Lift Selfie" },
   { src: "exyLift.jpg", alt: "Exy Lift Selfie" },
-  { src: "exy_2.jpg", alt: "Exy Black & White Pose" },
-  { src: "exy_3.jpg", alt: "Exy Showing Off Her Tteokbokki Pose" },
+  { src: "exy_2.jpg", alt: "Exy Lift Selfie" },
+  { src: "exy_3.jpg", alt: "Exy Lift Selfie" },
 ];
 
 const videos = [
@@ -23,14 +21,6 @@ const videos = [
   { src: "https://www.youtube.com/embed/ZBPQCKpoe6c" },
   { src: "https://www.youtube.com/embed/aWX8_QER_qQ" },
 ];
-
-const playlists = [
-  { link: "https://open.spotify.com/playlist/2FoneT7G5hqPzZHCApiZHi" },
-  { link: "https://open.spotify.com/playlist/3bnJMGcWgAI6SOg5RrJ4ao" },
-  { link: "https://open.spotify.com/playlist/3dGsgWV86aPN9wjcbkwDMf" },
-  { link: "https://open.spotify.com/playlist/0kx5D2fqVJ4JMeRBItZJ0n" },
-];
-
 function Exy() {
   const { address } = useAccount();
   const [loading, setLoading] = useState(true);
@@ -68,10 +58,8 @@ function Exy() {
           description="Members only content"
           images={images}
           videos={videos}
-          playlists={playlists}
         />
       </Box>
-      
     </Box>
   );
 }

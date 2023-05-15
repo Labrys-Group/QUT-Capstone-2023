@@ -4,9 +4,7 @@ import { Text, Flex, Box } from "@chakra-ui/react";
 import ArrowButton from "./ArrowButton";
 import ImageGrid from "./ImageGrid";
 import VideoCarousel from "./VideoCarousel";
-import SpotifyGrid from "./SpotifyGrid";
 import { useRouter } from "next/router";
-import { Spotify } from "react-spotify-embed";
 
 type ImageProps = {
   alt: string;
@@ -17,16 +15,11 @@ type VideoProps = {
   src: string;
 };
 
-type PlaylistProps = {
-  link: string;
-};
-
 export type ContentTitleProps = {
   title: string;
   description?: string;
   images?: ImageProps[];
   videos?: VideoProps[];
-  playlists?: PlaylistProps[];
 };
 
 const boxStyle = {
@@ -52,7 +45,6 @@ const ContentTitle = ({
   description,
   images,
   videos,
-  playlists,
 }: ContentTitleProps) => {
   const router = useRouter();
   const handleClick = () => {
@@ -74,7 +66,6 @@ const ContentTitle = ({
         </Box>
 
         <VideoCarousel video_list={videos || []} />
-        <SpotifyGrid spotify_list={playlists || []} />
       </Box>
     </Flex>
   );

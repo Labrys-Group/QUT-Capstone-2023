@@ -48,7 +48,7 @@ export default function App() {
         </Text>
         <Box className="flexAlgnCenter" mt="3em">
           <Text className="txt paddingTxt txtCenter" mb="1em">
-            To get started, first connect your wallet:
+            To get start first connect your wallet
           </Text>
           <ConnectButton />
         </Box>
