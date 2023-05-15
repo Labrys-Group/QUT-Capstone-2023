@@ -24,6 +24,7 @@ export const ClubProvider = ({ children }: { children: ReactNode }) => {
       const newData = await fetchDBClub();
       setClub(newData);
     };
+    fetchData();
   }, []);
 
   return (
@@ -34,6 +35,7 @@ export const ClubProvider = ({ children }: { children: ReactNode }) => {
 const fetchDBClub = async () => {
   const response = await fetch("/api/useDatabase?type=club");
   const data = await response.json();
+  console.log("data", data);
   return data;
 };
 

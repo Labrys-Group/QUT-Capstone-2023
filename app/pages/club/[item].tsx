@@ -43,13 +43,13 @@ function Item() {
   }, [session]);
 
   useEffect(() => {
-    console.log(session);
     if (
       session !== undefined &&
       session !== null &&
       contractAddress !== undefined
     ) {
-      session.owns.ownedNfts.forEach((item: string) => {
+      console.log("own nfts", session.owns.ownedNfts);
+      for (const item of session.owns.ownedNfts) {
         if (
           contractAddress.toLowerCase() == item.contract.address.toLowerCase()
         ) {
@@ -61,7 +61,20 @@ function Item() {
           setAccess(false);
           getTokenRemaining();
         }
-      });
+      }
+      // session.owns.ownedNfts.forEach((item) => {
+      //   if (
+      //     contractAddress.toLowerCase() == item.contract.address.toLowerCase()
+      //   ) {
+      //     const newStr = item.id.tokenId.replace(/[0x]+/g, "");
+      //     setTokenID(newStr);
+      //     setAccess(true);
+      //     return;
+      //   } else {
+      //     setAccess(false);
+      //     getTokenRemaining();
+      //   }
+      // });
     }
   }, [session, contractAddress]);
 
@@ -124,23 +137,23 @@ function Item() {
     );
   }
 
-  let displayRemainingToken =
-    remainingToken !== undefined ? 200 - remainingToken : 9999;
-
   return (
     <PageComponent
-      title={item}
-      description={description}
-      address={address}
       image={"/" + clubName + "Granted.png"}
+      // backgroundClassName={clubName + "Image"}
+      // image="/lockShoes.png"
+      title={item ?? ""}
+      description={description ?? ""}
+      address={address}
+      image_lock="/lockShoes.png"
       backgroundClassName={clubName + "Img"}
-      gotoLeft={left}
-      gotoRight={right}
+      gotoLeft={left ?? ""}
+      gotoRight={right ?? ""}
       access={access}
-      clubName={item}
-      price={"0.01"}
+      clubName={item ?? ""}
+      price={0.01}
       tokenId={tokenId}
-      displayRemainingToken={remainingToken}
+      displayRemainingToken={remainingToken ?? 0}
     />
   );
 }
