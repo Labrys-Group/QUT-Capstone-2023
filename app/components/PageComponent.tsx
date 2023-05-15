@@ -4,7 +4,6 @@ import NavBar from "@/components/NavBar";
 import TitleAndDescription from "@/components/TitleAndDescription";
 import { Flex, Box } from "@chakra-ui/react";
 import NavigationButton from "@/components/NavigationButton";
-import SlideTransitionWrapper from "./SlideTransitionWrapper";
 
 export type PageComponentProps = {
   title: string;
@@ -17,9 +16,10 @@ export type PageComponentProps = {
   gotoRight: string;
   access: boolean;
   clubName: string;
-  price: number;
+  price: string;
   tokenId: number | undefined;
   displayRemainingToken: number;
+  handleMint(): void;
 };
 
 const PageComponent = ({
@@ -36,6 +36,7 @@ const PageComponent = ({
   price,
   tokenId,
   displayRemainingToken,
+  handleMint,
 }: PageComponentProps) => {
   return (
     <Box
@@ -57,6 +58,7 @@ const PageComponent = ({
           </Box>
 
           <KeyGranted
+            handleMint={handleMint}
             accessGranted={access}
             clubName={clubName}
             image_lock={image_lock}

@@ -5,7 +5,8 @@ import { Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useRouter } from "next/router";
-import { utils } from "ethers";
+import { Contract, utils } from "ethers";
+import useClubDetails from "@/hooks/useClubDetails";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -15,7 +16,8 @@ type KeyGrantedProps = {
   tokenNumber?: number;
   remainingToken?: number;
   totalToken?: number;
-  price?: number;
+  price?: string;
+  handleMint(): void;
 };
 
 const boxStyle = {
@@ -40,6 +42,7 @@ const KeyGranted = ({
   remainingToken,
   totalToken,
   price,
+  handleMint,
 }: KeyGrantedProps) => {
   const displayRemaining = remainingToken + `/${totalToken}`;
 
@@ -47,40 +50,9 @@ const KeyGranted = ({
 
   // use hook
   const router = useRouter();
-  const toast = useToast();
-  const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
 
-  const handleMint = async () => {
-    console.log("click on mint function");
-    console.log("signer", signer);
-    console.log("account address", accountAddress);
-    console.log("balance", balance);
-
-    if (erc721 === undefined) {
-    } else {
-      try {
-        toast({
-          title: "Loading",
-          description: "Trying to mint access token",
-          status: "loading",
-        });
-        const transaction = await erc721.mint({
-          value: utils.parseEther("0.000000000000001"),
-        });
-        toast({
-          title: "Success",
-          description: `View transaction at ${transaction.hash}`,
-          status: "success",
-        });
-      } catch (e: any) {
-        toast({
-          title: "Error",
-          description: `${e.error.message}`,
-          status: "error",
-        });
-      }
-    }
-  };
+  // const {contractAddress, abi} = useClubDetails(router.pathname)
+  //const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
 
   const handleClick = () => {
     //hardcoded for exy page

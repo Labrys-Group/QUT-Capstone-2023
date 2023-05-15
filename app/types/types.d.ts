@@ -1,3 +1,5 @@
+/** extend the Session type provided by NextAuth.js to include new property owns:any */
+
 import "next-auth";
 
 declare module "next-auth" {

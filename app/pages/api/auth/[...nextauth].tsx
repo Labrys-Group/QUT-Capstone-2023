@@ -71,7 +71,7 @@ export default async function auth(req: any, res: any) {
     callbacks: {
       async session({ session, token }: { session: any; token: any }) {
         // get all user owned NFTs of our own contracts
-        let data = await fetch("http://localhost:3000/api/NFT");
+        let data = await fetch("http://localhost:3000/api/verifyAccess");
         let formatData = await data.json();
 
         session.address = token.sub;

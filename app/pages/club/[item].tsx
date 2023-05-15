@@ -1,34 +1,44 @@
 import { useRouter } from "next/router";
 import { WalletContext } from "@/context/walletContext";
-import { Box, Text, Button } from "@chakra-ui/react";
+import { Box, Text, Button, useToast } from "@chakra-ui/react";
 import { useSession } from "next-auth/react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Provider } from "react";
 import { useAccount } from "wagmi";
 import LoadingPage from "@/components/LoadingPage";
 import PageComponent from "@/components/PageComponent";
 import { ClubContext } from "@/context/clubContext";
-import NavigationButton from "@/components/NavigationButton";
+import { Contract, Signer, utils } from "ethers";
 
 function Item() {
   const { address, isConnected } = useAccount();
   const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<boolean>(false);
+
   const [remainingToken, setRemainingToken] = useState<number | undefined>();
   const [tokenId, setTokenID] = useState<number | undefined>();
   const [access, setAccess] = useState<boolean>(false);
-  const [error, setError] = useState<boolean>(false);
-  const [item, setItem] = useState<string | undefined>("");
-  const [clubNu, setClubNu] = useState<number | undefined>();
-  const [right, setRight] = useState<string | undefined>();
-  const [left, setLeft] = useState<string | undefined>();
+
+  const [title, setTitle] = useState<string | undefined>("");
+  const [clubIndex, setClubIndex] = useState<number | undefined>();
   const [clubName, setClubName] = useState<string | undefined>();
-  const [price, setPrice] = useState<string | undefined>();
-  const { data: session } = useSession();
   const [description, setDescription] = useState<string | undefined>();
   const [contractAddress, setContractAddress] = useState<string | undefined>();
+  const [abi, setAbi] = useState<string | undefined>();
+  const [price, setPrice] = useState<string | undefined>();
+
+  const [right, setRight] = useState<string | undefined>();
+  const [left, setLeft] = useState<string | undefined>();
+
+  const { data: session } = useSession();
+
   const router = useRouter();
-  // wallet context
+  const { signer } = useContext(WalletContext);
+
+  // use club context
+  const { clubs } = useContext(ClubContext);
+
+  // get query from router
   const itemName = router.query.item;
-  const { club } = useContext(ClubContext);
 
   // verify session
   useEffect(() => {
@@ -43,13 +53,74 @@ function Item() {
   }, [session]);
 
   useEffect(() => {
+    if (itemName !== undefined && clubs !== undefined && clubs.length !== 0) {
+      const index: number = clubs.findIndex((obj) => obj.name === itemName);
+      setClubIndex(index);
+      setDescription(clubs[index]?.description);
+      setTitle(clubs[index]?.title);
+      setClubName(clubs[index]?.name);
+      setPrice(clubs[index]?.price);
+      setContractAddress(clubs[index]?.address);
+      setAbi(clubs[index]?.abi);
+      setLoading(false);
+    }
+  }, [itemName, clubs]);
+
+  useEffect(() => {
+    if (clubIndex !== undefined && clubs !== undefined && clubs.length !== 0) {
+      console.log(clubs);
+      judge();
+    }
+  }, [clubIndex, clubs]);
+
+  function judge() {
+    if (clubIndex !== undefined && clubs !== undefined) {
+      if (clubIndex == clubs.length - 1) {
+        setRight(clubs[0].name);
+        setLeft(clubs[clubIndex - 1].name);
+        return;
+      }
+      if (clubIndex == 0) {
+        setLeft(clubs[clubs.length - 1].name);
+        setRight(clubs[clubIndex + 1].name);
+        return;
+      }
+      setRight(clubs[clubIndex + 1].name);
+      setLeft(clubs[clubIndex - 1].name);
+    }
+  }
+
+  async function getTokenRemaining() {
+    if (
+      clubIndex !== undefined &&
+      clubs !== undefined &&
+      contractAddress !== undefined
+    ) {
+      const contract = contractAddress;
+      const abi = clubs[clubIndex].abi;
+      const res = await fetch("../api/getBalance", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ contract, abi }),
+      });
+      const data = await res.json();
+      setRemainingToken(200 - data.totalSupply);
+    }
+  }
+
+  useEffect(() => {
     if (
       session !== undefined &&
       session !== null &&
       contractAddress !== undefined
     ) {
-      console.log("own nfts", session.owns.ownedNfts);
       for (const item of session.owns.ownedNfts) {
+        console.log("contractAddress ", contractAddress);
+        console.log("owned", session.owns.ownedNfts);
+        console.log("contractAddress2 ", item.contract.address);
+
         if (
           contractAddress.toLowerCase() == item.contract.address.toLowerCase()
         ) {
@@ -58,68 +129,42 @@ function Item() {
           setAccess(true);
           return;
         } else {
-          setAccess(false);
           getTokenRemaining();
+          setAccess(false);
         }
       }
-      // session.owns.ownedNfts.forEach((item) => {
-      //   if (
-      //     contractAddress.toLowerCase() == item.contract.address.toLowerCase()
-      //   ) {
-      //     const newStr = item.id.tokenId.replace(/[0x]+/g, "");
-      //     setTokenID(newStr);
-      //     setAccess(true);
-      //     return;
-      //   } else {
-      //     setAccess(false);
-      //     getTokenRemaining();
-      //   }
-      // });
     }
-  }, [session, contractAddress]);
+  }, [session, contractAddress, remainingToken]);
 
-  useEffect(() => {
-    if (itemName !== undefined && club !== undefined && club.length !== 0) {
-      const index: number = club.findIndex((obj) => obj.name === itemName);
-      setClubNu(index);
-      setDescription(club[index]?.description);
-      setItem(club[index]?.title);
-      setClubName(club[index]?.name);
-      setPrice(club[index]?.price);
-      setContractAddress(club[index]?.address);
-      setLoading(false);
-    }
-  }, [itemName, club]);
+  const toast = useToast();
 
-  useEffect(() => {
-    if (clubNu !== undefined && club !== undefined && club.length !== 0) {
-      console.log(club);
-      judge();
-    }
-  }, [clubNu, club]);
-
-  function judge() {
-    if (clubNu !== undefined && club !== undefined) {
-      if (clubNu == club.length - 1) {
-        setRight(club[0].name);
-        setLeft(club[clubNu - 1].name);
-        return;
+  const handleMint = async () => {
+    try {
+      if (contractAddress !== undefined && abi !== undefined) {
+        toast({
+          title: "Loading",
+          description: "Trying to mint access token",
+          status: "loading",
+        });
+        const contract = new Contract(contractAddress, abi, signer);
+        const transaction = await contract.mint({
+          value: utils.parseEther("0.000000000000001"),
+        });
+        toast({
+          title: "Success",
+          description: `View transaction at ${transaction.hash}`,
+          status: "success",
+        });
       }
-      if (clubNu == 0) {
-        setLeft(club[club.length - 1].name);
-        setRight(club[clubNu + 1].name);
-        return;
-      }
-      setRight(club[clubNu + 1].name);
-      setLeft(club[clubNu - 1].name);
+    } catch (e: any) {
+      console.log(error);
+      toast({
+        title: "Error",
+        description: `${e.error}`,
+        status: "error",
+      });
     }
-  }
-
-  async function getTokenRemaining() {
-    const res = await fetch("../api/getBalance");
-    const data = await res.json();
-    setRemainingToken(200 - data.totalSupply);
-  }
+  };
 
   if (loading) {
     return (
@@ -140,20 +185,19 @@ function Item() {
   return (
     <PageComponent
       image={"/" + clubName + "Granted.png"}
-      // backgroundClassName={clubName + "Image"}
-      // image="/lockShoes.png"
-      title={item ?? ""}
+      title={title ?? ""}
       description={description ?? ""}
       address={address}
-      image_lock="/lockShoes.png"
+      image_lock="/lock.png"
       backgroundClassName={clubName + "Img"}
       gotoLeft={left ?? ""}
       gotoRight={right ?? ""}
       access={access}
-      clubName={item ?? ""}
-      price={0.01}
+      clubName={title ?? ""}
+      price={price ?? ""}
       tokenId={tokenId}
       displayRemainingToken={remainingToken ?? 0}
+      handleMint={() => handleMint()}
     />
   );
 }

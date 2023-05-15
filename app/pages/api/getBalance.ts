@@ -1,11 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { ethers } from 'ethers'
-import { abi, address as ad } from '../../constants/AccessTicket'
+import type { NextApiRequest, NextApiResponse } from "next";
+import { ethers } from "ethers";
 
 type Data = {
-  totalSupply: string
-}
+  totalSupply: string;
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,24 +12,32 @@ export default async function handler(
 ) {
   try {
     const provider = new ethers.providers.JsonRpcProvider(
-      'https://goerli.infura.io/v3/eb15470ba306470585f45d0ce1da3f67'
-    )
-    const contractAddress = ad
-    const contractABI = abi
+      "https://goerli.infura.io/v3/eb15470ba306470585f45d0ce1da3f67"
+    );
+    console.log("req", req.body);
 
-    const contract = new ethers.Contract(contractAddress, contractABI, provider)
+    const contractAddress = req.body.contract;
+    console.log("address", contractAddress);
+    const contractABI = req.body.abi;
+    console.log("abi", contractABI);
 
-    const totalSupply = await contract.totalSupply()
+    const contract = new ethers.Contract(
+      contractAddress,
+      contractABI,
+      provider
+    );
+    const totalSupply = await contract.totalSupply();
 
     console.log(
       `The contract at address ${contractAddress} has ${totalSupply} tokens.`
-    )
+    );
     res.status(200).json({
       totalSupply: totalSupply.toString(),
-    })
-  } catch {
+    });
+  } catch (e) {
+    console.log("error", e);
     res.status(500).json({
-      totalSupply: '',
-    })
+      totalSupply: "",
+    });
   }
 }

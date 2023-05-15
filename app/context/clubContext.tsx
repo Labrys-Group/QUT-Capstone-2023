@@ -11,42 +11,36 @@ export type DataObject = {
 };
 
 interface IClubContext {
-  club: DataObject[] | undefined;
+  clubs: DataObject[] | undefined;
 }
 
-export const ClubContext = createContext<IClubContext>({} as IClubContext);
-
-export const ClubProvider = ({ children }: { children: ReactNode }) => {
-  const [club, setClub] = useState<DataObject[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const newData = await fetchDBClub();
-      setClub(newData);
-    };
-    fetchData();
-  }, []);
-
-  return (
-    <ClubContext.Provider value={{ club }}>{children}</ClubContext.Provider>
-  );
-};
-
-const fetchDBClub = async () => {
+const fetchClubsfromDb = async () => {
   const response = await fetch("/api/useDatabase?type=club");
   const data = await response.json();
   console.log("data", data);
   return data;
 };
 
-const fetchTotalSupply = async () => {
-  const response = await fetch("/api/getBalance", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({}),
-  });
-  const data = await response.json();
-  return data;
+export const ClubContext = createContext<IClubContext>({} as IClubContext);
+
+export const ClubProvider = ({ children }: { children: ReactNode }) => {
+  const [clubs, setClubs] = useState<DataObject[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const newData = await fetchClubsfromDb();
+      setClubs(newData);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchTotalSupply = async () => {
+      const newData = await fetchClubsfromDb();
+    };
+  }, []);
+
+  return (
+    <ClubContext.Provider value={{ clubs }}>{children}</ClubContext.Provider>
+  );
 };
