@@ -15,7 +15,9 @@ var ETHERSCAN_API = "1NC98FXI1IMKN7E2NWKU5HDG15JCNC7C5U";
 
 const config: HardhatUserConfig = {
   solidity: "0.8.18",
+  defaultNetwork: "hardhat",
   networks: {
+    hardhat: {},
     goerli: {
       chainId: 5,
       url: API_URL,
@@ -34,5 +36,3 @@ const config: HardhatUserConfig = {
 };
 
 export default config;
-
-
