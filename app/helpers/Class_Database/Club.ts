@@ -21,6 +21,14 @@ const clubSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  price: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
 });
 
 let Club: any;

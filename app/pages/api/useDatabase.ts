@@ -63,7 +63,6 @@ apiHandler.put(async (req, res) => {
  * @requires id must be included in each object
  * @returns a string array to show a list of adding result for each object Or an error
  */
-// delete data
 apiHandler.delete(async (req, res) => {
   const type = req.body.type;
   const data = req.body.content;
