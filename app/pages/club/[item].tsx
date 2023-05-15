@@ -138,7 +138,7 @@ function Item() {
       gotoRight={right}
       access={access}
       clubName={item}
-      price={price}
+      price={'0.01'}
       tokenId={tokenId}
       displayRemainingToken={remainingToken}
     />

@@ -2,7 +2,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { ethers } from 'ethers'
 import { abi, address as ad } from '../../constants/AccessTicket'
-import { AccessTicket } from '@/constants/typechain-types'
 
 type Data = {
   totalSupply: string
