@@ -53,7 +53,7 @@ const writeDocument = async (type: string, data: Array<object>) => {
     var obj: any = Club;
     type == "member" ? (obj = Member) : null;
     const result = await (obj as any).insertMany(data);
-    return `${Object.keys(result).length} objects inserted`;
+    return `${Object.keys(result).length} ${type}s inserted`;
   } catch (err) {
     throw err;
   }
@@ -88,11 +88,11 @@ const deleteDocument = async (type: String, data: Array<string>) => {
         let result = await obj.deleteMany({ id: str });
         if (result.deletedCount > 0) {
           message.push(
-            `Deleted ${result.deletedCount} members with id '${str}'`
+            `Deleted ${result.deletedCount} ${type}s with id '${str}'`
           );
         } else {
           message.push(
-            `No matching members found with id '${str}' for deletion`
+            `No matching ${type}s found with id '${str}' for deletion`
           );
         }
       })
@@ -119,7 +119,7 @@ const updateDocument = async (type: string, data: Array<object>) => {
         if ((await result.modifiedCount) > 0) {
           message.push(`Updated ${await result.modifiedCount} objects`);
         } else {
-          message.push("No matching objects found for updating");
+          message.push(`No matching ${type}s found for updating`);
         }
       })
     );

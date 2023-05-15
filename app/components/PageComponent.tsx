@@ -7,24 +7,26 @@ import NavigationButton from '@/components/NavigationButton'
 import SlideTransitionWrapper from './SlideTransitionWrapper'
 
 export type PageComponentProps = {
-  title: string | undefined
-  description: string | undefined
-  address: string | undefined
-  image: string
-  backgroundClassName: string | undefined
-  gotoLeft: string
-  gotoRight: string
-  access: boolean
-  clubName: string | undefined
-  price: string | undefined
-  tokenId: number | undefined
-  displayRemainingToken: number
-}
+  title: string;
+  description: string;
+  address: string | undefined;
+  image_lock: string;
+  image: string;
+  backgroundClassName: string;
+  gotoLeft: string;
+  gotoRight: string;
+  access: boolean;
+  clubName: string;
+  price: number;
+  tokenId: number | undefined;
+  displayRemainingToken: number;
+};
 
 const PageComponent = ({
   title,
   description,
   address,
+  image_lock,
   image,
   backgroundClassName,
   gotoLeft,
@@ -52,15 +54,18 @@ const PageComponent = ({
             <TitleAndDescription title={title} description={description} />
           </Box>
 
-          <KeyGranted
-            accessGranted={access}
-            clubName={clubName}
-            image={image}
-            price={price}
-            remainingToken={displayRemainingToken}
-            totalToken={200}
-            tokenNumber={tokenId}
-          />
+            <KeyGranted
+              accessGranted={access}
+              clubName={clubName}
+              image_lock={image_lock}
+              image={image}
+              price={price}
+              remainingToken={displayRemainingToken}
+              totalToken={200}
+              tokenNumber={tokenId}
+            />
+          </Flex>
+          <NavigationButton direction="right" goto={gotoRight} />
         </Flex>
         <NavigationButton direction="right" goto={gotoRight} />
       </Flex>
