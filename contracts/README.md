@@ -32,7 +32,7 @@ npx hardhat test
 Smart Contract Deployment
 
 ```sh
-npx hardhat deploy --network goerli    // deploy/001.ts
+npx hardhat deploy --network goerli    // deploy/001_deploy_access_ticket
 npx hardhat verify --network goerli <address>   // "Access Ticket" "TICKET"
 ```
 
