@@ -139,7 +139,11 @@ function Item() {
 
   const handleMint = async () => {
     try {
-      if (contractAddress !== undefined && abi !== undefined) {
+      if (
+        contractAddress !== undefined &&
+        abi !== undefined &&
+        signer !== undefined
+      ) {
         toast({
           title: 'Loading',
           description: 'Trying to mint access token',
@@ -149,6 +153,7 @@ function Item() {
         const transaction = await contract.mint({
           value: utils.parseEther('0.000000000000001'),
         })
+        setAccess(true)
         toast({
           title: 'Success',
           description: `View transaction at ${transaction.hash}`,
@@ -156,10 +161,10 @@ function Item() {
         })
       }
     } catch (e: any) {
-      console.log(error)
+      console.log(e)
       toast({
         title: 'Error',
-        description: `${e.error}`,
+        description: `${e.message}`,
         status: 'error',
       })
     }
