@@ -9,7 +9,7 @@ type InheritedProps = ButtonProps;
 
 export type NavigationButtonProps = {
   direction: "left" | "right";
-  goto: string;
+  goto: string | undefined;
 };
 
 const NavigationButton = ({
@@ -18,8 +18,15 @@ const NavigationButton = ({
 }: PropsWithChildren<NavigationButtonProps>) => {
   const router = useRouter();
 
+  function changePage() {
+    router.push({
+      pathname: "/club/[item]",
+      query: { item: goto },
+    });
+  }
+
   return (
-    <Button bg="none" onClick={() => router.push(`/${goto}`)}>
+    <Button bg="none" onClick={() => changePage()}>
       {direction === "left" ? (
         <ChevronLeftIcon boxSize={6} />
       ) : (

@@ -41,6 +41,7 @@ function ItemTableTennis() {
     title: "Table Tennis",
     description:
       "Welcome to the Table Tennis Club, where we are passionate about the sport of ping pong! As a member of our exclusive club, you'll have access to a wealth of exclusive content, including training videos, match highlights, and interviews with some of the top players in the game.",
+    image_lock: "/pingpong-ball-3d-render-png.webp",
     image: "/exyGranted.png",
     backgroundClassName: "tableTennisImg",
     gotoLeft: "item-climbing-gym",
@@ -61,6 +62,7 @@ function ItemTableTennis() {
       title={tableTennis.title}
       description={tableTennis.description}
       address={address}
+      image_lock={tableTennis.image_lock}
       image={tableTennis.image}
       backgroundClassName={tableTennis.backgroundClassName}
       gotoLeft={tableTennis.gotoLeft}

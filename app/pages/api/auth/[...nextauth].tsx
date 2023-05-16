@@ -1,10 +1,15 @@
-import NextAuth from 'next-auth'
+import { address } from '@/constants/AccessTicket'
+import NextAuth, { DefaultSession, Session } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { getCsrfToken } from 'next-auth/react'
 import { SiweMessage } from 'siwe'
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
+
+interface CustomSession extends Session {
+  owns: any // Replace 'any' with the appropriate type for the 'owns' property
+}
 export default async function auth(req: any, res: any) {
   const providers = [
     CredentialsProvider({
@@ -24,7 +29,7 @@ export default async function auth(req: any, res: any) {
       async authorize(credentials) {
         try {
           const siwe = new SiweMessage(JSON.parse(credentials?.message || '{}'))
-          const nextAuthUrl = new URL(process.env.NEXTAUTH_URL)
+          const nextAuthUrl = new URL(process.env.NEXTAUTH_URL || '')
 
           const result = await siwe.verify({
             signature: credentials?.signature || '',
@@ -63,9 +68,14 @@ export default async function auth(req: any, res: any) {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
       async session({ session, token }: { session: any; token: any }) {
+        // get all user owned NFTs of our own contracts
         session.address = token.sub
         session.user.name = token.sub
-        session.user.image = 'https://www.fillmurray.com/128/128'
+        let data = await fetch(
+          `http://localhost:3000/api/verifyAccess?address=${session.address}`
+        )
+        let formatData = await data.json()
+        session.owns = formatData
         return session
       },
     },

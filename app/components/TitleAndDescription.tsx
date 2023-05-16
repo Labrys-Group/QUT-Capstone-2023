@@ -1,44 +1,51 @@
-import { Text, Flex } from "@chakra-ui/react";
+import { Text, Flex } from '@chakra-ui/react'
 
 export type TitleAndDescriptionProps = {
-  title: string;
-  description?: string;
-};
+  title: string | undefined
+  description?: string | undefined
+}
 
 const boxStyle = {
-  flexDirection: "column",
-  maxWidth: { base: "60vw", md: "40vw", lg: "35vw" },
-};
+  flexDirection: 'column',
+  maxWidth: { base: '60vw', md: '40vw', lg: '35vw' },
+}
 
 const descriptionStyle = {
   // add bg
-  backgroundColor: "rgba(30,30,34,0.6)",
-  borderRadius: "10px",
-  padding: "12px 16px",
-  lineHeight: "16px",
-};
+  backgroundColor: 'rgba(30,30,34,0.6)',
+  borderRadius: '10px',
+  padding: '12px 16px',
+  lineHeight: '16px',
+}
 
 const titleStyle = {
   // add shadow
-  textShadow: "0px 0px 20px #000000,0px 0px 50px #000000",
-  textStroke: "2px #000000",
-  wordWrap: "initial",
-};
+  textShadow: '0px 0px 20px #000000,0px 0px 50px #000000',
+  textStroke: '2px #000000',
+  wordWrap: 'initial',
+}
 
 const TitleAndDescription = ({
   title,
   description,
 }: TitleAndDescriptionProps) => {
+  let myString
+  let replacedStr
+  if (title != undefined && description != undefined) {
+    myString = title.replace(/\s/g, ' ')
+    myString = myString.toUpperCase()
+    replacedStr = description.replace(/-/g, '_')
+  }
   return (
     <Flex sx={boxStyle}>
       <Text className="title" sx={titleStyle}>
-        {title.toUpperCase()}
+        {myString}
       </Text>
       <Text className="txt" sx={descriptionStyle}>
-        {description}
+        {replacedStr}
       </Text>
     </Flex>
-  );
-};
+  )
+}
 
-export default TitleAndDescription;
+export default TitleAndDescription

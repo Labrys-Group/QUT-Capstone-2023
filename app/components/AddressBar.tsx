@@ -45,7 +45,6 @@ const accordionItemStyle = {
 
 const AddressBar = ({ status, username }: AddressBarProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   return (
     <>
       {/* Accordian */}

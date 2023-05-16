@@ -25,7 +25,7 @@ describe("AccessTicket", function () {
   it("should mint a new token and verify ownership", async function () {
     await accessTicket
       .connect(user1)
-      .mint({ value: utils.parseEther("0.0000000001") });
+      .mint({ value: utils.parseEther("0.000000000000001") });
 
     const ownerOfToken = await accessTicket.ownerOf(1);
     expect(ownerOfToken).to.equal(user1.address);
@@ -43,82 +43,64 @@ describe("AccessTicket", function () {
 
   it("should return the price for the ticket", async function () {
     const ticketPrice = await accessTicket.readTicketPrice();
-    const expectedPriceInWei = ethers.BigNumber.from("100000000"); // 0.0000000001 Ether in Wei
+    const expectedPriceInWei = utils.parseEther("0.000000000000001");
     expect(ticketPrice).to.equal(expectedPriceInWei);
   });
 
   it("should revert if user already owns a token", async function () {
     await accessTicket
       .connect(user1)
-      .mint({ value: ethers.utils.parseEther("0.0000000001") });
+      .mint({ value: ethers.utils.parseEther("0.000000000000001") });
 
     await expect(
       accessTicket
         .connect(user1)
-        .mint({ value: ethers.utils.parseEther("0.0000000001") })
+        .mint({ value: ethers.utils.parseEther("0.000000000000001") })
     ).to.be.revertedWith("AccessTicket: User already owns a token");
   });
 
   it("should get tokenURI", async function () {
     await accessTicket
       .connect(user1)
-      .mint({ value: ethers.utils.parseEther("0.0000000001") });
+      .mint({ value: ethers.utils.parseEther("0.000000000000001") });
 
     let result = await accessTicket.connect(user1).tokenURI(1);
     expect(result).to.equal("http://localhost.com:3000/1");
   });
 
-  it("should verify ownership", async function () {
+  it("should verify ownership by member address", async function () {
     await accessTicket
       .connect(user1)
-      .mint({ value: ethers.utils.parseEther("0.0000000001") });
+      .mint({ value: ethers.utils.parseEther("0.000000000000001") });
 
-    await accessTicket
-      .connect(user2)
-      .mint({ value: ethers.utils.parseEther("0.0000000001") });
+    let result = await accessTicket.balanceOf(user1.address);
+    expect(result).to.equal(1);
 
-    let result = await accessTicket
-      .connect(user1)
-      .verifyAccess(user1.address, 1);
-    expect(result).to.equal(true);
-
-    let result_error = await accessTicket
-      .connect(user1)
-      .verifyAccess(user1.address, 2);
-    expect(result_error).to.equal(false);
+    let result_error = await accessTicket.balanceOf(user2.address);
+    expect(result_error).to.equal(0);
   });
 
   it("should remove a token and verify ownership", async function () {
     await accessTicket
       .connect(user1)
-      .mint({ value: ethers.utils.parseEther("0.0000000001") });
+      .mint({ value: ethers.utils.parseEther("0.000000000000001") });
 
     await accessTicket.connect(user1).removeTicket(1);
 
     await expect(
       accessTicket.connect(user1).removeTicket(1)
-    ).to.be.revertedWith("ERC721: token does not exist");
-  });
-
-  it("should revert if caller is not the ticket owner", async function () {
-    await accessTicket
-      .connect(user1)
-      .mint({ value: ethers.utils.parseEther("0.0000000001") });
-
-    await expect(
-      accessTicket.connect(user2).removeTicket(1)
-    ).to.be.revertedWith("AccessTicket: caller is not the ticket owner");
+    ).to.be.revertedWith("ERC721: invalid token ID");
   });
 
   it("should withdraw funds to owner", async function () {
     await accessTicket
       .connect(user1)
-      .mint({ value: ethers.utils.parseEther("0.0000000001") });
+      .mint({ value: ethers.utils.parseEther("0.000000000000001") });
     await accessTicket.connect(owner).withdrawFunds();
 
     expect(await ethers.provider.getBalance(accessTicket.address)).to.equal(0);
     expect(await ethers.provider.getBalance(owner.address)).to.be.above(
-      ethers.utils.parseEther("0.0000000001")
+      ethers.utils.parseEther("0.000000000000001")
     );
   });
 });

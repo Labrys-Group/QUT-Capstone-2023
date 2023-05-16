@@ -5,16 +5,19 @@ import { Image } from "@chakra-ui/react";
 import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useRouter } from "next/router";
-import { utils } from "ethers";
+import { Contract, utils } from "ethers";
+import useClubDetails from "@/hooks/useClubDetails";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
   clubName: string;
+  image_lock: string;
   image: string;
   tokenNumber?: number;
   remainingToken?: number;
   totalToken?: number;
-  price?: number;
+  price?: string;
+  handleMint(): void;
 };
 
 const boxStyle = {
@@ -34,56 +37,29 @@ const KeyGranted = ({
   accessGranted,
   clubName,
   image,
+  image_lock,
   tokenNumber,
   remainingToken,
   totalToken,
   price,
+  handleMint,
 }: KeyGrantedProps) => {
   const displayRemaining = remainingToken + `/${totalToken}`;
 
+  const clubName_noSpace = clubName.replace(/ /g, "_");
+
   // use hook
   const router = useRouter();
-  const toast = useToast();
-  const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
 
-  const handleMint = async () => {
-    console.log("click on mint function");
-    console.log("signer", signer);
-    console.log("account address", accountAddress);
-    console.log("balance", balance);
-
-    if (erc721 === undefined) {
-    } else {
-      try {
-        toast({
-          title: "Loading",
-          description: "Trying to mint access token",
-          status: "loading",
-        });
-        const transaction = await erc721.mint({
-          value: utils.parseEther("0.000000000000001"),
-        });
-        toast({
-          title: "Success",
-          description: `View transaction at ${transaction.hash}`,
-          status: "success",
-        });
-      } catch (e: any) {
-        toast({
-          title: "Error",
-          description: `${e.error.message}`,
-          status: "error",
-        });
-      }
-    }
-  };
+  // const {contractAddress, abi} = useClubDetails(router.pathname)
+  //const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
 
   const handleClick = () => {
     //hardcoded for exy page
     router.push("/exy");
   };
   return (
-    <Flex sx={boxStyle}>
+    <Flex id={clubName_noSpace + "_Box"} sx={boxStyle}>
       <Text className="blueTxtBold">{clubName}</Text>
       <Text className="headingSm">
         Member Key {accessGranted ? `#${tokenNumber}` : null}
@@ -102,11 +78,12 @@ const KeyGranted = ({
         // margin={{ base: "0", md: "12px 0px" }}
         >
           <Image
-            src="/lockCrop.png"
+            src={image_lock}
             alt="locked-image"
             boxSize="250px"
             objectFit="cover"
             margin="auto"
+            id={clubName_noSpace + "_LockImage"}
           />
           <Text className="txt" align="center">
             Key required for access

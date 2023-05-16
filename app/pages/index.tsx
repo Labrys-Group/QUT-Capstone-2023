@@ -1,42 +1,41 @@
-import React from "react";
-import { useEffect } from "react";
-import { Text, Box, Flex } from "@chakra-ui/react";
-import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
-import NavBar from "@/components/NavBar";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import React from 'react'
+import { useEffect } from 'react'
+import { Text, Box, Flex } from '@chakra-ui/react'
+import { ConnectButton } from '@rainbow-me/rainbowkit'
+import { useAccount } from 'wagmi'
+import NavBar from '@/components/NavBar'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 export default function App() {
-  const account = useAccount();
-  const { data: session } = useSession();
-  const router = useRouter();
+  const account = useAccount()
+  const { data: session } = useSession()
+  const router = useRouter()
 
-  const status = account.status;
+  const status = account.status
 
   useEffect(() => {
     const securePage = async () => {
       // check if authenticated and if is connected to wallet
-      console.log(status);
-      if (session && status === "connected") {
-        router.push("/item");
+      if (session && status === 'connected') {
+        console.log('session', session)
+        router.push('/club')
       } else {
       }
-    };
-    securePage();
-  }, [session, status]);
+    }
+    securePage()
+  }, [session, status])
 
   return (
     <Flex h="100vh" flexDirection="column" className="bgImg">
-      <Box h={{ base: "30%", lg: "20%" }}>
+      <Box h={{ base: '30%', lg: '20%' }}>
         <NavBar />
       </Box>
       <Flex
-        h={{ base: "70%", lg: "80%" }}
+        h={{ base: '70%', lg: '80%' }}
         pt="2em"
         flexDirection="column"
-        alignItems="center"
-      >
+        alignItems="center">
         <Text className="blueTxt">WELCOME TO</Text>
         <Text className="title paddingTxt txtCenter">MEMBERS ONLY</Text>
         <Text className="txt paddingTxt txtCenter">
@@ -54,5 +53,5 @@ export default function App() {
         </Box>
       </Flex>
     </Flex>
-  );
+  )
 }
