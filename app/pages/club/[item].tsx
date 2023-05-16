@@ -188,7 +188,7 @@ function Item() {
 
   return (
     <PageComponent
-      image={'/' + clubName + 'Granted.png'}
+      image={clubName=='exy' ? '/' + clubName + 'Granted.gif' : '/' + clubName + 'Granted.png'}
       title={title ?? ''}
       description={description ?? ''}
       address={address}
