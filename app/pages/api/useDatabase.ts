@@ -6,9 +6,13 @@ import {
   updateDocument,
 } from "../../helpers/databaseMethods";
 
+// const databaseName = "MembersOnly";
+
+// const mongoDBUri = `mongodb+srv://sunelia:sunelia@membersonly.1iuvkan.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
+
 const databaseName = "MembersOnly";
 
-const mongoDBUri = `mongodb+srv://sunelia:sunelia@membersonly.1iuvkan.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
+const mongoDBUri = `mongodb+srv://admin:PpuXdMSNaIuX4mVp@membersonly.dr0rpdo.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
 
 const apiHandler = dbHandlerFactory(mongoDBUri);
 
