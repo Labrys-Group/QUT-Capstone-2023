@@ -106,7 +106,8 @@ const KeyGranted = ({
         </PrimaryButton>
       ) : (
         <PrimaryButton onClick={handleMint}>
-          Purchase for Ξ{price}
+          Purchase for Ξ0.01
+          {/* {price} */}
         </PrimaryButton>
       )}
     </Flex>

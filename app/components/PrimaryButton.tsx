@@ -16,6 +16,8 @@ const btnStyle = {
   backgroundColor: "#7190FF",
   color: "whiteAlpha.900",
   flexDirection: "row",
+  size: { base: "xs", md: "md" },
+  fontSize: { base: "1.5em", md: "1em" },
 };
 
 const PrimaryButton = ({
@@ -23,7 +25,7 @@ const PrimaryButton = ({
   ...props
 }: PropsWithChildren<PrimaryButtonProps>) => {
   return (
-    <Button sx={btnStyle} size="md" _hover={{ bg: "#435dba" }} {...props}>
+    <Button sx={btnStyle} _hover={{ bg: "#435dba" }} {...props}>
       {children}
     </Button>
   );
