@@ -115,9 +115,9 @@ const theme = extendTheme({
       ".txt": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "400",
-        lineHeight: "1.5em",
+        lineHeight: "3em",
 
-        fontSize: "1em",
+        fontSize: {base:"1.2em",md:"1em",lg:"0.9em"},
         color: "rgba(255, 255, 255, 0.7)",
       },
       //This class used for display flex, column, align items center
