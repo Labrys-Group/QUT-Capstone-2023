@@ -153,7 +153,7 @@ function Item() {
         const transaction = await contract.mint({
           value: utils.parseEther('0.000000000000001'),
         })
-        setAccess(true)
+        // setAccess(true)
         toast({
           title: 'Success',
           description: `View transaction at ${transaction.hash}`,
