@@ -140,6 +140,11 @@ const theme = extendTheme({
         padding: "0 3em",
       },
       // animation
+      "@keyframes rotate_perfume": {
+        "0%": { transform: "rotate(-45deg)" },
+        "50%": { transform: "rotate(15deg)" },
+        "100%": { transform: " rotate(-45deg)" },
+      },
       "@keyframes float_pingpang": {
         "0%": { transform: "translateY(0px)" },
         "50%": { transform: "translateY(-20px)" },
@@ -152,6 +157,9 @@ const theme = extendTheme({
       },
       "#Climbing_Gym_Box": { background: "rgba(0,0,0,0.5)" },
       "#Table_Tennis_United_Box": { background: "none" },
+      "#Exy_United_LockImage": {
+        animation: "rotate_perfume 2s ease-in-out infinite",
+      },
       "#Climbing_Gym_LockImage": {
         animation: "rotate_climbingshoes 4s ease-in-out infinite",
       },
