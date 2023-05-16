@@ -45,7 +45,7 @@ const theme = extendTheme({
       },
 
       ".exyGranted": {
-        backgroundImage: "url('/exyGranted.png')",
+        backgroundImage: "url('/exyGranted.gif')",
         backgroundSize: "cover",
       },
 
