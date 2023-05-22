@@ -200,7 +200,7 @@ function Item() {
       backgroundClassName={clubName + "Img"}
       gotoLeft={left ?? ""}
       gotoRight={right ?? ""}
-      access={true}
+      access={access}
       clubName={clubName ?? ""}
       price={price ?? ""}
       tokenId={tokenId}
