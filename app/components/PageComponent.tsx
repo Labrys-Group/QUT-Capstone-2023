@@ -40,8 +40,8 @@ const PageComponent = ({
 }: PageComponentProps) => {
   return (
     <Box
-      height={{ md: "100vh" }}
-      minHeight={{ base: "100vh" }}
+      // height={{ md: "100vh" }}
+      minHeight={"100vh"}
       className={backgroundClassName}
     >
       <NavBar />
