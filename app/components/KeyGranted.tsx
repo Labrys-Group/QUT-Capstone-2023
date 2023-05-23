@@ -66,6 +66,7 @@ const KeyGranted = ({
       </Text>
       {accessGranted ? (
         <Image
+          id={clubName + "_unlockImage"}
           src={image}
           alt="Unlocked-image"
           boxSize="250px"
