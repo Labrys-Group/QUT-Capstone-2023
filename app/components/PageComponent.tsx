@@ -4,6 +4,7 @@ import NavBar from "@/components/NavBar";
 import TitleAndDescription from "@/components/TitleAndDescription";
 import { Flex, Box } from "@chakra-ui/react";
 import NavigationButton from "@/components/NavigationButton";
+import { motion, AnimatePresence } from "framer-motion";
 
 export type PageComponentProps = {
   title: string;
@@ -45,32 +46,44 @@ const PageComponent = ({
       className={backgroundClassName}
     >
       <NavBar />
+
       <AddressBar status={address !== undefined} username={address} />
       {/* //TODO: remove top margin */}
-      <Flex className="pagePadding itemBox">
-        <NavigationButton direction="left" goto={gotoLeft} />
-        <Flex className="itemDesc">
-          <Box
-            mb={{ base: "30px", md: "0px" }}
-            mr={{ base: "0px", md: "30px" }}
-          >
-            <TitleAndDescription title={title} description={description} />
-          </Box>
+      <AnimatePresence>
+        <motion.div
+          key={title}
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+        >
+          <Flex className="pagePadding itemBox">
+            <NavigationButton direction="left" goto={gotoLeft} />
 
-          <KeyGranted
-            handleMint={handleMint}
-            accessGranted={access}
-            clubName={clubName}
-            image_lock={image_lock}
-            image={image}
-            price={price}
-            remainingToken={displayRemainingToken}
-            totalToken={200}
-            tokenNumber={tokenId}
-          />
-        </Flex>
-        <NavigationButton direction="right" goto={gotoRight} />
-      </Flex>
+            <Flex className="itemDesc">
+              <Box
+                mb={{ base: "30px", md: "0px" }}
+                mr={{ base: "0px", md: "30px" }}
+              >
+                <TitleAndDescription title={title} description={description} />
+              </Box>
+
+              <KeyGranted
+                handleMint={handleMint}
+                accessGranted={access}
+                clubName={clubName}
+                image_lock={image_lock}
+                image={image}
+                price={price}
+                remainingToken={displayRemainingToken}
+                totalToken={200}
+                tokenNumber={tokenId}
+                title={title}
+              />
+            </Flex>
+
+            <NavigationButton direction="right" goto={gotoRight} />
+          </Flex>
+        </motion.div>
+      </AnimatePresence>
     </Box>
   );
 };

@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 import LoadingPage from "@/components/LoadingPage";
 import PageComponent from "@/components/PageComponent";
 import { Contract, Signer, utils } from "ethers";
-
+import { AnimatePresence, motion } from "framer-motion";
 function Item() {
   const { address, isConnected } = useAccount();
   const [loading, setLoading] = useState<boolean>(true);
