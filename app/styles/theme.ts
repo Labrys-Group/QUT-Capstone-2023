@@ -59,6 +59,10 @@ const theme = extendTheme({
         backgroundImage: "url('/bouldering.jpg')",
         backgroundSize: "cover",
       },
+        ".climbingImg2": {
+        backgroundImage: "url('/climbing2.jpg')",
+        backgroundSize: "cover",
+      },
       ".tableTennisImg": {
         backgroundImage: "url('/tableTennis.jpg')",
         backgroundSize: "cover",

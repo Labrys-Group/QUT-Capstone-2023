@@ -56,7 +56,7 @@ const KeyGranted = ({
 
   const handleClick = () => {
     //hardcoded for exy page
-    router.push("/exy");
+    router.push(`/${clubName}`);
   };
   return (
     <Flex id={clubName_noSpace + "_Box"} sx={boxStyle}>
