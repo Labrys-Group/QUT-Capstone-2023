@@ -59,7 +59,7 @@ const theme = extendTheme({
         backgroundImage: "url('/bouldering.jpg')",
         backgroundSize: "cover",
       },
-        ".climbingImg2": {
+      ".climbingImg2": {
         backgroundImage: "url('/climbing2.jpg')",
         backgroundSize: "cover",
       },
@@ -121,7 +121,7 @@ const theme = extendTheme({
         fontWeight: "400",
         lineHeight: "3em",
 
-        fontSize: {base:"1.2em",md:"1em",lg:"0.9em"},
+        fontSize: { base: "1.2em", md: "1em", lg: "0.9em" },
         color: "rgba(255, 255, 255, 0.7)",
       },
       //This class used for display flex, column, align items center
@@ -161,13 +161,10 @@ const theme = extendTheme({
       },
       "#Climbing_Gym_Box": { background: "rgba(0,0,0,0.5)" },
       "#Table_Tennis_United_Box": { background: "none" },
-      "#Exy_United_LockImage": {
-        animation: "rotate_perfume 2s ease-in-out infinite",
-      },
-      "#Climbing_Gym_LockImage": {
+      "#climbing_unlockImage": {
         animation: "rotate_climbingshoes 4s ease-in-out infinite",
       },
-      "#Table_Tennis_United_LockImage": {
+      "#tableTennis_unlockImage": {
         animation: "float_pingpang 2s ease-in-out infinite",
       },
     },
