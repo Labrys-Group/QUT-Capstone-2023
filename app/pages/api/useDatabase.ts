@@ -35,7 +35,7 @@ apiHandler.post(async (req, res) => {
  * @returns an object array to show a list of matched objects
  */
 apiHandler.get(async (req, res) => {
-  const type = req.body.type;
+  const type: any = req.query.type;
   let result = await readDocument(type);
   res.status(200).json(result);
 });
