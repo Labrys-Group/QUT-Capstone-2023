@@ -6,7 +6,6 @@ import { useState, useEffect, useContext, Provider } from "react";
 import { useAccount } from "wagmi";
 import LoadingPage from "@/components/LoadingPage";
 import PageComponent from "@/components/PageComponent";
-import { ClubContext } from "@/context/clubContext";
 import { Contract, Signer, utils } from "ethers";
 
 function Item() {
@@ -34,8 +33,7 @@ function Item() {
   const router = useRouter();
   const { signer } = useContext(WalletContext);
 
-  // use club context
-  const { clubs } = useContext(ClubContext);
+  const clubs = session?.clubs;
 
   // get query from router
   const itemName = router.query.item;
