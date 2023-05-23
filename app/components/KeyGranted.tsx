@@ -18,6 +18,7 @@ type KeyGrantedProps = {
   totalToken?: number;
   price?: string;
   handleMint(): void;
+  title: string;
 };
 
 const boxStyle = {
@@ -42,6 +43,7 @@ const KeyGranted = ({
   remainingToken,
   totalToken,
   price,
+  title,
   handleMint,
 }: KeyGrantedProps) => {
   const displayRemaining = remainingToken + `/${totalToken}`;
@@ -60,7 +62,7 @@ const KeyGranted = ({
   };
   return (
     <Flex id={clubName_noSpace + "_Box"} sx={boxStyle}>
-      <Text className="blueTxtBold">{clubName}</Text>
+      <Text className="blueTxtBold">{title}</Text>
       <Text className="headingSm">
         Member Key {accessGranted ? `#${tokenNumber}` : null}
       </Text>
