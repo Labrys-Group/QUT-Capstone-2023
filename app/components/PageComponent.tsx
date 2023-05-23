@@ -2,7 +2,7 @@ import AddressBar from "@/components/AddressBar";
 import KeyGranted from "@/components/KeyGranted";
 import NavBar from "@/components/NavBar";
 import TitleAndDescription from "@/components/TitleAndDescription";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Button } from "@chakra-ui/react";
 import NavigationButton from "@/components/NavigationButton";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -16,6 +16,7 @@ export type PageComponentProps = {
   gotoLeft: string;
   gotoRight: string;
   access: boolean;
+  keyGrantedLoading: boolean;
   clubName: string;
   price: string;
   tokenId: number | undefined;
@@ -33,6 +34,7 @@ const PageComponent = ({
   gotoLeft,
   gotoRight,
   access,
+  keyGrantedLoading,
   clubName,
   price,
   tokenId,
@@ -66,18 +68,29 @@ const PageComponent = ({
                 <TitleAndDescription title={title} description={description} />
               </Box>
 
-              <KeyGranted
-                handleMint={handleMint}
-                accessGranted={access}
-                clubName={clubName}
-                image_lock={image_lock}
-                image={image}
-                price={price}
-                remainingToken={displayRemainingToken}
-                totalToken={200}
-                tokenNumber={tokenId}
-                title={title}
-              />
+              {keyGrantedLoading === true ? (
+                <Box width={{ base: "65vw", md: "274px" }}>
+                  <Button
+                    background="#1E1E22"
+                    opacity={100}
+                    isLoading
+                    size="lg"
+                  ></Button>
+                </Box>
+              ) : (
+                <KeyGranted
+                  handleMint={handleMint}
+                  accessGranted={access}
+                  clubName={clubName}
+                  image_lock={image_lock}
+                  image={image}
+                  price={price}
+                  remainingToken={displayRemainingToken}
+                  totalToken={200}
+                  tokenNumber={tokenId}
+                  title={title}
+                />
+              )}
             </Flex>
 
             <NavigationButton direction="right" goto={gotoRight} />
