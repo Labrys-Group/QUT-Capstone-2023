@@ -4,13 +4,13 @@ import {
   readDocument,
   deleteDocument,
   updateDocument,
-} from "../../helpers/databaseMethods";
+} from '../../helpers/databaseMethods'
 
-const databaseName = "MembersOnly";
+const databaseName = 'MembersOnly'
 
-const mongoDBUri = `mongodb+srv://admin:PpuXdMSNaIuX4mVp@membersonly.dr0rpdo.mongodb.net/${databaseName}?retryWrites=true&w=majority`;
+const mongoDBUri = `mongodb+srv://admin:PpuXdMSNaIuX4mVp@membersonly.dr0rpdo.mongodb.net/${databaseName}?retryWrites=true&w=majority`
 
-const apiHandler = dbHandlerFactory(mongoDBUri);
+const apiHandler = dbHandlerFactory(mongoDBUri)
 
 /**
  * updating data
@@ -21,11 +21,11 @@ const apiHandler = dbHandlerFactory(mongoDBUri);
  * @returns a string array to show a list of updating result for each object Or an error
  */
 apiHandler.post(async (req, res) => {
-  const type = req.body.type;
-  const data = req.body.content;
-  let result = await updateDocument(type, data);
-  res.status(200).json(result);
-});
+  const type = req.body.type
+  const data = req.body.content
+  let result = await updateDocument(type, data)
+  res.status(200).json(result)
+})
 
 /**
  * getting data
@@ -35,10 +35,10 @@ apiHandler.post(async (req, res) => {
  * @returns an object array to show a list of matched objects
  */
 apiHandler.get(async (req, res) => {
-  const type: any = req.query.type;
-  let result = await readDocument(type);
-  res.status(200).json(result);
-});
+  const type: any = req.query.type
+  let result = await readDocument(type)
+  res.status(200).json(result)
+})
 
 /**
  * adding data
@@ -49,11 +49,11 @@ apiHandler.get(async (req, res) => {
  * @returns a string to notify how many object have been added Or an error
  */
 apiHandler.put(async (req, res) => {
-  const type = req.body.type;
-  const data = req.body.content;
-  let result = await writeDocument(type, data);
-  res.status(200).send(JSON.stringify(result));
-});
+  const type = req.body.type
+  const data = req.body.content
+  let result = await writeDocument(type, data)
+  res.status(200).send(JSON.stringify(result))
+})
 
 /**
  * deleting data
@@ -64,10 +64,10 @@ apiHandler.put(async (req, res) => {
  * @returns a string array to show a list of adding result for each object Or an error
  */
 apiHandler.delete(async (req, res) => {
-  const type = req.body.type;
-  const data = req.body.content;
-  let result = await deleteDocument(type, data);
-  res.status(200).json(result);
-});
+  const type = req.body.type
+  const data = req.body.content
+  let result = await deleteDocument(type, data)
+  res.status(200).json(result)
+})
 
-export default apiHandler;
+export default apiHandler
