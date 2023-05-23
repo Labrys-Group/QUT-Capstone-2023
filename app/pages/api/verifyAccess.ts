@@ -14,6 +14,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     };
 
     const dbData = await fetchClubsfromDb();
+    console.log("db", dbData);
 
     // query alchemy api to get owned nfts
     const apiKey = "o13ZJRrEu85G8Zi9lb9KxaZhkv6537H7";

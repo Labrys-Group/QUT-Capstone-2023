@@ -22,7 +22,7 @@ const videos = [
   { src: "https://www.youtube.com/embed/_Bi3vOTH_do" },
 ];
 
-function tableTennis() {
+function TableTennis() {
   const { address } = useAccount();
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
@@ -69,4 +69,4 @@ function tableTennis() {
   );
 }
 
-export default tableTennis;
+export default TableTennis;
