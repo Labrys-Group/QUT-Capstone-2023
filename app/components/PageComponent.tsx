@@ -78,18 +78,24 @@ const PageComponent = ({
                   ></Button>
                 </Box>
               ) : (
-                <KeyGranted
-                  handleMint={handleMint}
-                  accessGranted={access}
-                  clubName={clubName}
-                  image_lock={image_lock}
-                  image={image}
-                  price={price}
-                  remainingToken={displayRemainingToken}
-                  totalToken={200}
-                  tokenNumber={tokenId}
-                  title={title}
-                />
+                <motion.div
+                  initial={{ scale: 0.85, opacity: 0 }} // Initial scale is smaller than its normal size
+                  animate={{ scale: 1, opacity: 1 }} // Animate to normal size
+                  transition={{ duration: 0.25, ease: "easeInOut" }} // Transition duration in seconds
+                >
+                  <KeyGranted
+                    handleMint={handleMint}
+                    accessGranted={access}
+                    clubName={clubName}
+                    image_lock={image_lock}
+                    image={image}
+                    price={price}
+                    remainingToken={displayRemainingToken}
+                    totalToken={200}
+                    tokenNumber={tokenId}
+                    title={title}
+                  />
+                </motion.div>
               )}
             </Flex>
 

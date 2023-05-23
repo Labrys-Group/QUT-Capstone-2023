@@ -27,7 +27,7 @@ const boxStyle = {
   padding: "1em",
   borderRadius: "10px",
   textAlign: "left",
-  width: { base: "65vw", md: "274px" },
+  maxWidth: { base: "65vw", md: "274px" },
   boxShadow: "0px 3.4188px 8.54701px 1.7094px rgba(0, 0, 0, 0.2)",
   border: "0.42735px solid #303030",
   minHeight: { base: "0", md: "250px" },
@@ -53,9 +53,6 @@ const KeyGranted = ({
   // use hook
   const router = useRouter();
 
-  // const {contractAddress, abi} = useClubDetails(router.pathname)
-  //const { erc721, signer, accountAddress, balance } = useContext(WalletContext);
-
   const handleClick = () => {
     //hardcoded for exy page
     router.push(`/${clubName}`);
@@ -76,10 +73,7 @@ const KeyGranted = ({
           margin="12px 0px"
         />
       ) : (
-        <Box
-        // minHeight={{ base: "0", md: "250px" }}
-        // margin={{ base: "0", md: "12px 0px" }}
-        >
+        <Box>
           <Image
             src={image_lock}
             alt="locked-image"
