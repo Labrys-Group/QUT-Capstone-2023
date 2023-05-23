@@ -159,8 +159,10 @@ const theme = extendTheme({
         "50%": { transform: "rotate(15deg)" },
         "100%": { transform: " rotate(-45deg)" },
       },
-      "#Climbing_Gym_Box": { background: "rgba(0,0,0,0.5)" },
-      "#Table_Tennis_United_Box": { background: "none" },
+
+      "#exy_unlockImage": {
+        animation: "none",
+      },
       "#climbing_unlockImage": {
         animation: "rotate_climbingshoes 4s ease-in-out infinite",
       },

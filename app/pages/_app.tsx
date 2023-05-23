@@ -18,7 +18,6 @@ import {
 } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
-import { ClubProvider } from "@/context/clubContext";
 import { SessionProvider } from "next-auth/react";
 import { RainbowKitSiweNextAuthProvider } from "@rainbow-me/rainbowkit-siwe-next-auth";
 import { WalletContextProvider } from "@/context/walletContext";
@@ -53,20 +52,18 @@ export default function App({
     <WagmiConfig client={wagmiClient}>
       <ChakraProvider theme={theme} resetCSS={true}>
         <WalletContextProvider>
-          <ClubProvider>
-            <SessionProvider refetchInterval={0} session={session}>
-              <RainbowKitSiweNextAuthProvider>
-                <RainbowKitProvider
-                  chains={chains}
-                  theme={midnightTheme()}
-                  coolMode
-                  showRecentTransactions={true}
-                >
-                  <Component {...pageProps} />
-                </RainbowKitProvider>
-              </RainbowKitSiweNextAuthProvider>
-            </SessionProvider>
-          </ClubProvider>
+          <SessionProvider refetchInterval={0} session={session}>
+            <RainbowKitSiweNextAuthProvider>
+              <RainbowKitProvider
+                chains={chains}
+                theme={midnightTheme()}
+                coolMode
+                showRecentTransactions={true}
+              >
+                <Component {...pageProps} />
+              </RainbowKitProvider>
+            </RainbowKitSiweNextAuthProvider>
+          </SessionProvider>
         </WalletContextProvider>
       </ChakraProvider>
     </WagmiConfig>

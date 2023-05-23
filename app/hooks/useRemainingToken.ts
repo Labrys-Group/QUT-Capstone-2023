@@ -1,8 +1,9 @@
-import { ClubContext } from "@/context/clubContext";
+import { useSession } from "next-auth/react";
 import { useState, useEffect, useContext } from "react";
 
 function useTokenRemaining(itemName: string | string[]) {
-  const { clubs } = useContext(ClubContext);
+  const { data: session } = useSession();
+  const clubs = session?.clubs;
 
   const [remainingToken, setRemainingToken] = useState<number | undefined>();
 
