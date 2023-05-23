@@ -16,11 +16,12 @@ contract AccessTicket is ERC721Enumerable, IAccessTicket {
     event TicketRemoved(address indexed owner, uint256 tokenId);
     event FundsWithdrawn(address indexed owner, uint256 amount);
 
-    // When deploying the contract, add a contract owner address to receive eth from users
+    // initialize the `_owner` variable with the contract deployer
     constructor(string memory name, string memory symbol) ERC721(name, symbol) {
         _owner = payable(msg.sender);
     }
 
+    // It returns the URI of a specific token based on its tokenId
     function tokenURI(
         uint256 tokenId
     ) public view override(ERC721, IAccessTicket) returns (string memory) {
@@ -32,7 +33,7 @@ contract AccessTicket is ERC721Enumerable, IAccessTicket {
                 : "";
     }
 
-    // Charge every user 0.01 eth per mint and send the money to the contract owner
+    // Allows users to mint a new token by sending the required _ticketPrice in Ether
     function mint() public payable {
         require(msg.value == _ticketPrice, "AccessTicket: Insufficient payment");
 
@@ -50,46 +51,23 @@ contract AccessTicket is ERC721Enumerable, IAccessTicket {
 
         uint256 _tokenId = ++_totalSupply;
         _safeMint(msg.sender, _tokenId);
-        _totalSupply++;
 
         emit TicketMinted(msg.sender, _tokenId);
     }
 
-    // Charge every user 0.01 eth per mint and send the money to the contract owner
-    function mintWithVIP(address vip) public payable {
-        require(msg.value == _ticketPrice, "AccessTicket: Insufficient payment");
-
-        if(vip != 0xe5CA461cF9FF63143dE899d1Af8AE112eF6850CA || vip != 0x2F44998bdfB94F770Ae756ddC9C47C32DEa168df){
-            require(
-            balanceOf(vip) == 0,
-            "AccessTicket: User already owns a token"
-        );
-        }
-
-        require(
-            _totalSupply < 200,
-            "AccessTicket: Maximum supply of tokens reached"
-        );
-
-        uint256 _tokenId = ++_totalSupply;
-        _safeMint(vip, _tokenId);
-        _totalSupply++;
-
-        emit TicketMinted(msg.sender, _tokenId);
-    }
-
-    // read the ticket price
+    // return ticket price
     function readTicketPrice() public view returns (uint256) {
         return _ticketPrice;
     }
 
-    // Add a require statement to check if the caller is the ticket owner before removing the ticket
+    // allows the caller to remove a token by its tokenId
+    // no more conditions required as the ERC721 will do the check
     function removeTicket(uint256 tokenId) public {
         _burn(tokenId);
         emit TicketRemoved(msg.sender, tokenId);
     }
 
-    // Add a function to allow the contract owner to withdraw the funds collected from users
+    // it can only be called by the contract owner (_owner)
     function withdrawFunds() public {
         require(
             msg.sender == _owner,

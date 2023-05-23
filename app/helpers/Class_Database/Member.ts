@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 const memberSchema = new mongoose.Schema({
   id: {
@@ -9,14 +9,14 @@ const memberSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-})
+});
 
-let Member: any
+let Member: any;
 
 try {
-  Member = mongoose.model('Members')
+  Member = mongoose.model("Members");
 } catch (e) {
-  Member = mongoose.model('Members', memberSchema)
+  Member = mongoose.model("Members", memberSchema);
 }
 
-export default Member
+export default Member;
