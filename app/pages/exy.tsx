@@ -1,14 +1,12 @@
 import { getSession, useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Divider, Flex, Spacer } from '@chakra-ui/react'
-import { Grid, GridItem } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import AddressBar from '../components/AddressBar'
 import { useAccount } from 'wagmi'
 import ContentTitle from '@/components/ContentTitle'
 import NavBar from '@/components/NavBar'
 import LoadingPage from '@/components/LoadingPage'
-import { Spotify } from 'react-spotify-embed'
 
 const images = [
   { src: 'exy_1.jpg', alt: 'Exy Peace Pose' },
@@ -42,11 +40,8 @@ function Exy() {
   useEffect(() => {
     const securePage = async () => {
       const session1 = await getSession()
-      if (!session) {
-        router.push('/')
-      }
       let isMatchFound = false
-      session?.owns.ownedNfts.forEach((nft: any) => {
+      session1?.owns.ownedNfts.forEach((nft: any) => {
         if (nft.contractMetadata.name == trimmedPath) {
           isMatchFound = true
           return
