@@ -7,7 +7,7 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
     const fetchClubsfromDb = async () => {
       const response = await fetch(
-        `https://qut-capstone-2023-sunelia.vercel.app/api/useDatabase?type=club`
+        `https://qut-capstone-2023.vercel.app/api/useDatabase?type=club`
       );
       const data = await response.json();
       return data;

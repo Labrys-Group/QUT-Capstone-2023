@@ -74,7 +74,7 @@ export default async function auth(req: any, res: any) {
         session.address = token.sub;
         session.user.name = token.sub;
         let data = await fetch(
-          `https://qut-capstone-2023-sunelia.vercel.app/api/verifyAccess?address=${session.address}`
+          `https://qut-capstone-2023.vercel.app/api/verifyAccess?address=${session.address}`
         );
         let formatData = await data.json();
         session.owns = formatData.owned;
