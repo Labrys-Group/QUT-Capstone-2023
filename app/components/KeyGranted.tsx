@@ -27,10 +27,10 @@ const boxStyle = {
   padding: "1em",
   borderRadius: "10px",
   textAlign: "left",
-  maxWidth: { base: "65vw", md: "274px" },
+  width: { base: "65vw", md: "274px" },
   boxShadow: "0px 3.4188px 8.54701px 1.7094px rgba(0, 0, 0, 0.2)",
   border: "0.42735px solid #303030",
-  minHeight: { base: "0", md: "250px" },
+  height: { base: "425px", md: "465px" },
   margin: { base: "0", md: "12px 0px" },
 };
 

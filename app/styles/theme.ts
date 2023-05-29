@@ -86,7 +86,7 @@ const theme = extendTheme({
       ".title": {
         fontFamily: "Inter, sans-serif",
         fontWeight: "900",
-        fontSize: "6em",
+        fontSize: { base: "5em", md: "6em" },
         lineHeight: "1.2em",
       },
       ".headingSm": {

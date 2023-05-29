@@ -69,14 +69,18 @@ const PageComponent = ({
               </Box>
 
               {keyGrantedLoading === true ? (
-                <Box width={{ base: "65vw", md: "274px" }}>
+                <Flex
+                  width={{ base: "65vw", md: "274px" }}
+                  height={{ base: "425px", md: "465px" }}
+                  style={{ justifyContent: "center", alignItems: "center" }}
+                >
                   <Button
                     background="#1E1E22"
                     opacity={100}
                     isLoading
                     size="lg"
                   ></Button>
-                </Box>
+                </Flex>
               ) : (
                 <motion.div
                   initial={{ scale: 0.85, opacity: 0 }} // Initial scale is smaller than its normal size
