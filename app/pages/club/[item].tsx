@@ -72,10 +72,7 @@ function Item() {
     const getUserDB = async () => {
       const res = await fetch('../api/useDatabase?type=member')
       const data = await res.json()
-      if (data == undefined) {
-        return
-      }
-      const matchingUser = data.find((obj: any) => obj.id === address)
+      const matchingUser = data?.find((obj: any) => obj.id === address)
       const username = matchingUser ? matchingUser.username : null
 
       if (!matchingUser) {

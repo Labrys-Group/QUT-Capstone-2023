@@ -7,14 +7,6 @@ import { useAccount } from 'wagmi'
 import ContentTitle from '@/components/ContentTitle'
 import NavBar from '@/components/NavBar'
 import LoadingPage from '@/components/LoadingPage'
-import { Spotify } from 'react-spotify-embed'
-
-const images = [
-  { src: 'exy_1.jpg', alt: 'Exy Peace Pose' },
-  { src: 'exyLift.jpg', alt: 'Exy Lift Selfie' },
-  { src: 'exy_2.jpg', alt: 'Exy Black & White Pose' },
-  { src: 'exy_3.jpg', alt: 'Exy Showing Off Her Tteokbokki Pose' },
-]
 
 const videos = [
   { src: 'https://www.youtube.com/embed/iiepjLQiDic' },
@@ -33,11 +25,8 @@ function TableTennis() {
   useEffect(() => {
     const securePage = async () => {
       const session1 = await getSession()
-      if (!session) {
-        router.push('/')
-      }
       let isMatchFound = false
-      session?.owns.ownedNfts.forEach((nft: any) => {
+      session1?.owns.ownedNfts.forEach((nft: any) => {
         if (nft.contractMetadata.name == trimmedPath) {
           isMatchFound = true
           return
