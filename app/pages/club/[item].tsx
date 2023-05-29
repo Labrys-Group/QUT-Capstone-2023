@@ -62,7 +62,7 @@ function Item() {
     };
 
     fetch(
-      "https://qut-capstone-2023-sunelia.vercel.app/api/useDatabase",
+      "https://qut-capstone-2023.vercel.app/api/useDatabase",
       requestOptions
     )
       .then((response) => response.text())
