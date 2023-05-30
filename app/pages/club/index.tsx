@@ -7,6 +7,7 @@ function Item() {
   const { data: session } = useSession()
   const clubs = session?.clubs
 
+  //set the first page when user jump into the item page
   useEffect(() => {
     const Page = async () => {
       router.push({
