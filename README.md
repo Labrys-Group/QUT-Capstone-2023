@@ -2,14 +2,11 @@
 
 Welcome! This is the repository where work on the `MembersOnly` application will take place.
 
-![Landing Page](/app/public/LandingPage.png)
-![Steve Club](/app/public/SteveClub.png)
-
 # The App
 
 MembersOnly is a web application that provides token-gated access to members-only content using Ethereum NFTs as a key.
 
-Here are some key features:
+Here are the key features:
 
 1. Connect and authenticate user's wallet using Sign-In with Ethereum.
 2. Allow user to mint non-fungible tokens (NFTs), paying in Ethereum.
@@ -17,6 +14,11 @@ Here are some key features:
 4. Display token-gated content based on NFT holder status.
 5. Connect Spotify account and access public playlists.
 6. Connect Discord account and access private channels via Collab.Land integration.
+
+Some example screenshots:
+
+![Landing Page](/app/public/LandingPage.png)
+![Steve Club](/app/public/SteveClub.png)
 
 # Deployment and Links
 
@@ -27,7 +29,7 @@ Connect with us on Discord with the invitation link [here](https://discord.gg/Mz
 # Installation from Source
 
 ```bash
-$ git clone https://www.github.com/alichtman/shallow-backup.git
+$ git clone https://github.com/Labrys-Group/QUT-Capstone-2023.git
 $ cd app
 $ npm install
 $ npm run dev
