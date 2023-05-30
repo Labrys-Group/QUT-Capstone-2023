@@ -1,7 +1,7 @@
 import { getSession, useSession } from 'next-auth/react'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Divider, Flex, Spacer } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import AddressBar from '../components/AddressBar'
 import { useAccount } from 'wagmi'
 import ContentTitle from '@/components/ContentTitle'
@@ -22,6 +22,7 @@ function TableTennis() {
   const { pathname } = router
   const trimmedPath = pathname.replace('/', '')
 
+  //verify if user is log in and owns the NFT
   useEffect(() => {
     const securePage = async () => {
       const session1 = await getSession()

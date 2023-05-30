@@ -6,6 +6,7 @@ type Data = {
   totalSupply: string
 }
 
+//this function is for get totalSupply of contracts
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>

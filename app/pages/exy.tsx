@@ -37,6 +37,7 @@ function Exy() {
   const { pathname } = router
   const trimmedPath = pathname.replace('/', '')
 
+  //verify if user is log in and owns the NFT
   useEffect(() => {
     const securePage = async () => {
       const session1 = await getSession()

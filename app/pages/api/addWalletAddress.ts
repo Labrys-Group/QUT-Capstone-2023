@@ -3,10 +3,6 @@ import { dbHandlerFactory } from '../../helpers/databaseMethods'
 import { UserModel } from '../../models/User'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-type Data = {
-  name: string
-}
-
 const uri =
   'mongodb+srv://admin:PpuXdMSNaIuX4mVp@membersonly.dr0rpdo.mongodb.net/?retryWrites=true&w=majority'
 
