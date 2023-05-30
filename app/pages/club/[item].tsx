@@ -6,7 +6,7 @@ import { useState, useEffect, useContext, Provider } from 'react'
 import { useAccount } from 'wagmi'
 import LoadingPage from '@/components/LoadingPage'
 import PageComponent from '@/components/PageComponent'
-import { Contract, Signer, utils } from 'ethers'
+import { Contract, utils } from 'ethers'
 
 function Item() {
   const { address, isConnected } = useAccount()
@@ -72,10 +72,11 @@ function Item() {
     const getUserDB = async () => {
       const res = await fetch('../api/useDatabase?type=member')
       const data = await res.json()
+      //check whether user has set username,yes then show username,no then show address
       const matchingUser = data?.find((obj: any) => obj.id === address)
       const username = matchingUser ? matchingUser.username : null
-
       if (!matchingUser) {
+        //if matchingUser is null, mean it is first time log in,add user to db
         addUser()
       } else {
         setUsername(username)
@@ -122,6 +123,7 @@ function Item() {
     setAbi,
   ])
 
+  //call /api/getBalance to get the balance of contracts
   async function getTokenRemaining() {
     try {
       if (
@@ -184,6 +186,7 @@ function Item() {
     }
   }, [clubIndex, clubs, judge])
 
+  //this function is for side arrow's router
   function judge() {
     if (clubIndex !== undefined && clubs !== undefined) {
       if (clubIndex == clubs.length - 1) {
@@ -203,6 +206,7 @@ function Item() {
 
   const toast = useToast()
 
+  //mint the NFTs and show the toast
   const handleMint = async () => {
     try {
       if (
