@@ -3,6 +3,7 @@
 Welcome! This is the repository where work on the `MembersOnly` application will take place.
 
 ![Landing Page](/app/public/LandingPage.png)
+![Steve Club](/app/public/SteveClub.png)
 
 # The App
 
@@ -53,4 +54,4 @@ The app folder contains the code for the NextJS application. Read more about `/a
 
 ### contracts/
 
-The contracts folder contains a hardhat project - where all smart contract development and testing will take place. Read more about `/contracts` [here].
+The contracts folder contains a hardhat project - where all smart contract development and testing will take place. Read more about `/contracts` [here](https://github.com/Labrys-Group/QUT-Capstone-2023/blob/main/contracts/README.md).
