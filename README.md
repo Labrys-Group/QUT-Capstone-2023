@@ -2,32 +2,58 @@
 
 Welcome! This is the repository where work on the `MembersOnly` application will take place.
 
-This README.md should be updated constantly to reflect the state of the application - that is, what code is in here, and how to run it.
+# The App
+
+MembersOnly is a web application that provides token-gated access to members-only content using Ethereum NFTs as a key.
+
+Here are the key features:
+
+1. Connect and authenticate user's wallet using Sign-In with Ethereum.
+2. Allow user to mint non-fungible tokens (NFTs), paying in Ethereum.
+3. Verify user owns particular NFT.
+4. Display token-gated content based on NFT holder status.
+5. Connect Spotify account and access public playlists.
+6. Connect Discord account and access private channels via Collab.Land integration.
+
+Some example screenshots:
+
+![Landing Page](/app/public/LandingPage.png)
+![Steve Club](/app/public/SteveClub.png)
+
+# Deployment and Links
+
+We successfully deployed this app to Vercel. Link [here](https://qut-capstone-2023.vercel.app/).
+
+Connect with us on Discord with the invitation link [here](https://discord.gg/Mz3VGaekfW).
+
+# Installation from Source
+
+```bash
+$ git clone https://github.com/Labrys-Group/QUT-Capstone-2023.git
+$ cd app
+$ npm install
+$ npm run dev
+```
+
+# Overview of Tech Stack
+
+To build `MembersOnly`, we have:
+
+1. Used **NextJS** for front and back end
+2. Used **Chakra UI** for frontend UI components
+3. Used **RainbowKit SDK** to connect to wallets
+4. Used **Alchemy** to verify owned NFTs
+5. Used **Infura** to get total supply from the back end
+6. Used **OpenZeppelin** smart contract standards (ERC721 NFT)
+7. Used **MongoDB** for storing off-chain data (users Username, etc.)
+8. Deployed contracts to **Ethereum Goerli Testnet**
 
 # Repository Structure
 
-> ❗️**IMPORTANT**
-> Any merges into the main branch will require a PR first.
-> So, create a new branch for your work, put it up for Code Review - before it's pushed here.
-
 ### app/
 
-The app folder will be where the code for the NextJS application will be.
-
-To get started with nextjs - read [here](https://nextjs.org/docs/getting-started).
-
-We'll be using rainbow kit to connect to our users wallet - you can read more about it [here](https://www.rainbowkit.com/).
-
-Once you've populated the `app/` folder with a NextJS application - come back here and update this description 😉
-
-The design for the front end is [here](https://www.figma.com/proto/7UB73xYEJODrUIKVBBBa8q/MembersOnly?node-id=1-2&scaling=scale-down&page-id=0%3A1&starting-point-node-id=1%3A2).
-
-**We will deploy this app to Vercel once it's set up here a bit more**
+The app folder contains the code for the NextJS application. Read more about `/app` [here](https://github.com/Labrys-Group/QUT-Capstone-2023/blob/main/app/README.md).
 
 ### contracts/
 
-The contracts folder will be a hardhat project - where all smart contract development and testing will take place.
-
-To get started with hardhat - read [here](https://hardhat.org/hardhat-runner/docs/getting-started#overview).
-
-Once you've populated the `contracts/` folder with a valid hardhat application - come back here and update this description 😉
+The contracts folder contains a hardhat project - where all smart contract development and testing will take place. Read more about `/contracts` [here](https://github.com/Labrys-Group/QUT-Capstone-2023/blob/main/contracts/README.md).
