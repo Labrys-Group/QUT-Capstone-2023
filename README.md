@@ -2,7 +2,7 @@
 
 Welcome! This is the repository where work on the `MembersOnly` application will take place.
 
-![Landing Page](/QUT-Capstone-2023/app/public/LandingPage.png)
+![Landing Page](/app/public/LandingPage.png)
 
 # The App
 
