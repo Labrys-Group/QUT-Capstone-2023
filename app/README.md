@@ -2,37 +2,31 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+Run the below commands to get the NextJs app running:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+$ npm install
+$ npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open in `http://localhost:3000`.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Front End
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+The front end of the app lives in `app/pages`. NextJs uses file-based routing and the entry point of the app is `/pages/index.tsx` The user has to first connect their wallet to proceed.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+The entry page for each club is a dynamic page `/pages/club/[item].tsx`. The exclusive content pages are `/exy.tsx`, `/climbing.tsx` and `/tableTennis.tsx`. They can be found in the `/pages`.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+All the UI components lives in folder `/components`
 
-## Learn More
+## Back End
 
-To learn more about Next.js, take a look at the following resources:
+The back end of the app lives in `/pages/api`. We created `getBalance` endpoint to get remaining token of each club, `useDatabase` endpoint to read and write the database and `verifyToken` to get the user's owned NFTs.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Database
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Database is created to store all the constants and information of the app.
 
-## Deploy on Vercel
+Table `Club` stores the club name and club description with contract address as the key. Table `User` stores the username with the wallet address as the key.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Database endpoint can be found in `/pages/api/useDatabase` and the other helper functions can be found in `/helpers`.
