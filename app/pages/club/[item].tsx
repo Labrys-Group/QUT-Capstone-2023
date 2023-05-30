@@ -224,6 +224,7 @@ function Item() {
           description: `View transaction at ${transaction.hash}`,
           status: 'success',
         })
+        setAccess(true)
       }
     } catch (e: any) {
       console.log(e)
