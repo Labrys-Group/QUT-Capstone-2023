@@ -2,6 +2,8 @@
 
 Welcome! This is the repository where work on the `MembersOnly` application will take place.
 
+![Landing Page](/QUT-Capstone-2023/app/public/LandingPage.png)
+
 # The App
 
 MembersOnly is a web application that provides token-gated access to members-only content using Ethereum NFTs as a key.
@@ -19,7 +21,7 @@ Here are some key features:
 
 We successfully deployed this app to Vercel. Link [here](https://qut-capstone-2023.vercel.app/).
 
-Connect with us on Discord with the invitation link [here](https://discord.gg/Mz3VGaekfW)
+Connect with us on Discord with the invitation link [here](https://discord.gg/Mz3VGaekfW).
 
 # Installation from Source
 
@@ -47,8 +49,8 @@ To build `MembersOnly`, we have:
 
 ### app/
 
-The app folder contains the code for the NextJS application. Read more about `/app` [here](https://github.com/Labrys-Group/QUT-Capstone-2023/blob/main/app/README.md)
+The app folder contains the code for the NextJS application. Read more about `/app` [here](https://github.com/Labrys-Group/QUT-Capstone-2023/blob/main/app/README.md).
 
 ### contracts/
 
-The contracts folder contains a hardhat project - where all smart contract development and testing will take place. Read more about `/contracts` [here]
+The contracts folder contains a hardhat project - where all smart contract development and testing will take place. Read more about `/contracts` [here].
