@@ -26,15 +26,6 @@ We successfully deployed this app to Vercel. Link [here](https://qut-capstone-20
 
 Connect with us on Discord with the invitation link [here](https://discord.gg/Mz3VGaekfW).
 
-# Installation from Source
-
-```bash
-$ git clone https://github.com/Labrys-Group/QUT-Capstone-2023.git
-$ cd app
-$ npm install
-$ npm run dev
-```
-
 # Overview of Tech Stack
 
 To build `MembersOnly`, we have:
