@@ -2,26 +2,26 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-Run the below commands to get the NextJs app running:
+Run the below commands to get the NextJs app running locally:
 
 ```bash
 $ npm install
 $ npm run dev
 ```
 
-Open in `http://localhost:3000`.
+Open in `http://localhost:3000`. You might need to change the base URL to `http://localhost:3000` to get connections to the smart contract working on your local host. It is currently connected to the deployed application. 
 
 ## Front End
 
 The front end of the app lives in `app/pages`. NextJs uses file-based routing and the entry point of the app is `/pages/index.tsx` The user has to first connect their wallet to proceed.
 
-The entry page for each club is a dynamic page `/pages/club/[item].tsx`. The exclusive content pages are `/exy.tsx`, `/climbing.tsx` and `/tableTennis.tsx`. They can be found in the `/pages`.
+The entry page for each club is a dynamic page `/pages/club/[item].tsx`. The exclusive content pages are `/exy.tsx`, `/climbing.tsx` and `/tableTennis.tsx`. They can be found in the `/pages` folder.
 
-All the UI components lives in folder `/components`
+All the UI components lives in the folder `/components`. All the images lives in the folder `/public`
 
 ## Back End
 
-The back end of the app lives in `/pages/api`. We created `getBalance` endpoint to get remaining token of each club, `useDatabase` endpoint to read and write the database and `verifyToken` to get the user's owned NFTs.
+The APIs lives in `/pages/api`. We created `getBalance` endpoint to get remaining token of each club, `useDatabase` endpoint to read and write the database and `verifyToken` endpoint to get the user's owned NFTs.
 
 ## Database
 
