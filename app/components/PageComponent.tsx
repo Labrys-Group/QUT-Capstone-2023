@@ -42,11 +42,7 @@ const PageComponent = ({
   handleMint,
 }: PageComponentProps) => {
   return (
-    <Box
-      // height={{ md: "100vh" }}
-      minHeight={"100vh"}
-      className={backgroundClassName}
-    >
+    <Box minHeight={"100vh"} className={backgroundClassName}>
       <NavBar />
 
       <AddressBar status={address !== undefined} username={address} />

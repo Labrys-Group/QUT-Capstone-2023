@@ -16,7 +16,6 @@ type InheritedProps = Pick<
 >;
 
 export type ArrowButtonProps = InheritedProps & {
-  //text: string
   onClick(): void;
   direction: "left" | "right";
 };

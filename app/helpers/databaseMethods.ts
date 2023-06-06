@@ -1,10 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { connectDatabase } from "./connectDatabase";
-import mongoose from "mongoose";
 import nc, { NextConnect } from "next-connect";
 import Club from "./Class_Database/Club";
 import Member from "./Class_Database/Member";
-import { error } from "console";
 
 /**
  * Factory to generate request handlers with default 404 and 500 handlers

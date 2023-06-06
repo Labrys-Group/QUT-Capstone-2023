@@ -1,55 +1,59 @@
-import { ethers, providers, Contract } from 'ethers'
+import { ethers, providers } from "ethers";
 import React, {
   createContext,
   ReactNode,
   useEffect,
   useMemo,
   useState,
-} from 'react'
+} from "react";
 
-declare let window: any
+declare let window: any;
 
 interface IWalletContext {
-  accountAddress: string | undefined
-  provider: providers.Web3Provider | undefined
-  signer: ethers.providers.JsonRpcSigner | undefined
+  accountAddress: string | undefined;
+  provider: providers.Web3Provider | undefined;
+  signer: ethers.providers.JsonRpcSigner | undefined;
 }
 
-export const WalletContext = createContext<IWalletContext>({} as IWalletContext)
+export const WalletContext = createContext<IWalletContext>(
+  {} as IWalletContext
+);
 
 export const WalletContextProvider = ({
   children,
 }: {
-  children: ReactNode
+  children: ReactNode;
 }) => {
-  const [provider, setProvider] = useState<providers.Web3Provider | undefined>()
+  const [provider, setProvider] = useState<
+    providers.Web3Provider | undefined
+  >();
   const [signer, setSigner] = useState<
     ethers.providers.JsonRpcSigner | undefined
-  >()
-  const [accountAddress, setAccountAddress] = useState<string | undefined>()
+  >();
+  const [accountAddress, setAccountAddress] = useState<string | undefined>();
 
-  // set the wallet provider in state on load
+  /** set the wallet provider in state on load */
   useEffect(() => {
-    if (!window.ethereum) return
-    const connectProvider = new ethers.providers.Web3Provider(window.ethereum)
-    setProvider(connectProvider)
-  }, [])
+    if (!window.ethereum) return;
+    const connectProvider = new ethers.providers.Web3Provider(window.ethereum);
+    setProvider(connectProvider);
+  }, []);
 
-  // set signer on initial render
+  /** set signer and wallet address on initial render */
   useEffect(() => {
-    if (!provider || !window.ethereum) return
-    ;(async () => {
-      const newSigner = provider.getSigner()
-      console.log(newSigner)
+    if (!provider || !window.ethereum) return;
+    (async () => {
+      const newSigner = provider.getSigner();
+      console.log(newSigner);
       try {
-        const newAddress = await newSigner.getAddress()
-        setSigner(newSigner)
-        setAccountAddress(newAddress)
+        const newAddress = await newSigner.getAddress();
+        setSigner(newSigner);
+        setAccountAddress(newAddress);
       } catch (e: any) {
-        console.log(e)
+        console.log(e);
       }
-    })()
-  }, [provider])
+    })();
+  }, [provider]);
 
   const values = useMemo(
     () => ({
@@ -58,9 +62,9 @@ export const WalletContextProvider = ({
       signer,
     }),
     [accountAddress, provider, signer]
-  )
+  );
 
   return (
     <WalletContext.Provider value={values}>{children}</WalletContext.Provider>
-  )
-}
+  );
+};

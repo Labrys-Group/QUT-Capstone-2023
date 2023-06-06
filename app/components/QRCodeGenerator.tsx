@@ -30,12 +30,8 @@ function generateUniqueShortString(longString: string) {
 }
 
 const QRCodeGenerator = ({ uniqueId }: QRCodeGeneratorProps) => {
-  const uniqueBarcode = generateUniqueShortString("steve");
+  const uniqueBarcode = generateUniqueShortString(uniqueId);
   return (
-    // <div>
-    //
-    // </div>
-
     <Card maxW="md">
       <CardHeader>
         <Flex>

@@ -1,12 +1,8 @@
-import { WalletContext } from "../context/walletContext";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { Text, Box, Flex, useToast } from "@chakra-ui/react";
+import { Text, Box, Flex } from "@chakra-ui/react";
 import { Image } from "@chakra-ui/react";
-import { useContext } from "react";
 import PrimaryButton from "./PrimaryButton";
 import { useRouter } from "next/router";
-import { Contract, utils } from "ethers";
-import useClubDetails from "@/hooks/useClubDetails";
 
 type KeyGrantedProps = {
   accessGranted: boolean;
@@ -54,7 +50,6 @@ const KeyGranted = ({
   const router = useRouter();
 
   const handleClick = () => {
-    //hardcoded for exy page
     router.push(`/${clubName}`);
   };
   return (
@@ -102,10 +97,7 @@ const KeyGranted = ({
           Enter Site
         </PrimaryButton>
       ) : (
-        <PrimaryButton onClick={handleMint}>
-          Purchase for Ξ0.01
-          {/* {price} */}
-        </PrimaryButton>
+        <PrimaryButton onClick={handleMint}>Purchase for Ξ0.01</PrimaryButton>
       )}
     </Flex>
   );

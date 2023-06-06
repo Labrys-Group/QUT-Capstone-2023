@@ -9,7 +9,7 @@ $ npm install
 $ npm run dev
 ```
 
-Open in `http://localhost:3000`. You might need to change the base URL to `http://localhost:3000` to get connections to the smart contract working on your local host. It is currently connected to the deployed application. 
+Open in `http://localhost:3000`. You might need to change the base URL to `http://localhost:3000` to get connections to the smart contract working on your local host. It is currently connected to the deployed application.
 
 ## Front End
 
@@ -27,6 +27,6 @@ The APIs lives in `/pages/api`. We created `getBalance` endpoint to get remainin
 
 Database is created to store all the constants and information of the app.
 
-Table `Club` stores the club name and club description with contract address as the key. Table `User` stores the username with the wallet address as the key.
+Table `Club` stores the club name and club description with contract address as the key. Table `Member` stores the username with the wallet address as the key.
 
 Database endpoint can be found in `/pages/api/useDatabase` and the other helper functions can be found in `/helpers`.

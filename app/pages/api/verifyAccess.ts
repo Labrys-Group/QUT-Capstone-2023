@@ -14,7 +14,6 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     };
 
     const dbData = await fetchClubsfromDb();
-    console.log("db", dbData);
 
     // query alchemy api to get owned nfts
     const apiKey = "o13ZJRrEu85G8Zi9lb9KxaZhkv6537H7";
@@ -39,7 +38,6 @@ export default async (req: NextApiRequest, res: NextApiResponse<Data>) => {
     const data = await response.json();
     return res.status(200).json({ clubs: dbData, owned: data });
   } catch (e) {
-    console.log("error", e);
     return res.status(500).json({ error: "Internal server error" });
   }
 };

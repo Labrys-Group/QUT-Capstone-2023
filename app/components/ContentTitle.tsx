@@ -1,12 +1,11 @@
-//This component is used in content page to display title and description and any other inclusize content
-//This design is suitable for any
+// This component is used in content page to display title and description and any other inclusive content
+
 import { Text, Flex, Box } from "@chakra-ui/react";
 import ArrowButton from "./ArrowButton";
 import ImageGrid from "./ImageGrid";
 import VideoCarousel from "./VideoCarousel";
 import SpotifyGrid from "./SpotifyGrid";
 import { useRouter } from "next/router";
-import { Spotify } from "react-spotify-embed";
 
 type ImageProps = {
   alt: string;

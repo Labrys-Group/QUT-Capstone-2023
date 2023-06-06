@@ -1,11 +1,7 @@
 import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { Button, ButtonProps } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { PropsWithChildren } from "react";
-
-type InheritedProps = ButtonProps;
-
-// type Page = "item" | "item-climbing-gym" | "item-table-tennis";
 
 export type NavigationButtonProps = {
   direction: "left" | "right";

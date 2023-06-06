@@ -1,32 +1,31 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { dbHandlerFactory } from '../../helpers/databaseMethods'
-import { UserModel } from '../../models/User'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { dbHandlerFactory } from "../../helpers/databaseMethods";
+import { UserModel } from "../../models/User";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const uri =
-  'mongodb+srv://admin:PpuXdMSNaIuX4mVp@membersonly.dr0rpdo.mongodb.net/?retryWrites=true&w=majority'
+  "mongodb+srv://admin:PpuXdMSNaIuX4mVp@membersonly.dr0rpdo.mongodb.net/?retryWrites=true&w=majority";
 
 const getUserWallets = async (
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) => {
-  const users = await UserModel.find({}).lean()
-  res.status(200).json({ users })
-}
+  const users = await UserModel.find({}).lean();
+  res.status(200).json({ users });
+};
 
 const addUserWallet = async (
   req: NextApiRequest, // req.query = parameters in the URL
   res: NextApiResponse<any>
 ) => {
   const user = UserModel.create({
-    walletAddress: '0x76543456789',
-    userName: 'please work',
-  })
-  const users = await UserModel.find({}).lean()
+    walletAddress: "0x76543456789",
+    userName: "please work",
+  });
+  const users = await UserModel.find({}).lean();
 
-  res.status(200).json({ users })
-}
+  res.status(200).json({ users });
+};
 
-const handler = dbHandlerFactory(uri).get(getUserWallets).post(addUserWallet)
+const handler = dbHandlerFactory(uri).get(getUserWallets).post(addUserWallet);
 
-export default handler
+export default handler;

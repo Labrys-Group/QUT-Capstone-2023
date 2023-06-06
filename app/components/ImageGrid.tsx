@@ -9,7 +9,7 @@ type ImageProps = {
 export type ImageGridProps = {
   image_list: ImageProps[];
 };
-//export type NavBarProps = {};
+
 const ImageGrid = ({ image_list }: ImageGridProps) => {
   return (
     <SimpleGrid

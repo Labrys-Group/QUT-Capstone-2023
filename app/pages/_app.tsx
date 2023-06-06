@@ -8,14 +8,7 @@ import {
   midnightTheme,
 } from "@rainbow-me/rainbowkit";
 import { configureChains, createClient, WagmiConfig } from "wagmi";
-import {
-  mainnet,
-  polygon,
-  optimism,
-  arbitrum,
-  goerli,
-  Chain,
-} from "wagmi/chains";
+import { mainnet, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 import { SessionProvider } from "next-auth/react";
@@ -25,7 +18,6 @@ import theme from "@/styles/theme";
 
 const { chains, provider } = configureChains(
   [mainnet, goerli],
-  // [mainnet, polygon, optimism, arbitrum, goerli],
   [
     alchemyProvider({ apiKey: "o13ZJRrEu85G8Zi9lb9KxaZhkv6537H7" }),
     publicProvider(),
