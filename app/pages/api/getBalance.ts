@@ -29,7 +29,6 @@ export default async function handler(
       totalSupply: totalSupply.toString(),
     });
   } catch (e) {
-    console.log("error", e);
     res.status(500).json({
       totalSupply: "",
     });

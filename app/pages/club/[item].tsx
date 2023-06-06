@@ -233,7 +233,6 @@ function Item() {
         setAccess(true);
       }
     } catch (e: any) {
-      console.log(e);
       toast({
         title: "Error",
         description: `${e.message}`,

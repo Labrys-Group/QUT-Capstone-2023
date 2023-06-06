@@ -18,7 +18,6 @@ export default function App() {
     const securePage = async () => {
       // check if authenticated and if is connected to wallet
       if (session && status === "connected") {
-        console.log("session", session);
         router.push("/club");
       } else {
       }
