@@ -56,8 +56,8 @@ npx hardhat verify --network goerli <address> <name> <symbol>
 ```
 
 - [EXY United](https://goerli.etherscan.io/address/0x18b0a06cd63d1641467Ed5B1021e0B9a4A6D9245#code)
-- [Steve Climbing Gym](https://goerli.etherscan.io/address/0x18b0a06cd63d1641467Ed5B1021e0B9a4A6D9245#code)
-- [Table Tennis](https://goerli.etherscan.io/address/0x18b0a06cd63d1641467Ed5B1021e0B9a4A6D9245#code)
+- [Steve Climbing Gym](https://goerli.etherscan.io/address/0xd00564BF5Ad93B090fE4a09a3Bb337117070b98D#code)
+- [Table Tennis](https://goerli.etherscan.io/address/0xCA25Ab93cFEAACe58840C35e25829b5A1a926e07#code)
 
 ```shell
 npx hardhat verify --network goerli 0x18b0a06cd63d1641467Ed5B1021e0B9a4A6D9245 "exy" "EXY"
