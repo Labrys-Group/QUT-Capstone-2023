@@ -91,7 +91,6 @@ const KeyGranted = ({
           rightIcon={<ArrowForwardIcon />}
           onClick={() => {
             handleClick();
-            console.log(router);
           }}
         >
           Enter Site

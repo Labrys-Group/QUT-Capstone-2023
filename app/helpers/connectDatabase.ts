@@ -15,7 +15,6 @@ let cachedDbConnection: typeof mongoose | null = null
  */
 const connectDatabase = async (uri: string) => {
   if (cachedDbConnection) {
-    console.log('Using cached DB connection')
     return cachedDbConnection
   }
 
@@ -34,7 +33,6 @@ const connectDatabase = async (uri: string) => {
     console.log(`Connected to ${info.host}:${info.port}/${info.name}`)
   )
 
-  console.log('Using fresh DB connection')
   return cachedDbConnection
 }
 
